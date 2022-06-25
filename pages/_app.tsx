@@ -6,7 +6,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   // return <Component {...pageProps} />;
   return (
     <AuthContextProvider>
-      <Component {...pageProps} />
+      <div className="container">
+        <Component {...pageProps} />
+      </div>
     </AuthContextProvider>
   );
 }
