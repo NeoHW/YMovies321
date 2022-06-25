@@ -21,8 +21,11 @@ const Home: NextPage = () => {
   const [articles, setArticles] = useState<Article[]>([] as Article[]);
 
   onSnapshot(postRef, (event) => {
-    // @ts-ignore
-    const articles: Article[] = event.docs.map((doc) => doc.data());
+    const articles: Article[] = [];
+    event.docs.forEach((doc) => {
+      // @ts-ignore
+      articles.push({ ...doc.data(), id: doc.id });
+    });
     setArticles(articles);
   });
 
