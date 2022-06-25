@@ -5,6 +5,7 @@ import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
+  signInWithRedirect,
 } from 'firebase/auth';
 import firebaseApp from '../firebase';
 
@@ -37,8 +38,10 @@ export const AuthContextProvider = ({
     return () => unsubscribe();
   }, []);
 
-  const login = async () => {
-    return await signInWithPopup(auth, new GoogleAuthProvider());
+  const login = async ({ popup }: { popup: boolean }) => {
+    return popup
+      ? await signInWithPopup(auth, new GoogleAuthProvider())
+      : await signInWithRedirect(auth, new GoogleAuthProvider());
   };
 
   const logout = async () => {
