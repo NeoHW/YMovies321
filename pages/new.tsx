@@ -12,13 +12,17 @@ const article = {
 };
 
 export default function NewArticle() {
-  const title = useRef('');
-  const description = useRef('');
-  const content = useRef('');
+  const title = useRef<HTMLInputElement>(null);
+  const description = useRef<HTMLInputElement>(null);
+  const content = useRef<HTMLInputElement>(null);
 
   const newArticle = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log(title.current?.value);
+    console.log(description.current?.value);
+    console.log(content.current?.value);
   };
+
   return (
     <>
       <h1 className="mb-4">Create New Article</h1>
