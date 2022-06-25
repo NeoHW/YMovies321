@@ -7,7 +7,7 @@ const LoginPage: NextPage = () => {
   const { login } = useAuthContext();
   const loginWithGoogle = async () => {
     try {
-      await login();
+      await login({ popup: true });
       router.push('/');
     } catch (error) {
       console.error(error);
