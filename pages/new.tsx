@@ -25,8 +25,11 @@ export default function NewArticle() {
       <form onSubmit={newArticle}>
         <Form_Fields
           article={null}
+          // @ts-ignore
           title={title}
+          // @ts-ignore
           description={description}
+          // @ts-ignore
           content={content}
         />
       </form>
