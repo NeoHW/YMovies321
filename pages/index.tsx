@@ -4,19 +4,11 @@ import { Article } from '../types/article';
 import { collection, getFirestore, onSnapshot } from 'firebase/firestore';
 import firebaseApp from '../firebase';
 import { useAuthContext } from '../context/AuthContext';
-import type { User } from 'firebase/auth';
 import Link from 'next/link';
+import { AuthContext } from '../types/context';
 
 const db = getFirestore(firebaseApp);
 const postRef = collection(db, 'posts');
-
-function createNewArticle() {
-  return;
-}
-
-function deleteArticle(articleId: string) {
-  return;
-}
 
 const Home: NextPage = () => {
   const [articles, setArticles] = useState<Article[]>([] as Article[]);
@@ -30,7 +22,10 @@ const Home: NextPage = () => {
     setArticles(articles);
   });
 
-  const { user }: { user: User } = useAuthContext();
+  const { user }: AuthContext = useAuthContext();
+  function deleteArticle(articleId: string) {
+    return;
+  }
 
   return (
     <>
