@@ -1,3 +1,6 @@
 {
     "prettier.singleQuote": true,
+    "cSpell.words": [
+        "Firestore"
+    ],
 }
