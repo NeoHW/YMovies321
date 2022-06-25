@@ -5,6 +5,7 @@ import { collection, getFirestore, onSnapshot } from 'firebase/firestore';
 import firebaseApp from '../firebase';
 import { useAuthContext } from '../context/AuthContext';
 import type { User } from 'firebase/auth';
+import Link from 'next/link';
 
 const db = getFirestore(firebaseApp);
 const postRef = collection(db, 'posts');
@@ -34,13 +35,9 @@ const Home: NextPage = () => {
   return (
     <>
       <h1 className="mb-4">Blog Articles</h1>
-      <button
-        id="new-article"
-        className="btn btn-success"
-        onClick={createNewArticle}
-      >
-        Create New Article
-      </button>
+      <Link href="/new">
+        <a className="btn btn-success">Create New Article</a>
+      </Link>
       {articles.map((article: Article) => {
         return (
           <div className="card mt-4" key={article.id}>
@@ -50,20 +47,17 @@ const Home: NextPage = () => {
                 {article.createdAt}
               </div>
               <div className="card-text mb-2">{article.description}</div>
-              <a href={`articles/${article.slug}`} className="btn btn-primary">
-                Read More
-              </a>
+              <Link href={`articles/${article.slug}`}>
+                <a className="btn btn-primary">Read More</a>
+              </Link>
               {article.creatorId !== user?.uid ? (
                 ''
               ) : (
                 <span className="creator" id={article.creatorId}>
                   {' '}
-                  <a
-                    href={`articles/edit/${article.id}`}
-                    className="btn btn-info"
-                  >
-                    Edit
-                  </a>{' '}
+                  <Link href={`articles/edit/${article.id}`}>
+                    <a className="btn btn-info">Edit</a>
+                  </Link>{' '}
                   <button
                     type="submit"
                     className="btn btn-danger"
