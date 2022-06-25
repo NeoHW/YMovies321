@@ -1,7 +1,13 @@
 import type { NextPage } from 'next';
 import { useState } from 'react';
 import { Article } from '../types/article';
-import { collection, getFirestore, onSnapshot } from 'firebase/firestore';
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getFirestore,
+  onSnapshot,
+} from 'firebase/firestore';
 import firebaseApp from '../firebase';
 import { useAuthContext } from '../context/AuthContext';
 import Link from 'next/link';
@@ -23,8 +29,9 @@ const Home: NextPage = () => {
   });
 
   const { user }: AuthContext = useAuthContext();
-  function deleteArticle(articleId: string) {
-    return;
+  function deleteArticle(article: Article) {
+    const docRef = doc(db, 'posts', article.id);
+    return deleteDoc(docRef);
   }
 
   return (
@@ -56,7 +63,7 @@ const Home: NextPage = () => {
                   <button
                     type="submit"
                     className="btn btn-danger"
-                    onClick={() => deleteArticle(article.id)}
+                    onClick={() => deleteArticle(article)}
                   >
                     Delete
                   </button>
