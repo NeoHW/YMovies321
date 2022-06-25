@@ -1,21 +1,13 @@
 import { FormEvent, useRef } from 'react';
 import Form_Fields from '../components/_form_fields';
 import { useAuthContext } from '../context/AuthContext';
-
-const article = {
-  id: 'id',
-  createdAt: 'createdAt',
-  creatorId: 'creatorId',
-  description: 'description',
-  markdown: 'markdown',
-  slug: 'slug',
-  title: 'title',
-};
+import { AuthContext } from '../types/context';
 
 export default function NewArticle() {
   const title = useRef<HTMLInputElement>(null);
   const description = useRef<HTMLInputElement>(null);
   const content = useRef<HTMLInputElement>(null);
+  const { user, login }: AuthContext = useAuthContext();
 
   const createNewArticle = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -23,7 +15,6 @@ export default function NewArticle() {
     console.log(description.current?.value);
     console.log(content.current?.value);
   };
-  const { user, login } = useAuthContext();
 
   if (user === null) login({ popup: false });
 
