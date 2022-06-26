@@ -30,10 +30,13 @@ export default function NewArticle() {
       description: description.current?.value,
       html: sanitizeHtml(marked.parse(content.current?.value as string)),
       markdown: content.current?.value,
-      slug: slugify(title.current?.value as string, {
-        lower: true,
-        strict: true,
-      }),
+      // Each slug has to be unique
+      slug:
+        Math.random() * 1000 +
+        slugify(title.current?.value as string, {
+          lower: true,
+          strict: true,
+        }),
       title: title.current?.value,
     });
     router.push('/');
