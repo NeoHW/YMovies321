@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Article } from '../types/article';
 
-export default function Form_Fields({
+export default function FormFields({
   article,
   title,
   description,

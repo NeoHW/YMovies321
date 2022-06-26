@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { FormEvent, useRef } from 'react';
-import Form_Fields from '../components/_form_fields';
+import FormFields from '../components/_form_fields';
 
 import { marked } from 'marked';
 import sanitizeHtml from 'sanitize-html';
@@ -48,7 +48,7 @@ export default function NewArticle() {
     <>
       <h1 className="mb-4">Create New Article</h1>
       <form onSubmit={createNewArticle}>
-        <Form_Fields
+        <FormFields
           article={null}
           // @ts-ignore
           title={title}
