@@ -24,6 +24,10 @@ export default function ViewArticle() {
 
   const post = query(postRef, where('slug', '==', givenSlug));
   onSnapshot(post, (event) => {
+    // Redirect user to hom page if an invalid slug is given
+    if (event.docs.length == 0) {
+      router.push('/');
+    }
     event.docs.forEach((doc) => {
       // @ts-ignore
       const postData: Article = { ...doc.data(), id: doc.id };
