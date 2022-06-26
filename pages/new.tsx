@@ -32,7 +32,7 @@ export default function NewArticle() {
       markdown: content.current?.value,
       // Each slug has to be unique
       slug:
-        Math.random() * 1000 +
+        Math.round(Math.random() * 1000) +
         slugify(title.current?.value as string, {
           lower: true,
           strict: true,
