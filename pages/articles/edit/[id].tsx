@@ -1,4 +1,4 @@
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import type { FormEvent } from 'react';
@@ -27,11 +27,18 @@ export default function EditArticle() {
     }
   });
 
-  function editArticle(event: FormEvent<HTMLFormElement>) {
+  async function editArticle(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log(title);
-    console.log(description);
-    console.log(markdown);
+    const title_ = title === '' ? article.title : title;
+    const description_ = description === '' ? article.description : description;
+    const markdown_ = markdown === '' ? article.markdown : markdown;
+    const data = {
+      title: title_,
+      description: description_,
+      markdown: markdown_,
+    };
+    await updateDoc(doc(db, `posts/${articleId}`), data);
+    router.push(`/articles/${article.slug}`);
   }
 
   return (
