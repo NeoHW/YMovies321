@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useState } from 'react';
 import FormFields from '../components/_form_fields';
 
 import { marked } from 'marked';
@@ -16,9 +16,9 @@ const db = getFirestore(firebaseApp);
 const postRef = collection(db, 'posts');
 
 export default function NewArticle() {
-  const title = useRef<HTMLInputElement>(null);
-  const description = useRef<HTMLInputElement>(null);
-  const content = useRef<HTMLInputElement>(null);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [content, setContent] = useState('');
   const { user, login }: AuthContext = useAuthContext();
   const router = useRouter();
 
@@ -27,17 +27,17 @@ export default function NewArticle() {
     addDoc(postRef, {
       createdAt: moment().format('MMM Do [at] h:mmA'),
       creatorId: user.uid,
-      description: description.current?.value,
-      html: sanitizeHtml(marked.parse(content.current?.value as string)),
-      markdown: content.current?.value,
+      description: description,
+      html: sanitizeHtml(marked.parse(content)),
+      markdown: content,
       // Each slug has to be unique
       slug:
         Math.round(Math.random() * 1000) +
-        slugify(title.current?.value as string, {
+        slugify(title as string, {
           lower: true,
           strict: true,
         }),
-      title: title.current?.value,
+      title: title,
     });
     router.push('/');
   };
@@ -50,12 +50,9 @@ export default function NewArticle() {
       <form onSubmit={createNewArticle}>
         <FormFields
           article={null}
-          // @ts-ignore
-          title={title}
-          // @ts-ignore
-          description={description}
-          // @ts-ignore
-          content={content}
+          title={setTitle}
+          description={setDescription}
+          content={setContent}
         />
       </form>
     </>
