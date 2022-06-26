@@ -9,6 +9,7 @@ import FormFields from '../../../components/_form_fields';
 const db = getFirestore(firebaseApp);
 
 export default function EditArticle() {
+  const [article, setArticle] = useState({} as Article);
   const [description, setDescription] = useState('');
   const [markdown, setMarkdown] = useState('');
   const [title, setTitle] = useState('');
@@ -18,10 +19,8 @@ export default function EditArticle() {
   getDoc(doc(db, `posts/${articleId}`)).then((snap) => {
     // Check whether the post exists
     if (snap.exists()) {
-      const { description, markdown, title }: Article = snap.data() as Article;
-      setDescription(description);
-      setMarkdown(markdown);
-      setTitle(title);
+      const article = snap.data() as Article;
+      setArticle(article);
     } else {
       // Redirect user to home page if invalid formId is used
       router.push('/');
@@ -30,6 +29,9 @@ export default function EditArticle() {
 
   function editArticle(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    console.log(title);
+    console.log(description);
+    console.log(markdown);
   }
 
   return (
@@ -37,7 +39,7 @@ export default function EditArticle() {
       <h1 className="mb-4">Edit Article</h1>
       <form onSubmit={editArticle}>
         <FormFields
-          article={null}
+          article={article}
           description={setDescription}
           content={setMarkdown}
           title={setTitle}
