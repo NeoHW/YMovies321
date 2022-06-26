@@ -8,9 +8,9 @@ export default function FormFields({
   content,
 }: {
   article: Article | null;
-  title: string;
-  description: string;
-  content: string;
+  title: (val: string) => any;
+  description: (val: string) => any;
+  content: (val: string) => any;
 }) {
   return (
     <>
@@ -23,7 +23,7 @@ export default function FormFields({
           className="form-control"
           placeholder="Title of the article"
           value={article?.title}
-          ref={title}
+          onChange={(event) => title(event.target.value)}
           required
         />
       </div>
@@ -35,7 +35,7 @@ export default function FormFields({
           id="description"
           className="form-control"
           placeholder="A small description of the article"
-          ref={description}
+          onChange={(event) => description(event.target.value)}
           required
         >
           {article?.description}
@@ -48,7 +48,7 @@ export default function FormFields({
           name="markdown"
           id="markdown"
           className="form-control"
-          ref={content}
+          onChange={(event) => content(event.target.value)}
           placeholder="Content of your article. You may use markdown for styling"
           required
         >
