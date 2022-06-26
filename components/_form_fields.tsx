@@ -22,7 +22,7 @@ export default function FormFields({
           id="title"
           className="form-control"
           placeholder="Title of the article"
-          value={article?.title}
+          defaultValue={article?.title}
           onChange={(event) => title(event.target.value)}
           required
         />
@@ -35,7 +35,7 @@ export default function FormFields({
           id="description"
           className="form-control"
           placeholder="A small description of the article"
-          value={article?.description}
+          defaultValue={article?.description}
           onChange={(event) => description(event.target.value)}
           required
         />
@@ -48,7 +48,7 @@ export default function FormFields({
           id="markdown"
           className="form-control"
           onChange={(event) => content(event.target.value)}
-          value={article?.markdown}
+          defaultValue={article?.markdown}
           placeholder="Content of your article. You may use markdown for styling"
           required
         />
