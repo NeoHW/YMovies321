@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import FormFields from '../components/_form_fields';
 
 import { marked } from 'marked';
@@ -42,8 +42,17 @@ export default function NewArticle() {
     router.push('/');
   };
 
-  if (user === null) login({ popup: false });
-
+  useEffect(() => {
+    const loginWithGoogle = async () => {
+      try {
+        await login({ popup: true });
+        router.push('/new');
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    if (user === null) loginWithGoogle();
+  }, [user, login, router]);
   return (
     <>
       <h1 className="mb-4">Create New Article</h1>
