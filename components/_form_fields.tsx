@@ -35,11 +35,10 @@ export default function FormFields({
           id="description"
           className="form-control"
           placeholder="A small description of the article"
+          value={article?.description}
           onChange={(event) => description(event.target.value)}
           required
-        >
-          {article?.description}
-        </textarea>
+        />
       </div>
       <br />
       <div className="form-group">
@@ -49,11 +48,10 @@ export default function FormFields({
           id="markdown"
           className="form-control"
           onChange={(event) => content(event.target.value)}
+          value={article?.markdown}
           placeholder="Content of your article. You may use markdown for styling"
           required
-        >
-          {article?.markdown}
-        </textarea>
+        />
       </div>
       <br />
       <Link href="/">
