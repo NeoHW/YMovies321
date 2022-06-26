@@ -37,7 +37,12 @@ export default function EditArticle() {
       description: description_,
       markdown: markdown_,
     };
-    await updateDoc(doc(db, `posts/${articleId}`), data);
+
+    try {
+      await updateDoc(doc(db, `posts/${articleId}`), data);
+    } catch (error) {
+      alert('Missing permission');
+    }
     router.push(`/articles/${article.slug}`);
   }
 
