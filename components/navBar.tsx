@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import Link from 'next/link';
 import { useAuthContext } from '../context/AuthContext';
@@ -18,7 +17,7 @@ const NavbarComp = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             {user ? (
-              <div>
+              <>
                 <Nav.Link
                   onClick={() => {
                     logout();
@@ -27,7 +26,7 @@ const NavbarComp = () => {
                 >
                   Logout
                 </Nav.Link>
-              </div>
+              </>
             ) : (
               // Show `login` and `Signup` link if the user hasn't logged in yet
               <>

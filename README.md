@@ -1,7 +1,15 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-It uses Firebase for authentication. \
-Make sure you enable `Google` for authentication.
+A simple blog built with Next.js and Firebase,
+where the user could:
+
+- make a new post
+- edit posts
+- delete posts
+- use markdown
+
+It uses Firebase for authentication (google specifically) \
+and Firestore as a database
 
 ## Getting Started
 
