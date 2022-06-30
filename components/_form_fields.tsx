@@ -1,5 +1,8 @@
+import { marked } from 'marked';
+import moment from 'moment';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import sanitizeHtml from 'sanitize-html';
 import { Article } from '../types/article';
 
 export default function FormFields({
@@ -14,6 +17,9 @@ export default function FormFields({
   content: (val: string) => any;
 }) {
   const [preview, setPreview] = useState(false);
+  const [title_, setTitle_] = useState('');
+  const [content_, setContent_] = useState('');
+
   return (
     <>
       <div className="form-group">
@@ -25,7 +31,10 @@ export default function FormFields({
           className="form-control"
           placeholder="Title of the article"
           defaultValue={article?.title}
-          onChange={(event) => title(event.target.value)}
+          onChange={(event) => {
+            title(event.target.value);
+            setTitle_(event.target.value);
+          }}
           required
         />
       </div>
@@ -49,7 +58,10 @@ export default function FormFields({
           name="markdown"
           id="markdown"
           className="form-control"
-          onChange={(event) => content(event.target.value)}
+          onChange={(event) => {
+            content(event.target.value);
+            setContent_(event.target.value);
+          }}
           defaultValue={article?.markdown}
           placeholder="Content of your article. You may use markdown for styling"
           required
@@ -60,7 +72,7 @@ export default function FormFields({
         <a className="btn btn-secondary">Cancel</a>
       </Link>{' '}
       <button
-        type="submit"
+        type="button"
         className="btn btn-info"
         onClick={() => setPreview(true)}
       >
@@ -69,7 +81,23 @@ export default function FormFields({
       <button type="submit" className="btn btn-primary">
         {article !== null ? 'Save' : 'Create'}
       </button>
-      {preview ? <h1>Hello</h1> : ''}
+      {preview ? (
+        <>
+          <h1>Preview:</h1>
+          <h1 className="mb-1">{title_}</h1>
+          <div className="text-muted mb-2">
+            {/* Date created */}
+            {moment().format('MMM Do [at] h:mmA')}
+          </div>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: sanitizeHtml(marked.parse(content_)),
+            }}
+          ></div>
+        </>
+      ) : (
+        ''
+      )}
     </>
   );
 }
