@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useState } from 'react';
 import { Article } from '../types/article';
 
 export default function FormFields({
@@ -12,6 +13,7 @@ export default function FormFields({
   description: (val: string) => any;
   content: (val: string) => any;
 }) {
+  const [preview, setPreview] = useState(false);
   return (
     <>
       <div className="form-group">
@@ -57,9 +59,17 @@ export default function FormFields({
       <Link href="/">
         <a className="btn btn-secondary">Cancel</a>
       </Link>{' '}
+      <button
+        type="submit"
+        className="btn btn-info"
+        onClick={() => setPreview(true)}
+      >
+        Preview
+      </button>{' '}
       <button type="submit" className="btn btn-primary">
         {article !== null ? 'Save' : 'Create'}
       </button>
+      {preview ? <h1>Hello</h1> : ''}
     </>
   );
 }
