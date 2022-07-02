@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { MutableRefObject } from 'react';
 import { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Modal } from 'react-bootstrap';
 import { Article } from '../types/article';
 
 export default function FormFields({
@@ -16,8 +16,16 @@ export default function FormFields({
   content: MutableRefObject<HTMLTextAreaElement | null>;
 }) {
   const [previewBtn, setPreviewBtn] = useState(false);
+  const [show, setShow] = useState(false);
+
   return (
     <>
+      <Modal show={show} fullscreen={true} onHide={() => setShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Modal body content</Modal.Body>
+      </Modal>
       <h1 className="mb-4">
         {article === null ? 'Create New Article' : 'Edit Article'}
       </h1>
@@ -73,7 +81,7 @@ export default function FormFields({
         <a className="btn btn-secondary">Cancel</a>
       </Link>{' '}
       {previewBtn ? (
-        <Button type="button" variant="info">
+        <Button type="button" variant="info" onClick={() => setShow(true)}>
           Preview
         </Button>
       ) : (
