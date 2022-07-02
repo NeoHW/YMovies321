@@ -1,7 +1,10 @@
+import { marked } from 'marked';
+import moment from 'moment';
 import Link from 'next/link';
 import type { MutableRefObject } from 'react';
 import { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
+import sanitizeHtml from 'sanitize-html';
 import { Article } from '../types/article';
 
 export default function FormFields({
@@ -22,9 +25,27 @@ export default function FormFields({
     <>
       <Modal show={show} fullscreen={true} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal</Modal.Title>
+          <Modal.Title>Preview:</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Modal body content</Modal.Body>
+        <Modal.Body>
+          <h1 className="mb-1">{title.current?.value}</h1>
+          <div className="text-muted mb-2">
+            {moment().format('MMM Do [at] h:mmA')}
+          </div>
+          <Link href="#">
+            <a className="btn btn-secondary">All Articles</a>
+          </Link>{' '}
+          <a href={`#`} className="btn btn-info">
+            Edit
+          </a>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: sanitizeHtml(
+                marked.parse(content.current?.value as string)
+              ),
+            }}
+          ></div>
+        </Modal.Body>
       </Modal>
       <h1 className="mb-4">
         {article === null ? 'Create New Article' : 'Edit Article'}
