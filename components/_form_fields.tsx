@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { MutableRefObject } from 'react';
 import { useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
 import { Article } from '../types/article';
 
 export default function FormFields({
@@ -20,9 +21,9 @@ export default function FormFields({
       <h1 className="mb-4">
         {article === null ? 'Create New Article' : 'Edit Article'}
       </h1>
-      <div className="form-group">
-        <label htmlFor="title">Title</label>
-        <input
+      <Form.Group className="form-group" controlId="articleTitle">
+        <Form.Label htmlFor="title">Title</Form.Label>
+        <Form.Control
           type="text"
           name="title"
           id="title"
@@ -35,11 +36,12 @@ export default function FormFields({
           ref={title}
           required
         />
-      </div>
+      </Form.Group>
       <br />
-      <div className="form-group">
-        <label htmlFor="description">Description</label>
-        <textarea
+      <Form.Group className="form-group">
+        <Form.Label htmlFor="description">Description</Form.Label>
+        <Form.Control
+          as="textarea"
           name="description"
           id="description"
           className="form-control"
@@ -48,11 +50,12 @@ export default function FormFields({
           defaultValue={article?.description}
           required
         />
-      </div>
+      </Form.Group>
       <br />
-      <div className="form-group">
-        <label htmlFor="markdown">Content</label>
-        <textarea
+      <Form.Group className="form-group">
+        <Form.Label htmlFor="markdown">Content</Form.Label>
+        <Form.Control
+          as="textarea"
           name="markdown"
           id="markdown"
           className="form-control"
@@ -64,21 +67,21 @@ export default function FormFields({
           placeholder="Content of your article. You may use markdown for styling"
           required
         />
-      </div>
+      </Form.Group>
       <br />
       <Link href="/">
         <a className="btn btn-secondary">Cancel</a>
       </Link>{' '}
       {previewBtn ? (
-        <button type="button" className="btn btn-info">
+        <Button type="button" variant="info">
           Preview
-        </button>
+        </Button>
       ) : (
         ''
       )}{' '}
-      <button type="submit" className="btn btn-primary">
+      <Button type="submit" variant="primary">
         {article !== null ? 'Save' : 'Create'}
-      </button>
+      </Button>
     </>
   );
 }

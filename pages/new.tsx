@@ -12,6 +12,7 @@ import { useAuthContext } from '../context/AuthContext';
 import firebaseApp from '../firebase';
 import { AuthContext } from '../types/context';
 import { Article } from '../types/article';
+import { Form } from 'react-bootstrap';
 
 const db = getFirestore(firebaseApp);
 const postRef = collection(db, 'posts');
@@ -57,14 +58,14 @@ export default function NewArticle() {
   }, [user, login, router]);
   return (
     <>
-      <form onSubmit={createNewArticle}>
+      <Form onSubmit={createNewArticle}>
         <FormFields
           article={null}
           title={title}
           description={description}
           content={content}
         />
-      </form>
+      </Form>
     </>
   );
 }
