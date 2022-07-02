@@ -35,7 +35,7 @@ export default function ViewArticle() {
 
       setCreatedAt(createdAt);
       setHtml(html);
-      setArticleId(id);
+      setArticleId(id as string);
       setTitle(title);
     });
   });
