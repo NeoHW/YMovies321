@@ -1,7 +1,7 @@
 import { marked } from 'marked';
 import moment from 'moment';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import sanitizeHtml from 'sanitize-html';
 import { Article } from '../types/article';
 
@@ -18,8 +18,12 @@ export default function FormFields({
 }) {
   const [previewForm, setPreviewForm] = useState(false);
   const [previewBtn, setPreviewBtn] = useState(false);
-  const [title_, setTitle_] = useState('');
-  const [content_, setContent_] = useState('');
+  const [title_, setTitle_] = useState(
+    article ? article.title : 'Title of your article'
+  );
+  const [content_, setContent_] = useState(
+    article ? article.description : 'Content of your article'
+  );
 
   return (
     <>
