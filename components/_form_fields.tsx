@@ -41,7 +41,11 @@ export default function FormFields({
           <div
             dangerouslySetInnerHTML={{
               __html: sanitizeHtml(
-                marked.parse(content.current?.value as string)
+                marked.parse(
+                  content.current?.value == undefined
+                    ? ''
+                    : content.current.value
+                )
               ),
             }}
           ></div>
