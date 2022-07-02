@@ -16,7 +16,8 @@ export default function FormFields({
   description: (val: string) => any;
   content: (val: string) => any;
 }) {
-  const [preview, setPreview] = useState(false);
+  const [previewForm, setPreviewForm] = useState(false);
+  const [previewBtn, setPreviewBtn] = useState(false);
   const [title_, setTitle_] = useState('');
   const [content_, setContent_] = useState('');
 
@@ -34,6 +35,7 @@ export default function FormFields({
           onChange={(event) => {
             title(event.target.value);
             setTitle_(event.target.value);
+            setPreviewBtn(true);
           }}
           required
         />
@@ -47,7 +49,10 @@ export default function FormFields({
           className="form-control"
           placeholder="A small description of the article"
           defaultValue={article?.description}
-          onChange={(event) => description(event.target.value)}
+          onChange={(event) => {
+            description(event.target.value);
+            setPreviewBtn(true);
+          }}
           required
         />
       </div>
@@ -61,6 +66,7 @@ export default function FormFields({
           onChange={(event) => {
             content(event.target.value);
             setContent_(event.target.value);
+            setPreviewBtn(true);
           }}
           defaultValue={article?.markdown}
           placeholder="Content of your article. You may use markdown for styling"
@@ -71,17 +77,23 @@ export default function FormFields({
       <Link href="/">
         <a className="btn btn-secondary">Cancel</a>
       </Link>{' '}
-      <button
-        type="button"
-        className="btn btn-info"
-        onClick={() => setPreview(true)}
-      >
-        Preview
-      </button>{' '}
+      {previewBtn ? (
+        <>
+          <button
+            type="button"
+            className="btn btn-info"
+            onClick={() => setPreviewForm(true)}
+          >
+            Preview
+          </button>{' '}
+        </>
+      ) : (
+        ''
+      )}
       <button type="submit" className="btn btn-primary">
         {article !== null ? 'Save' : 'Create'}
       </button>
-      {preview ? (
+      {previewForm ? (
         <>
           <h1>Preview:</h1>
           <h1 className="mb-1">{title_}</h1>
