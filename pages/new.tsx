@@ -55,7 +55,6 @@ export default function NewArticle() {
   }, [user, login, router]);
   return (
     <>
-      <h1 className="mb-4">Create New Article</h1>
       <form onSubmit={createNewArticle}>
         <FormFields
           article={null}

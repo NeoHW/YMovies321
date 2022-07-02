@@ -48,7 +48,6 @@ export default function EditArticle() {
 
   return (
     <>
-      <h1 className="mb-4">Edit Article</h1>
       <form onSubmit={editArticle}>
         <FormFields
           article={article}
