@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import FormFields from '../components/_form_fields';
 
 import { marked } from 'marked';
@@ -11,34 +11,36 @@ import { collection, getFirestore, addDoc } from 'firebase/firestore';
 import { useAuthContext } from '../context/AuthContext';
 import firebaseApp from '../firebase';
 import { AuthContext } from '../types/context';
+import { Article } from '../types/article';
 
 const db = getFirestore(firebaseApp);
 const postRef = collection(db, 'posts');
 
 export default function NewArticle() {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [content, setContent] = useState('');
+  const title = useRef<HTMLInputElement>(null);
+  const description = useRef<HTMLTextAreaElement>(null);
+  const content = useRef<HTMLTextAreaElement>(null);
   const { user, login }: AuthContext = useAuthContext();
   const router = useRouter();
 
   const createNewArticle = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    addDoc(postRef, {
+    const article: Article = {
       createdAt: moment().format('MMM Do [at] h:mmA'),
       creatorId: user.uid,
-      description: description,
-      html: sanitizeHtml(marked.parse(content)),
-      markdown: content,
+      description: description.current?.value as string,
+      html: sanitizeHtml(marked.parse(content.current?.value as string)),
+      markdown: content.current?.value as string,
       // Each slug has to be unique
       slug:
         Math.round(Math.random() * 1000) +
-        slugify(title as string, {
+        slugify(title.current?.value as string, {
           lower: true,
           strict: true,
         }),
-      title: title,
-    });
+      title: title.current?.value as string,
+    };
+    addDoc(postRef, article);
     router.push('/');
   };
 
@@ -58,9 +60,9 @@ export default function NewArticle() {
       <form onSubmit={createNewArticle}>
         <FormFields
           article={null}
-          title={setTitle}
-          description={setDescription}
-          content={setContent}
+          title={title}
+          description={description}
+          content={content}
         />
       </form>
     </>
