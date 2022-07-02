@@ -1,6 +1,6 @@
 import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { FormEvent } from 'react';
 import firebaseApp from '../../../firebase';
 import { Article } from '../../../types/article';
@@ -10,9 +10,9 @@ const db = getFirestore(firebaseApp);
 
 export default function EditArticle() {
   const [article, setArticle] = useState({} as Article);
-  const [description, setDescription] = useState('');
-  const [markdown, setMarkdown] = useState('');
-  const [title, setTitle] = useState('');
+  const title = useRef<HTMLInputElement>(null);
+  const description = useRef<HTMLTextAreaElement>(null);
+  const markdown = useRef<HTMLTextAreaElement>(null);
 
   const router = useRouter();
   const { id: articleId } = router.query;
@@ -29,9 +29,19 @@ export default function EditArticle() {
 
   async function editArticle(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const title_ = title === '' ? article.title : title;
-    const description_ = description === '' ? article.description : description;
-    const markdown_ = markdown === '' ? article.markdown : markdown;
+    const title_ =
+      title.current?.value == '' ? article.title : title.current?.value;
+
+    const description_ =
+      description.current?.value == ''
+        ? article.description
+        : description.current?.value;
+
+    const markdown_ =
+      markdown.current?.value == ''
+        ? article.markdown
+        : markdown.current?.value;
+
     const data = {
       title: title_,
       description: description_,
@@ -51,9 +61,9 @@ export default function EditArticle() {
       <form onSubmit={editArticle}>
         <FormFields
           article={article}
-          description={setDescription}
-          content={setMarkdown}
-          title={setTitle}
+          description={description}
+          content={markdown}
+          title={title}
         />
       </form>
     </>
