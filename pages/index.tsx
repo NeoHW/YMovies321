@@ -30,7 +30,7 @@ const Home: NextPage = () => {
 
   const { user }: AuthContext = useAuthContext();
   function deleteArticle(article: Article) {
-    const docRef = doc(db, 'posts', article.id);
+    const docRef = doc(db, 'posts', article.id as string);
     return deleteDoc(docRef);
   }
 
