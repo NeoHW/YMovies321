@@ -20,7 +20,7 @@ const NavbarComp = () => {
               <>
                 <Nav.Link
                   onClick={() => {
-                    router.push('/settings');
+                    router.push('/auth');
                   }}
                 >
                   Settings
