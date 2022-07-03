@@ -5,6 +5,7 @@ import type { FormEvent } from 'react';
 import firebaseApp from '../../../firebase';
 import { Article } from '../../../types/article';
 import FormFields from '../../../components/_form_fields';
+import { Form } from 'react-bootstrap';
 
 const db = getFirestore(firebaseApp);
 
@@ -57,15 +58,13 @@ export default function EditArticle() {
   }
 
   return (
-    <>
-      <form onSubmit={editArticle}>
-        <FormFields
-          article={article}
-          description={description}
-          content={markdown}
-          title={title}
-        />
-      </form>
-    </>
+    <Form onSubmit={editArticle}>
+      <FormFields
+        article={article}
+        description={description}
+        content={markdown}
+        title={title}
+      />
+    </Form>
   );
 }

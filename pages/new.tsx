@@ -57,15 +57,13 @@ export default function NewArticle() {
     if (user === null) loginWithGoogle();
   }, [user, login, router]);
   return (
-    <>
-      <Form onSubmit={createNewArticle}>
-        <FormFields
-          article={null}
-          title={title}
-          description={description}
-          content={content}
-        />
-      </Form>
-    </>
+    <Form onSubmit={createNewArticle}>
+      <FormFields
+        article={null}
+        title={title}
+        description={description}
+        content={content}
+      />
+    </Form>
   );
 }
