@@ -20,6 +20,13 @@ const NavbarComp = () => {
               <>
                 <Nav.Link
                   onClick={() => {
+                    router.push('/settings');
+                  }}
+                >
+                  Settings
+                </Nav.Link>
+                <Nav.Link
+                  onClick={() => {
                     logout();
                     router.push('/');
                   }}
