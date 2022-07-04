@@ -1,4 +1,8 @@
-import type { User } from 'firebase/auth';
+import {
+  GoogleAuthProvider,
+  reauthenticateWithPopup,
+  User,
+} from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
@@ -26,7 +30,10 @@ export default function Settings() {
       const choice = prompt(
         'Are you sure you want to delete this account? (YES/NO): '
       );
-      choice == 'YES' ? user.delete() : alert('Account not deleted');
+      if (choice != 'YES') return alert('Account not deleted');
+      await reauthenticateWithPopup(user, new GoogleAuthProvider());
+      await user.delete();
+      router.push('/');
     }
   };
 
@@ -44,8 +51,8 @@ export default function Settings() {
 
   return (
     <Form>
-      <br />
-      {/* <Button variant="info" onClick={changeEmail}>
+      {/* <br />
+      <Button variant="info" onClick={changeEmail}>
         Change Email
       </Button> */}
       <br /> <br />
