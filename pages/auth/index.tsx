@@ -23,7 +23,7 @@ function validDateEmail(user: User): boolean {
 
 export default function Settings() {
   const router = useRouter();
-  const { user, login, logout }: AuthContext = useAuthContext();
+  const { user, logout }: AuthContext = useAuthContext();
 
   const deleteAccount = async () => {
     if (validDateEmail(user)) {
@@ -33,21 +33,10 @@ export default function Settings() {
       if (choice != 'YES') return alert('Account not deleted');
       await reauthenticateWithPopup(user, new GoogleAuthProvider());
       await user.delete();
-      router.push('/');
     }
   };
 
-  useEffect(() => {
-    const loginWithGoogle = async () => {
-      try {
-        await login({ popup: true });
-        router.push('/new');
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    if (user === null) loginWithGoogle();
-  }, [user, login, router]);
+  if (user === null) router.push('/login');
 
   return (
     <Form>
