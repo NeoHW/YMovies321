@@ -30,11 +30,6 @@ export default function Settings() {
     }
   };
 
-  const changeEmail = () => {
-    if (validDateEmail(user)) {
-    }
-  };
-
   useEffect(() => {
     const loginWithGoogle = async () => {
       try {
@@ -50,9 +45,9 @@ export default function Settings() {
   return (
     <Form>
       <br />
-      <Button variant="info" onClick={changeEmail}>
+      {/* <Button variant="info" onClick={changeEmail}>
         Change Email
-      </Button>
+      </Button> */}
       <br /> <br />
       <Button variant="danger" onClick={deleteAccount}>
         Delete Account
