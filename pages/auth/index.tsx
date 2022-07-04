@@ -21,8 +21,12 @@ export default function Settings() {
   const router = useRouter();
   const { user, login, logout }: AuthContext = useAuthContext();
 
-  const deleteAccount = () => {
+  const deleteAccount = async () => {
     if (validDateEmail(user)) {
+      const choice = prompt(
+        'Are you sure you want to delete this account? (YES/NO): '
+      );
+      choice == 'YES' ? user.delete() : alert('Account not deleted');
     }
   };
 
