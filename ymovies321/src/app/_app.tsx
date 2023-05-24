@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import type { AppProps } from 'next/app';
-import NavBar from '../components/navBar';
+import NavBar from './components/navBar';
 import { AuthContextProvider } from '../context/AuthContext';
 
 function MyApp({ Component, pageProps }: AppProps) {

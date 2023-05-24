@@ -9,7 +9,7 @@ import moment from 'moment';
 
 import { collection, getFirestore, addDoc } from 'firebase/firestore';
 import { useAuthContext } from '../context/AuthContext';
-import firebaseApp from '../firebase';
+import firebaseApp from '../../../firebase';
 import { AuthContext } from '../types/context';
 import { Article } from '../types/article';
 import { Form } from 'react-bootstrap';

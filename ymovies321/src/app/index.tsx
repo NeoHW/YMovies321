@@ -8,7 +8,7 @@ import {
   getFirestore,
   onSnapshot,
 } from 'firebase/firestore';
-import firebaseApp from '../firebase';
+import firebaseApp from '../../../firebase';
 import { useAuthContext } from '../context/AuthContext';
 import Link from 'next/link';
 import { AuthContext } from '../types/context';

@@ -1,6 +1,6 @@
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import Link from 'next/link';
-import { useAuthContext } from '../context/AuthContext';
+import { useAuthContext } from '../src/app/context/AuthContext';
 import { useRouter } from 'next/router';
 
 const NavbarComp = () => {
