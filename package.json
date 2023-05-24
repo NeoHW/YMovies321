@@ -9,5 +9,11 @@
   },
   "script": {
     "lint": "eslint"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "dashify": "^2.0.0",
+    "firebase": "^9.22.0",
+    "firebase-admin": "^11.8.0"
   }
 }
