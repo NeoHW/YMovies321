@@ -1,3 +1,5 @@
+'use client';
+
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import Link from 'next/link';
 import { useAuthContext } from '../src/app/context/AuthContext';

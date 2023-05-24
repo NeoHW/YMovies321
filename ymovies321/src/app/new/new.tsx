@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useRef, useState } from 'react';
-import FormFields from '../components/_form_fields';
+import FormFields from '../formFields/_form_fields';
 
 import { marked } from 'marked';
 import sanitizeHtml from 'sanitize-html';

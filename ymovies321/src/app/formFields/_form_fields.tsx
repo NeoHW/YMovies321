@@ -1,3 +1,5 @@
+'use client';
+
 import { marked } from 'marked';
 import moment from 'moment';
 import Link from 'next/link';
