@@ -7,6 +7,9 @@ import Image from 'next/image';
 import companyLogo from "./YMoviesLogo.jpg";
 import avatar from "./avatar.png";
 
+import { signIn } from "../authContext/auth"
+
+interface NavbarSignedOutProps {}
 
 const navigation = [
   { name: 'Home', href: '#', current: true },
@@ -19,7 +22,12 @@ function classNames(...classes: unknown[]): string {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Example() {
+const handleSignIn = async () => {
+  await signIn();
+  // Perform any additional actions after sign-in if needed
+};
+
+const NavbarSignedOut: React.FunctionComponent<NavbarSignedOutProps> = () => {
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -73,6 +81,7 @@ export default function Example() {
                 <button
                   type="button"
                   className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  onClick={handleSignIn} // call signIn function on button click
                 >
                   <span className="sr-only">Log In</span>
                   Log In
@@ -149,4 +158,6 @@ export default function Example() {
       )}
     </Disclosure>
   )
-}
+};
+
+export default NavbarSignedOut;
