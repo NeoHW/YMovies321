@@ -15,8 +15,8 @@ const navigation = [
   { name: 'Watchlist', href: '#', current: false },
 ]
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+function classNames(...classes: unknown[]): string {
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Example() {
