@@ -1,7 +1,5 @@
-"use client";
-
 import Image from 'next/image'
-import Navbar from "./Navigation/Navbar";
+import Navbar from "./Navigation/NavbarSignedOut";
 
 export default function Home() {
   return (
