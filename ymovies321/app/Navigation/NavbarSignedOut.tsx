@@ -6,10 +6,14 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image';
 import companyLogo from "./YMoviesLogo.jpg";
 import avatar from "./avatar.png";
+import {useState, useEffect} from 'react';
+import { useRouter } from 'next/router';
 
 import { signIn } from "../authContext/auth"
 
 interface NavbarSignedOutProps {}
+
+let profile = null;
 
 const navigation = [
   { name: 'Home', href: '#', current: true },
@@ -22,12 +26,26 @@ function classNames(...classes: unknown[]): string {
   return classes.filter(Boolean).join(' ');
 }
 
-const handleSignIn = async () => {
-  await signIn();
-  // Perform any additional actions after sign-in if needed
-};
+
 
 const NavbarSignedOut: React.FunctionComponent<NavbarSignedOutProps> = () => {
+
+  const handleSignIn = async () => {
+    const user = await signIn();
+    // Perform any additional actions after sign-in if needed
+    console.log("signed in")
+  
+    // Pass the user data to somewhere
+    displayLoggedIn(user);
+
+    const router = useRouter();
+    
+  };
+
+  const displayLoggedIn = x => {
+    return x == null ? "false" : "true";
+  }
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -84,7 +102,7 @@ const NavbarSignedOut: React.FunctionComponent<NavbarSignedOutProps> = () => {
                   onClick={handleSignIn} // call signIn function on button click
                 >
                   <span className="sr-only">Log In</span>
-                  Log In
+                  {displayLoggedIn()}Log In
                 </button>
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
