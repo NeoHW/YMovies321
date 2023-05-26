@@ -12,19 +12,19 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 export default function Home() {
   { 
-    // profile is the state, useAuthState auto detects if person is logged in or out
-    const [profile] = useAuthState(auth);
-    console.log(profile);
+    // user is the state, useAuthState auto detects if person is logged in or out
+    const [user] = useAuthState(auth);
+    console.log(user);
 
     return (
       <div>
-        <Navbar isSignedIn={profile ? true : false} profile={profile} handleSignIn={signIn} handleSignOut={signOut} />
+        <Navbar isSignedIn={user ? true : false} profile={user} handleSignIn={signIn} handleSignOut={signOut} />
 
         <h1 className="text-3xl font-bold underline">Home Page</h1>
-        {profile
+        {user
           ? (
             <div>
-              <ContentLoggedIn profile={profile} />
+              <ContentLoggedIn profile={user} />
             </div>
           )
           :
