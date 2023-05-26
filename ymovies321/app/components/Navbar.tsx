@@ -10,6 +10,16 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { signIn } from "../authContext/auth"
+import { UserCredential } from 'firebase/auth';
+
+
+interface ButtonProps {
+    isSignedIn: boolean;
+    profile: UserCredential;
+    handleSignIn: () => void;
+    handleSignOut: () => void;
+  }
+
 
 
 const navigation = [
@@ -23,7 +33,7 @@ function classNames(...classes: unknown[]): string {
     return classes.filter(Boolean).join(' ');
 }
 
-function Navbar({ isSignedIn, profile, handleSignIn, handleSignOut }) {
+function Navbar({ isSignedIn, profile, handleSignIn, handleSignOut }: ButtonProps) {
 
     return (
         <Disclosure as="nav" className="bg-gray-800">
