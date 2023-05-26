@@ -1,6 +1,7 @@
 // Experimentation of the IMDB API. 
 // Referenced from https://imdb-api.com
 
+{/*
 export default async function get() {
     var res;
     var https = require('follow-redirects').https;
@@ -36,3 +37,4 @@ export default async function get() {
     req.end();
     return res;
 }
+*/}

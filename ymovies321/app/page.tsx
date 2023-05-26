@@ -5,16 +5,18 @@ import Navbar from "./components/Navbar";
 import { useState } from "react";
 import { signIn } from "./authContext/auth";
 import Content from "./components/Content";
+import { UserCredential } from 'firebase/auth';
 
 
 
 export default function Home() {
   {
-    const [profile, setProfile] = useState(null);
+    const [profile, setProfile] = useState<null | UserCredential>(null);;
 
     const handleSignIn = async () => {
       const user = await signIn();
       // Pass the user data
+      console.log(user);
       setProfile(user);
     };
 
