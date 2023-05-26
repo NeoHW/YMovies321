@@ -4,8 +4,8 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image';
-import companyLogo from "../Navigation/YMoviesLogo.jpg";
-import avatar from "../Navigation/avatar.png";
+import companyLogo from "../navigation/YMoviesLogo.jpg";
+import avatar from "../navigation/avatar.png";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
@@ -20,11 +20,12 @@ interface ButtonProps {
     handleSignOut: () => void;
   }
 
-
-
-const navigation = [
+const nav = [
     { name: 'Home', href: '#', current: true },
     { name: 'Trending', href: '#', current: false },
+]
+
+const navLoggedInExtra = [
     { name: 'Reviews', href: '#', current: false },
     { name: 'Watchlist', href: '#', current: false },
 ]
@@ -66,8 +67,8 @@ function Navbar({ isSignedIn, profile, handleSignIn, handleSignOut }: ButtonProp
                                     />
                                 </div>
                                 <div className="hidden sm:ml-6 sm:block">
-                                    <div className="flex space-x-4">
-                                        {navigation.map((item) => (
+                                    <div className="flex space-x-2">
+                                        {nav.map((item) => (
                                             <a
                                                 key={item.name}
                                                 href={item.href}
@@ -80,6 +81,24 @@ function Navbar({ isSignedIn, profile, handleSignIn, handleSignOut }: ButtonProp
                                                 {item.name}
                                             </a>
                                         ))}
+                                        {isSignedIn ? ( // reviews & watchlist buttons when signed in
+                                            navLoggedInExtra.map((item) => (
+                                                <a
+                                                    key={item.name}
+                                                    href={item.href}
+                                                    className={classNames(
+                                                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                                        'rounded-md px-3 py-2 text-sm font-medium'
+                                                    )}
+                                                    aria-current={item.current ? 'page' : undefined}
+                                                >
+                                                    {item.name}
+                                                </a>
+                                            )))
+                                                : (
+                                                    <span></span>
+                                                )
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -173,7 +192,7 @@ function Navbar({ isSignedIn, profile, handleSignIn, handleSignOut }: ButtonProp
 
                     <Disclosure.Panel className="sm:hidden">
                         <div className="space-y-1 px-2 pb-3 pt-2">
-                            {navigation.map((item) => (
+                            {nav.map((item) => (
                                 <Disclosure.Button
                                     key={item.name}
                                     as="a"

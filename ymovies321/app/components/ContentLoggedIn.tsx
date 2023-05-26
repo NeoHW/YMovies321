@@ -1,8 +1,9 @@
 // Display the signed-in contents of main page.
+import { UserCredential } from "firebase/auth";
+import get from "../imdb/api";
 
-import { UserCredential } from "firebase/auth"
-import get from "../imdb/api"
-export default function Content({ profile }: { profile: UserCredential | null}) {
+
+export default function ContentLoggedIn({ profile }: { profile: UserCredential | null}) {
     return (
         <div>
             <h2 className="text-xl font-bold">

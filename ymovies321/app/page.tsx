@@ -4,8 +4,9 @@ import 'firebase/firestore';
 import Navbar from "./components/Navbar";
 import { useState } from "react";
 import { signIn } from "./authContext/auth";
-import Content from "./components/Content";
+import Content from "./components/ContentLoggedIn";
 import { UserCredential } from 'firebase/auth';
+import ContentLoggedIn from './components/ContentLoggedIn';
 
 
 
@@ -42,7 +43,7 @@ export default function Home() {
           ? (<p>LOGGED OUT</p>)
           : (
             <div>
-              <Content profile={profile} />
+              <ContentLoggedIn profile={profile} />
             </div>
           )}
       </div>
