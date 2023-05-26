@@ -15,7 +15,7 @@ import { UserCredential } from 'firebase/auth';
 
 interface ButtonProps {
     isSignedIn: boolean;
-    profile: UserCredential;
+    profile: null | UserCredential;
     handleSignIn: () => void;
     handleSignOut: () => void;
   }
