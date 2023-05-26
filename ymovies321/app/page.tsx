@@ -28,15 +28,7 @@ export default function Home() {
 
     return (
       <div>
-
-        {// Display different navbars based on sign in status
-        profile == null ? (
-          <Navbar isSignedIn={false} profile={profile} handleSignIn={handleSignIn} handleSignOut={handleSignOut} />
-        )
-          : (
-            <Navbar isSignedIn={true} profile={profile} handleSignIn={handleSignIn} handleSignOut={handleSignOut} />
-          )}
-
+        <Navbar isSignedIn={profile == null ? false : true} profile={profile} handleSignIn={handleSignIn} handleSignOut={handleSignOut} />
 
         <h1 className="text-3xl font-bold underline">Home Page</h1>
         {profile == null
