@@ -8,21 +8,11 @@ import firebase_app from './firebase/config';
 import Navbar from "./components/Navbar";
 import { useState } from "react";
 import { signIn } from "./authContext/auth";
+import Content from "./components/Content";
 
 
 
 export default function Home() {
-
-  {
-    /* trying to move it to auth.ts
-    const provider = new GoogleAuthProvider()
-    const auth = getAuth(firebase_app);
-    const signIn = async() => {
-      const result = await signInWithPopup(auth, provider);
-      console.log(result.user);
-    }
-    */
-  }
 
   {
     const [profile, setProfile] = useState(null);
@@ -33,7 +23,7 @@ export default function Home() {
       console.log("signed in")
 
       // Pass the user data to somewhere
-      setProfile(user.user.displayName);
+      setProfile(user);
     };
 
     const handleSignOut = async () => {
@@ -51,18 +41,23 @@ export default function Home() {
             </div>
           }
         </div>
-  
+
         {profile == null ? (
-          <Navbar isSignedIn={false} user={profile} handleSignIn={handleSignIn} handleSignOut = {handleSignOut} />
+          <Navbar isSignedIn={false} user={profile} handleSignIn={handleSignIn} handleSignOut={handleSignOut} />
         )
           : (
-            <Navbar isSignedIn={true} user={profile} handleSignIn={handleSignIn} handleSignOut = {handleSignOut} />
+            <Navbar isSignedIn={true} user={profile} handleSignIn={handleSignIn} handleSignOut={handleSignOut} />
           )}
 
 
         <h1 className="text-3xl font-bold underline">Home Page</h1>
-        {profile == null ? (<p>LOGGED OUT</p>) : (<p>LOGGED IN: {profile}</p>)}
-
+        { profile == null
+        ? (<p>LOGGED OUT</p>) 
+        : (
+          <div>
+        <Content profile = {profile} />
+        </div>
+        )}
       </div>
     );
   }
