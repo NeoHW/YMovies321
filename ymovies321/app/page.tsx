@@ -3,41 +3,34 @@ import 'firebase/firestore';
 
 import Navbar from "./components/Navbar";
 import { useState } from "react";
-import { signIn } from "./authContext/auth";
+import { auth, signIn , signOut} from "./authContext/auth";
 import Content from "./components/ContentLoggedIn";
 import { UserCredential } from 'firebase/auth';
 import ContentLoggedIn from './components/ContentLoggedIn';
-
-
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 export default function Home() {
-  {
-    const [profile, setProfile] = useState<null | UserCredential>(null);;
-
-    const handleSignIn = async () => {
-      const user = await signIn();
-      // Pass the user data
-      console.log(user);
-      setProfile(user);
-    };
-
-    // Handle the signing out of user.
-    const handleSignOut = async () => {
-      setProfile(null);
-    }
+  { 
+    // profile is the state, useAuthState auto detects if person is logged in or out
+    const [profile] = useAuthState(auth);
+    console.log(profile);
 
     return (
       <div>
-        <Navbar isSignedIn={profile == null ? false : true} profile={profile} handleSignIn={handleSignIn} handleSignOut={handleSignOut} />
+        <Navbar isSignedIn={profile ? true : false} profile={profile} handleSignIn={signIn} handleSignOut={signOut} />
 
         <h1 className="text-3xl font-bold underline">Home Page</h1>
-        {profile == null
-          ? (<p>LOGGED OUT</p>)
-          : (
+        {profile
+          ? (
             <div>
               <ContentLoggedIn profile={profile} />
             </div>
-          )}
+          )
+          :
+          (<p>LOGGED OUT</p>)
+        }
+          
       </div>
     );
   }

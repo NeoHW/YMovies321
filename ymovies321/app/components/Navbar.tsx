@@ -12,10 +12,9 @@ import { useRouter } from 'next/router';
 import { signIn } from "../authContext/auth"
 import { UserCredential } from 'firebase/auth';
 
-
 interface ButtonProps {
     isSignedIn: boolean;
-    profile: null | UserCredential;
+    profile: User | null | undefined;
     handleSignIn: () => void;
     handleSignOut: () => void;
   }

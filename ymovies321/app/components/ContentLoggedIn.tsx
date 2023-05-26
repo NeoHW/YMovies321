@@ -3,7 +3,7 @@ import { UserCredential } from "firebase/auth";
 import get from "../imdb/api";
 
 
-export default function ContentLoggedIn({ profile }: { profile: UserCredential | null}) {
+export default function ContentLoggedIn({ profile }: { profile: User | null | undefined}) {
     return (
         <div>
             <h2 className="text-xl font-bold">
