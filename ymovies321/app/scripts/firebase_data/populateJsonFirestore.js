@@ -49,4 +49,17 @@ async function exportData() {
   });
 }
 
-exportData();
+// exportData();
+
+// trying to check if data exists
+async function getData() {
+  const docRef = db.collection('MoviesID_TMDB_database').doc("20683");
+  const doc = await docRef.get();
+  if (!doc.exists) {
+    console.log('No such document!');
+  } else {
+    console.log('Document data:', doc.data());
+  }
+}
+
+// getData();
