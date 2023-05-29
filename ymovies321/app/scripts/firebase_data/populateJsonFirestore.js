@@ -1,3 +1,6 @@
+// firebase allows 20k writes/day, 50k reads/day
+// maybe we trim it to top 20k movies?
+
 import { initializeApp, applicationDefault, cert } from 'firebase-admin/app';
 import { getFirestore, Timestamp, FieldValue } from 'firebase-admin/firestore';
 import { createReadStream } from "fs";
