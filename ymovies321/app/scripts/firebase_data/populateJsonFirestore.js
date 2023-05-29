@@ -21,7 +21,7 @@ const db = getFirestore();
 async function exportData() {
   // Read the downloaded file line by line
   const lineReader = readline.createInterface({
-    input: createReadStream("./movie_ids.json"),
+    input: createReadStream("./movie_ids_trimmed.json"),
   });
 
   // Process each line (JSON object) and store the movie ID in the database
