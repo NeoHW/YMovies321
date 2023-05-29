@@ -19,7 +19,7 @@ rl.on('line', (jsonLine) => {
     const movie = JSON.parse(jsonLine);
 
     // Check if the movie's popularity is lower than 50
-    if (movie.popularity < 50) {
+    if (movie.popularity < 15) {
     // Skip this movie entry
     return;
     }
