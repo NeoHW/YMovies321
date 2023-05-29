@@ -14,32 +14,39 @@ initializeApp({
 
 const db = getFirestore();
 
-const moviesID_ref = collection(db, "MoviesID_TMDB_database");
-
-// adding data from json file :
-
-// Read the downloaded file line by line
-const lineReader = readline.createInterface({
-  input: createReadStream("./movie_ids.json"),
-});
-
-// Process each line (JSON object) and store the movie ID in the database
-lineReader.on("line", async (line) => {
-  const movieData = JSON.parse(line);
-  const movieId = movieData.id.toString(); // as document ID in firebase has to be string
-  const movieTitle = movieData.original_title;
-  console.log(movieId);
-
-  const docRef = db.collection('MoviesID_TMDB_database').doc(movieId);
-
-  await docRef.set({
-    id: movieId,
-    name: movieTitle
+// Adding data from the JSON file
+async function exportData() {
+  // Read the downloaded file line by line
+  const lineReader = readline.createInterface({
+    input: createReadStream("./movie_ids.json"),
   });
 
-  console.log("added " + movieId);
+  // Process each line (JSON object) and store the movie ID in the database
+  lineReader.on("line", async (line) => {
+    const movieData = JSON.parse(line);
+    const movieId = movieData.id.toString(); // Convert to string as document ID in Firestore
+    const movieTitle = movieData.original_title;
+
+    const docRef = db.collection('MoviesID_TMDB_database').doc(movieId);
+
+    try {
+      await db.runTransaction(async (transaction) => {
+        // Retry the operation in case of failures
+        return transaction.set(docRef, {
+          id: movieId,
+          name: movieTitle
+        });
+      });
+
+      console.log(`Movie ID ${movieId} added to Firestore.`);
+    } catch (error) {
+      console.error(`Failed to add Movie ID ${movieId} to Firestore:`, error);
+    }
+  });
 
   lineReader.on("close", () => {
     console.log("Data import completed.");
   });
-});
+}
+
+exportData();
