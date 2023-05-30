@@ -8,11 +8,14 @@ import readline from "readline";
 
 // !! IMPORTANT: Remember to Set the environment variable GOOGLE_APPLICATION_CREDENTIALS to the path of the JSON file that contains your service account key. This variable only applies to your current shell session, so if you open a new session, set the variable again.
 // export GOOGLE_APPLICATION_CREDENTIALS="/Users/haowei/NUS/Orbital/firebase-service-account-file.json"
+// export GOOGLE_APPLICATION_CREDENTIALS="/Users/haowei/NUS/Orbital/orbtial-test-firebase-service-account-file.json"
+
 
 // Initialise Firestore and get a reference to the database
 initializeApp({
   credential: applicationDefault(),
-  databaseURL: 'https://orbital-9ada9.firebaseio.com'
+  //databaseURL: 'https://orbital-9ada9.firebaseio.com'
+  databaseURL: 'https://orbital-test.firebaseio.com'
 });
 
 const db = getFirestore();
@@ -37,7 +40,9 @@ async function exportData() {
         // Retry the operation in case of failures
         return transaction.set(docRef, {
           id: movieId,
-          name: movieTitle
+          name: movieTitle,
+          averageReviewRating: 0,
+          numReviews: 0
         });
       });
 
@@ -52,7 +57,7 @@ async function exportData() {
   });
 }
 
-// exportData();
+exportData();
 
 // trying to check if data exists
 async function getData() {
