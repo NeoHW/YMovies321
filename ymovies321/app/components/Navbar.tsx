@@ -10,7 +10,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { signIn } from "../authContext/auth"
-import { UserCredential } from 'firebase/auth';
+import { User, UserCredential } from 'firebase/auth';
 
 interface ButtonProps {
     isSignedIn: boolean;
