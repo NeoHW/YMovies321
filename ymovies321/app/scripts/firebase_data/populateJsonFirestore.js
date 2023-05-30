@@ -72,7 +72,7 @@ async function fetchOtherDetailsByAPI(movieId) {
     }
   };
   
-  return fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`, options)
+  return fetch(`https://api.themoviedb.org/3/movie/${movieId}?append_to_response=images&language=en-US&include_image_language=en,null`, options)
     .then(response => response.json())
     .then(response => console.log(response))
     .catch(err => console.error(err));
