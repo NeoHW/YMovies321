@@ -9,28 +9,19 @@ const db = getFirestore(firebase_app);
 // https://firebase.google.com/docs/firestore/manage-data/add-data
 async function addData() {    
     // "cities" is the new collection's name
-    const moviesID_ref = collection(db, "MoviesID_TMDB_database");
+    const citiesRef = collection(db, "cities");
 
-    // adding separate documents into the collection 
-    //await setDoc(doc(moviesID_ref, "1"), {
-    //    name: "movie_test",
-    //    id: 1});
-
-    const movieId = "3924";
-    const movieTitle = "blondie"
-    // console.log(movieId);
-
-    // Store the movie ID in the Firestore database
-    await setDoc(doc(moviesID_ref, movieId), {
-        id: movieId,
-        name: movieTitle
-    })
+    await setDoc(doc(citiesRef, "SF"), {
+        name: "San Francisco", state: "CA", country: "USA",
+        capital: false, population: 860000,
+        regions: ["west_coast", "norcal"] }
+    );
 }
 
 // https://firebase.google.com/docs/firestore/query-data/get-data
 async function fetchData() {
     // getting data
-    const docRef = doc(db, "MoviesDB", "Sherlock Holmes");
+    const docRef = doc(db, "cities", "SF");
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
@@ -43,10 +34,11 @@ async function fetchData() {
 
 
 function Movies() {
-    // testing out fetchData & addData from database function (it works!)
-    addData();
-    fetchData();
     
+    // addData() & fetchData() works
+    // addData();
+    // fetchData();
+
     // return jsx
     return (
         <div>
