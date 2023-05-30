@@ -7,14 +7,17 @@ import { createReadStream } from "fs";
 import readline from "readline";
 
 // !! IMPORTANT: Remember to Set the environment variable GOOGLE_APPLICATION_CREDENTIALS to the path of the JSON file that contains your service account key. This variable only applies to your current shell session, so if you open a new session, set the variable again.
-// export GOOGLE_APPLICATION_CREDENTIALS="/Users/haowei/NUS/Orbital/firebase-service-account-file.json"
+// proj account: 
+// export GOOGLE_APPLICATION_CREDENTIALS="/Users/haowei/NUS/Orbital/orbital-ymovies321-firebase-service-account-file.json"
+
+// test account:
 // export GOOGLE_APPLICATION_CREDENTIALS="/Users/haowei/NUS/Orbital/orbtial-test-firebase-service-account-file.json"
 
 
 // Initialise Firestore and get a reference to the database
 initializeApp({
   credential: applicationDefault(),
-  //databaseURL: 'https://orbital-9ada9.firebaseio.com'
+  // databaseURL: 'https://orbital-ymovies321.firebaseio.com'
   databaseURL: 'https://orbital-test.firebaseio.com'
 });
 
@@ -57,11 +60,11 @@ async function exportData() {
   });
 }
 
-exportData();
+// exportData();
 
 // trying to check if data exists
 async function getData() {
-  const docRef = db.collection('MoviesID_TMDB_database').doc("20683");
+  const docRef = db.collection('MoviesID_TMDB_database').doc("10003");
   const doc = await docRef.get();
   if (!doc.exists) {
     console.log('No such document!');
