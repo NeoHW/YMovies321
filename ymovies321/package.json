@@ -8,10 +8,8 @@
     "start": "next start",
     "lint": "next lint"
   },
-  
   "type": "module",
   "google-gax": "1.6.2",
-
   "dependencies": {
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.18",
@@ -24,6 +22,7 @@
     "firebase-admin": "^11.8.0",
     "follow-redirects": "^1.15.2",
     "fs": "^0.0.1-security",
+    "moment": "^2.29.4",
     "next": "13.4.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
