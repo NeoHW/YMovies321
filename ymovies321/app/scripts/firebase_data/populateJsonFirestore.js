@@ -62,6 +62,24 @@ async function exportData() {
 
 // exportData();
 
+// to use API to fetch using movieID
+async function fetchOtherDetailsByAPI(movieId) {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZDI1NmMyZWVjNzhmNzk0OTg1ZWQwYjdjMzVjY2JiMCIsInN1YiI6IjY0NzFjZDM3YTE5OWE2MDExNmM2ZDk1ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MjVdbubEYW3r_vtxBOcq4zxOo6lteIShmCykxu1m8co'
+    }
+  };
+  
+  return fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`, options)
+    .then(response => response.json())
+    .then(response => console.log(response))
+    .catch(err => console.error(err));
+}
+
+fetchOtherDetailsByAPI(100);
+
 // trying to check if data exists
 async function getData() {
   const docRef = db.collection('MoviesID_TMDB_database').doc("10003");
