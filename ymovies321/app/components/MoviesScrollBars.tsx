@@ -4,6 +4,7 @@ import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestor
 import React, { useState, useEffect } from "react";
 import type { InferGetStaticPropsType, GetStaticProps } from 'next';
 import moment from "moment";
+import Link from 'next/link';
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
@@ -87,24 +88,26 @@ function fetchMovieData() {
         <div className="container mx-auto flex overflow-x-scroll pb-5">
             <div className="flex flex-nowrap">
                 {showingInCinemas.results && showingInCinemas.results.map((item: any) => (
-                <div className="ml-3 w-40 h-128 max-w-xs overflow-hidden cursor-pointer" key={item.id}>
-                    <img
-                    onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.onerror = null;
-                        target.src = "../images/no-image-available.png";
-                    }}
-                    src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
-                    alt={item.title ? item.title : item.name}
-                    />
-                    <div className="pl-1">
-                    <a className="break-all">
-                        {item.title ? item.title : item.name}
-                    </a>
-                    <p>{moment(item.release_date).format("MMM DD, YYYY")}</p>
-                    <p>{item.vote_average}</p>
+                  <Link href={"/details/" + item.id} key={item.id}>
+                    <div className="ml-3 w-40 h-128 max-w-xs overflow-hidden cursor-pointer" key={item.id}>
+                        <img
+                        onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.onerror = null;
+                            target.src = "../images/no-image-available.png";
+                        }}
+                        src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
+                        alt={item.title ? item.title : item.name}
+                        />
+                        <div className="pl-1">
+                        <a className="break-all">
+                            {item.title ? item.title : item.name}
+                        </a>
+                        <p>{moment(item.release_date).format("MMM DD, YYYY")}</p>
+                        <p>{item.vote_average}</p>
+                        </div>
                     </div>
-                </div>
+                  </Link>
                 ))}
             </div>
         </div>
@@ -112,24 +115,26 @@ function fetchMovieData() {
         <div className="container mx-auto flex overflow-x-scroll pb-5">
             <div className="flex flex-nowrap">
                 {topRated.results && topRated.results.map((item: any) => (
-                <div className="ml-3 w-40 h-128 max-w-xs overflow-hidden cursor-pointer" key={item.id}>
-                    <img
-                    onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.onerror = null;
-                        target.src = "../images/no-image-available.png";
-                    }}
-                    src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
-                    alt={item.title ? item.title : item.name}
-                    />
-                    <div className="pl-1">
-                    <a className="break-all">
-                        {item.title ? item.title : item.name}
-                    </a>
-                    <p>{moment(item.release_date).format("MMM DD, YYYY")}</p>
-                    <p>{item.vote_average}</p>
+                  <Link href={"/details/" + item.id} key={item.id}>
+                    <div className="ml-3 w-40 h-128 max-w-xs overflow-hidden cursor-pointer" key={item.id}>
+                        <img
+                        onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.onerror = null;
+                            target.src = "../images/no-image-available.png";
+                        }}
+                        src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
+                        alt={item.title ? item.title : item.name}
+                        />
+                        <div className="pl-1">
+                        <a className="break-all">
+                            {item.title ? item.title : item.name}
+                        </a>
+                        <p>{moment(item.release_date).format("MMM DD, YYYY")}</p>
+                        <p>{item.vote_average}</p>
+                        </div>
                     </div>
-                </div>
+                  </Link>
                 ))}
             </div>
         </div>
