@@ -1,7 +1,7 @@
 // shows trending movies + searchbar(?)
 import firebase_app from "../firebase/config";
 import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import type { InferGetStaticPropsType, GetStaticProps } from 'next';
 import moment from "moment";
 
@@ -34,39 +34,58 @@ async function fetchData() {
     }
 }
 
+interface MovieData {
+    showingInCinemas: any;
+    popular: any; 
+  }
 
- async function MoviesComponent() {
-    
+
+function fetchMovieData() {
     const options = {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization: `Bearer ${process.env.MOVIE_API_READ_ACCESS_TOKEN}`,
-        },
-      };
+          Authorization: `Bearer ${process.env.MOVIE_API_READ_ACCESS_TOKEN}`
+        }
+      }
+  
+    return Promise.all([
+      fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options),
+      fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options),
+    ]).then(([showingInCinemasAPIResponse, popularAPIResponse]) => {
+        // console.log(showingInCinemasAPIResponse);
+        // console.log(popularAPIResponse);
+        return Promise.all([
+        showingInCinemasAPIResponse.json(),
+        popularAPIResponse.json(),
+      ]);
+    }).then(([showingInCinemas, popular]) => {
+      return { showingInCinemas, popular };
+    });
+}
+  
+  function MoviesComponent() {
+    const [movieData, setMovieData] = useState<MovieData>({ showingInCinemas: null, popular: null });
+  
+    useEffect(() => {
+      fetchMovieData().then((data) => {
+        setMovieData(data);
+      }).catch((error) => {
+        console.error('Error fetching movie data:', error);
+      });
+    }, []);
+  
+    if (movieData.showingInCinemas === null || movieData.popular === null) {
+        return <div>Loading...</div>;
+      }
+    const { showingInCinemas, popular } = movieData;
     
-      const showingInCinemasAPIResponse: any = await fetch(
-        'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
-        options
-      );
-    
-      const popularAPIResponse: any = await fetch(
-        'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1',
-        options
-      );
-    
-      const showingInCinemas = await showingInCinemasAPIResponse.json();
-      const popular = await popularAPIResponse.json();
-
-      console.log(showingInCinemas);
-      console.log(popular);
-
     return (
     <div>
         <h2>Showing In Cinemas</h2>
         <div className="container mx-auto flex overflow-x-scroll pb-5">
             <div className="flex flex-nowrap">
-                {showingInCinemas.results.map((item : any ) => (
+                {showingInCinemas.results && showingInCinemas.results.map((item: any) => (
                 <div className="ml-3 w-40 h-128 max-w-xs overflow-hidden cursor-pointer" key={item.id}>
                     <img
                     onError={(e) => {
