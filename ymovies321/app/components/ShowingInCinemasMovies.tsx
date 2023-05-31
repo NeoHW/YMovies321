@@ -36,7 +36,7 @@ async function fetchData() {
 
 interface MovieData {
     showingInCinemas: any;
-    popular: any; 
+    topRated: any; 
   }
 
 
@@ -45,27 +45,28 @@ function fetchMovieData() {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization: `Bearer ${process.env.MOVIE_API_READ_ACCESS_TOKEN}`
+          // Authorization: `Bearer ${process.env.MOVIE_API_READ_ACCESS_TOKEN}`
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZDI1NmMyZWVjNzhmNzk0OTg1ZWQwYjdjMzVjY2JiMCIsInN1YiI6IjY0NzFjZDM3YTE5OWE2MDExNmM2ZDk1ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MjVdbubEYW3r_vtxBOcq4zxOo6lteIShmCykxu1m8co'
         }
       }
   
     return Promise.all([
       fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options),
-      fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options),
-    ]).then(([showingInCinemasAPIResponse, popularAPIResponse]) => {
-        // console.log(showingInCinemasAPIResponse);
-        // console.log(popularAPIResponse);
+      fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options),
+    ]).then(([showingInCinemasAPIResponse, topRatedAPIResponse]) => {
+        console.log(showingInCinemasAPIResponse);
+        console.log(topRatedAPIResponse);
         return Promise.all([
         showingInCinemasAPIResponse.json(),
-        popularAPIResponse.json(),
+        topRatedAPIResponse.json(),
       ]);
-    }).then(([showingInCinemas, popular]) => {
-      return { showingInCinemas, popular };
+    }).then(([showingInCinemas, topRated]) => {
+      return { showingInCinemas, topRated };
     });
 }
   
   function MoviesComponent() {
-    const [movieData, setMovieData] = useState<MovieData>({ showingInCinemas: null, popular: null });
+    const [movieData, setMovieData] = useState<MovieData>({ showingInCinemas: null, topRated: null });
   
     useEffect(() => {
       fetchMovieData().then((data) => {
@@ -75,10 +76,10 @@ function fetchMovieData() {
       });
     }, []);
   
-    if (movieData.showingInCinemas === null || movieData.popular === null) {
+    if (movieData.showingInCinemas === null || movieData.topRated === null) {
         return <div>Loading...</div>;
       }
-    const { showingInCinemas, popular } = movieData;
+    const { showingInCinemas, topRated } = movieData;
     
     return (
     <div>
@@ -86,6 +87,31 @@ function fetchMovieData() {
         <div className="container mx-auto flex overflow-x-scroll pb-5">
             <div className="flex flex-nowrap">
                 {showingInCinemas.results && showingInCinemas.results.map((item: any) => (
+                <div className="ml-3 w-40 h-128 max-w-xs overflow-hidden cursor-pointer" key={item.id}>
+                    <img
+                    onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.onerror = null;
+                        target.src = "../images/no-image-available.png";
+                    }}
+                    src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
+                    alt={item.title ? item.title : item.name}
+                    />
+                    <div className="pl-1">
+                    <a className="break-all">
+                        {item.title ? item.title : item.name}
+                    </a>
+                    <p>{moment(item.release_date).format("MMM DD, YYYY")}</p>
+                    <p>{item.vote_average}</p>
+                    </div>
+                </div>
+                ))}
+            </div>
+        </div>
+        <h2>topRated</h2>
+        <div className="container mx-auto flex overflow-x-scroll pb-5">
+            <div className="flex flex-nowrap">
+                {topRated.results && topRated.results.map((item: any) => (
                 <div className="ml-3 w-40 h-128 max-w-xs overflow-hidden cursor-pointer" key={item.id}>
                     <img
                     onError={(e) => {
