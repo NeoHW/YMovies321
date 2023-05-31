@@ -59,6 +59,7 @@ async function fetchData() {
       const popular = await popularAPIResponse.json();
 
       console.log(showingInCinemas);
+      console.log(popular);
 
     return (
     <div>

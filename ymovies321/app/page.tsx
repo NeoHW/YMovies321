@@ -2,7 +2,7 @@
 import 'firebase/firestore';
 
 import Navbar from "./components/Navbar";
-import ShowingInCinemaMovie from "./components/ShowingInCinemasMovies";
+import Movies from "./pages/Movies";
 import { useState } from "react";
 import { auth, signIn , signOut} from "./authContext/auth";
 import Content from "./components/ContentLoggedIn";
@@ -11,7 +11,7 @@ import ContentLoggedIn from './components/ContentLoggedIn';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-export default function Page() {
+export default function Home() {
   { 
     // user is the state, useAuthState auto detects if person is logged in or out
     const [user] = useAuthState(auth);
@@ -31,11 +31,8 @@ export default function Page() {
           :
           (<p>LOGGED OUT</p>)
         }
-        {/* @ts-expect-error Server Component */}
-        <ShowingInCinemaMovie />  
-        { /*
-        <ShowingInCinemaMovie popularMovies={popularMovies}/>
-        */ }
+
+        <Movies />
       </div>
     );
   }
