@@ -34,66 +34,65 @@ async function fetchData() {
     }
 }
 
+
 export const getStaticProps = async () => {
     const options = {
-        method: 'GET',
-        headers: {
-          accept: 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZDI1NmMyZWVjNzhmNzk0OTg1ZWQwYjdjMzVjY2JiMCIsInN1YiI6IjY0NzFjZDM3YTE5OWE2MDExNmM2ZDk1ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MjVdbubEYW3r_vtxBOcq4zxOo6lteIShmCykxu1m8co'
-        }
-      };
-
-    const popularAPIResponse : any = await fetch(
-        'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${process.env.MOVIE_API_READ_ACCESS_TOKEN}`,
+      },
+    };
+  
+    const showingInCinemasAPIResponse: any = await fetch(
+      'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
+      options
     );
   
-    const showingInCinemasAPIResponse : any = await fetch(
-        'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options
+    const popularAPIResponse: any = await fetch(
+      'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1',
+      options
     );
-
-    const popular = await popularAPIResponse.json();
+  
     const showingInCinemas = await showingInCinemasAPIResponse.json();
-
+    const popular = await popularAPIResponse.json();
+  
+    console.log(showingInCinemas);
+  
     return {
       props: {
         showingInCinemas: showingInCinemas.results,
-        popular: popular.results,
+        popularMovies: popular.results,
       },
     };
-  };
-
-// Homepage component that shows all the current movies showing in cinemas 
-function Home ({ showingInCinemas, popular }: InferGetStaticPropsType<typeof getStaticProps>) {
-    
-    // addData() & fetchData() works
-    // addData();
-    // fetchData();
-
-    // return jsx
-    return (
-        <div>
-            {showingInCinemas.map((item) => (
-                <div className="ml-3 w-40 h-128 max-w-xs overflow-hidden cursor-pointer" key={item.id}>
-                <img
-                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-                    const target = e.target as HTMLImageElement;
-                    target.onerror = null;
-                    target.src = "../images/no-image-available.png";
-                    }}
-                    src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
-                    alt={item.title ? item.title : item.name}
-                />
-                <div className="pl-1">
-                    <a className="break-all">
-                    {item.title ? item.title : item.name}
-                    </a>
-                    <p>{moment(item.release_date).format("MMM DD, YYYY")}</p>
-                    <p>{item.vote_average}</p>
-                </div>
-                </div>
-            ))}
-        </div>
-    )
 };
 
-export default Home;
+// Homepage component that shows all the current movies showing in cinemas 
+function ShowingInCinemaMovie({ showingInCinemas }) {
+    return (
+      <div>
+        {showingInCinemas.map((item) => (
+          <div className="ml-3 w-40 h-128 max-w-xs overflow-hidden cursor-pointer" key={item.id}>
+            <img
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.onerror = null;
+                target.src = "../images/no-image-available.png";
+              }}
+              src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
+              alt={item.title ? item.title : item.name}
+            />
+            <div className="pl-1">
+              <a className="break-all">
+                {item.title ? item.title : item.name}
+              </a>
+              <p>{moment(item.release_date).format("MMM DD, YYYY")}</p>
+              <p>{item.vote_average}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  
+  export default ShowingInCinemaMovie;
