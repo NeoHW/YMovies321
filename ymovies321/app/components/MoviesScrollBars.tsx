@@ -108,7 +108,7 @@ function fetchMovieData() {
                 ))}
             </div>
         </div>
-        <h2>topRated</h2>
+        <h2>Top Rated</h2>
         <div className="container mx-auto flex overflow-x-scroll pb-5">
             <div className="flex flex-nowrap">
                 {topRated.results && topRated.results.map((item: any) => (

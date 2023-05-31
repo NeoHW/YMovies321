@@ -2,7 +2,7 @@
 import 'firebase/firestore';
 
 import Navbar from "./components/Navbar";
-import ShowingInCinemaMovie from "./components/ShowingInCinemasMovies";
+import MoviesScrollBars from "./components/MoviesScrollBars";
 import { useState } from "react";
 import { auth, signIn , signOut} from "./authContext/auth";
 import Content from "./components/ContentLoggedIn";
@@ -32,10 +32,7 @@ export default function Page() {
           (<p>LOGGED OUT</p>)
         }
 
-        <ShowingInCinemaMovie />  
-        { /*
-        <ShowingInCinemaMovie popularMovies={popularMovies}/>
-        */ }
+        <MoviesScrollBars />
       </div>
     );
   }
