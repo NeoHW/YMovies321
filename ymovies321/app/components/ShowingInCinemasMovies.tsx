@@ -35,64 +35,60 @@ async function fetchData() {
 }
 
 
-export const getStaticProps = async () => {
+ async function MoviesComponent() {
+    
     const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: `Bearer ${process.env.MOVIE_API_READ_ACCESS_TOKEN}`,
-      },
-    };
-  
-    const showingInCinemasAPIResponse: any = await fetch(
-      'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
-      options
-    );
-  
-    const popularAPIResponse: any = await fetch(
-      'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1',
-      options
-    );
-  
-    const showingInCinemas = await showingInCinemasAPIResponse.json();
-    const popular = await popularAPIResponse.json();
-  
-    console.log(showingInCinemas);
-  
-    return {
-      props: {
-        showingInCinemas: showingInCinemas.results,
-        popularMovies: popular.results,
-      },
-    };
-};
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: `Bearer ${process.env.MOVIE_API_READ_ACCESS_TOKEN}`,
+        },
+      };
+    
+      const showingInCinemasAPIResponse: any = await fetch(
+        'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
+        options
+      );
+    
+      const popularAPIResponse: any = await fetch(
+        'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1',
+        options
+      );
+    
+      const showingInCinemas = await showingInCinemasAPIResponse.json();
+      const popular = await popularAPIResponse.json();
 
-// Homepage component that shows all the current movies showing in cinemas 
-function ShowingInCinemaMovie({ showingInCinemas }) {
+      console.log(showingInCinemas);
+
     return (
-      <div>
-        {showingInCinemas.map((item) => (
-          <div className="ml-3 w-40 h-128 max-w-xs overflow-hidden cursor-pointer" key={item.id}>
-            <img
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.onerror = null;
-                target.src = "../images/no-image-available.png";
-              }}
-              src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
-              alt={item.title ? item.title : item.name}
-            />
-            <div className="pl-1">
-              <a className="break-all">
-                {item.title ? item.title : item.name}
-              </a>
-              <p>{moment(item.release_date).format("MMM DD, YYYY")}</p>
-              <p>{item.vote_average}</p>
+    <div>
+        <h2>Showing In Cinemas</h2>
+        <div className="container mx-auto flex overflow-x-scroll pb-5">
+            <div className="flex flex-nowrap">
+                {showingInCinemas.results.map((item : any ) => (
+                <div className="ml-3 w-40 h-128 max-w-xs overflow-hidden cursor-pointer" key={item.id}>
+                    <img
+                    onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.onerror = null;
+                        target.src = "../images/no-image-available.png";
+                    }}
+                    src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
+                    alt={item.title ? item.title : item.name}
+                    />
+                    <div className="pl-1">
+                    <a className="break-all">
+                        {item.title ? item.title : item.name}
+                    </a>
+                    <p>{moment(item.release_date).format("MMM DD, YYYY")}</p>
+                    <p>{item.vote_average}</p>
+                    </div>
+                </div>
+                ))}
             </div>
-          </div>
-        ))}
-      </div>
+        </div>
+    </div>
     );
   }
   
-  export default ShowingInCinemaMovie;
+  export default MoviesComponent;

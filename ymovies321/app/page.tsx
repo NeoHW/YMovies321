@@ -11,7 +11,7 @@ import ContentLoggedIn from './components/ContentLoggedIn';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-export default function Page( {showingInCinemas, popularMovies} ) {
+export default function Page() {
   { 
     // user is the state, useAuthState auto detects if person is logged in or out
     const [user] = useAuthState(auth);
@@ -31,7 +31,8 @@ export default function Page( {showingInCinemas, popularMovies} ) {
           :
           (<p>LOGGED OUT</p>)
         }
-        <ShowingInCinemaMovie showingInCinemas={showingInCinemas} />  
+        {/* @ts-expect-error Server Component */}
+        <ShowingInCinemaMovie />  
         { /*
         <ShowingInCinemaMovie popularMovies={popularMovies}/>
         */ }
