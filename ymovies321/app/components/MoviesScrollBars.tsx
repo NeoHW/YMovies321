@@ -42,28 +42,28 @@ interface MovieData {
 
 
 function fetchMovieData() {
-    const options = {
-        method: 'GET',
-        headers: {
-          accept: 'application/json',
-          // Authorization: `Bearer ${process.env.MOVIE_API_READ_ACCESS_TOKEN}`
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZDI1NmMyZWVjNzhmNzk0OTg1ZWQwYjdjMzVjY2JiMCIsInN1YiI6IjY0NzFjZDM3YTE5OWE2MDExNmM2ZDk1ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MjVdbubEYW3r_vtxBOcq4zxOo6lteIShmCykxu1m8co'
-        }
-      }
-  
-    return Promise.all([
-      fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options),
-      fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options),
-    ]).then(([showingInCinemasAPIResponse, topRatedAPIResponse]) => {
-        console.log(showingInCinemasAPIResponse);
-        console.log(topRatedAPIResponse);
-        return Promise.all([
-        showingInCinemasAPIResponse.json(),
-        topRatedAPIResponse.json(),
-      ]);
-    }).then(([showingInCinemas, topRated]) => {
-      return { showingInCinemas, topRated };
-    });
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      // Authorization: `Bearer ${process.env.MOVIE_API_READ_ACCESS_TOKEN}`
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZDI1NmMyZWVjNzhmNzk0OTg1ZWQwYjdjMzVjY2JiMCIsInN1YiI6IjY0NzFjZDM3YTE5OWE2MDExNmM2ZDk1ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MjVdbubEYW3r_vtxBOcq4zxOo6lteIShmCykxu1m8co'
+    }
+  }
+
+  return Promise.all([
+    fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options),
+    fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options),
+  ]).then(([showingInCinemasAPIResponse, topRatedAPIResponse]) => {
+      console.log(showingInCinemasAPIResponse);
+      console.log(topRatedAPIResponse);
+      return Promise.all([
+      showingInCinemasAPIResponse.json(),
+      topRatedAPIResponse.json(),
+    ]);
+  }).then(([showingInCinemas, topRated]) => {
+    return { showingInCinemas, topRated };
+  });
 }
   
   function MoviesComponent() {
