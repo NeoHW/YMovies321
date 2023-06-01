@@ -9,7 +9,7 @@ import type { InferGetStaticPropsType, GetStaticProps } from 'next';
 import moment from "moment";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
+import Reviews from "../../components/Reviews";
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
@@ -89,6 +89,7 @@ async function details() {
             <h2 className="text-xl font-bold">
                 Movie details here
             </h2>
+            <Reviews />
         </div>
     )
 };
