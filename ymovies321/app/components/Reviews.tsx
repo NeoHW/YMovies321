@@ -10,11 +10,13 @@ import { useRouter } from 'next/router';
 import { signIn } from "../authContext/auth"
 import { User, UserCredential } from 'firebase/auth';
 
-export default function Reviews() {
+export default function Reviews({ movieId } : { movieId : string | null }) {
     return (
         <div>
             <div>
-                input review block 
+                <h1>
+                    input review block {movieId}
+                </h1>
             </div>
             <div>
                 review view

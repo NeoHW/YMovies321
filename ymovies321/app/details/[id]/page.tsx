@@ -46,14 +46,12 @@ interface MovieData {
   }
 
 
-async function fetchMovieData() {
+function extractIdFromPath() {
     // getting URL path
     const pathName = usePathname();
     console.log(pathName);
-
     // extracting out the id from URL path
-    const extractIdFromPath = (pathName : String) => {
-        const regex = /\/details\/(\d+)/;
+    const regex = /\/details\/(\d+)/;
         const match = pathName.match(regex);
         
         if (match && match[1]) {
@@ -61,10 +59,11 @@ async function fetchMovieData() {
         }
         
         return null;
-    };
+}
 
-    const movieId = extractIdFromPath(pathName);
-    console.log(movieId);
+
+async function fetchMovieData() {
+    const movieId = extractIdFromPath();
 
     const options = {
         method: 'GET',
@@ -81,6 +80,8 @@ async function fetchMovieData() {
 
 
 async function details() {
+    const movieId = extractIdFromPath();
+
     const data = await fetchMovieData();
     console.log(data);
 
@@ -89,7 +90,7 @@ async function details() {
             <h2 className="text-xl font-bold">
                 Movie details here
             </h2>
-            <Reviews />
+            <Reviews movieId = {movieId} />
         </div>
     )
 };
