@@ -57,6 +57,9 @@ Deploy the web application to a production environment
 Finalize documentation and user guides  
 
 
+### SWE Practices
+- As a student-led project, we are taking into consideration that the product we are developing is in an environment susceptible to change. Therefore, we are using the Scrum methodology, in which we are breaking our tasks into delivery cycles called sprints, which generally lasts from a week to two. This way, work would be incremental and focused on previous work.
+
 ### Tech Stack
 
 - Front-end: React
