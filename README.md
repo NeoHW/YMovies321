@@ -60,6 +60,10 @@ Finalize documentation and user guides
 ### SWE Practices
 - As a student-led project, we are taking into consideration that the product we are developing is in an environment susceptible to change. Therefore, we are using the Scrum methodology, in which we are breaking our tasks into delivery cycles called sprints, which generally lasts from a week to two. This way, work would be incremental and focused on previous work.
 
+- Version Control: We would be ustilising a version control system (Git) to manage source code changes. We took the time to ensure that both team members are familiar with version control best practices. We would be creating branches for feature developments and also be performing regular code reviews.
+
+- Code Reviews: We have implemented a code review process to maintain code quality and catch potential issues early. We will be conducting regular code reviews among team members to provide feedback, identify bugs, improve code readability, and enforce coding standards.
+
 ### Tech Stack
 
 - Front-end: React
