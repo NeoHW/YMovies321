@@ -3,6 +3,7 @@ import firebase_app from "../firebase/config";
 import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
 import type { InferGetStaticPropsType, GetStaticProps } from 'next';
+import { Box, Typography } from "@mui/material";
 import moment from "moment";
 import Link from 'next/link';
 
@@ -84,8 +85,17 @@ function fetchMovieData() {
     
     return (
     <div>
-        <h2>Showing In Cinemas</h2>
-        <div className="container mx-auto flex overflow-x-scroll pb-5">
+
+        <Box sx={{ textAlign: "center" }}>
+          <Typography variant="h4">
+            Showing In Cinemas
+          </Typography>
+          <Typography variant="body1">
+            Escape to Cinematic Wonder: Catch the Hottest Shows in Theaters Now!
+          </Typography>
+        </Box>
+
+        <Box className="container mx-auto flex overflow-x-scroll pb-5">
             <div className="flex flex-nowrap">
                 {showingInCinemas.results && showingInCinemas.results.map((item: any) => (
                   <Link href={"/details/" + item.id} key={item.id}>
@@ -110,9 +120,21 @@ function fetchMovieData() {
                   </Link>
                 ))}
             </div>
-        </div>
-        <h2>Top Rated</h2>
-        <div className="container mx-auto flex overflow-x-scroll pb-5">
+        </Box>
+        
+        {/*blank space as separator */}
+        <Box sx={{ height: 50}}></Box>
+
+        <Box sx={{ textAlign: "center" }}>
+          <Typography variant="h4">
+            Top Rated
+          </Typography>
+          <Typography variant="body1">
+            Masterpieces Unleashed: Top Rated Shows of All Time!
+          </Typography>
+        </Box>
+        
+        <Box className="container mx-auto flex overflow-x-scroll pb-5">
             <div className="flex flex-nowrap">
                 {topRated.results && topRated.results.map((item: any) => (
                   <Link href={"/details/" + item.id} key={item.id}>
@@ -137,7 +159,8 @@ function fetchMovieData() {
                   </Link>
                 ))}
             </div>
-        </div>
+        </Box>
+
     </div>
     );
   }
