@@ -10,7 +10,7 @@ import Content from "./components/ContentLoggedIn";
 import { UserCredential } from 'firebase/auth';
 import ContentLoggedIn from './components/ContentLoggedIn';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-
+import { Box, Typography } from "@mui/material";
 
 export default function Page() {
   { 

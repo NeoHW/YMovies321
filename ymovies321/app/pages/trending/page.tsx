@@ -10,6 +10,7 @@ import moment from "moment";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Reviews from "../../components/ReviewForm";
+import { Box, Typography } from "@mui/material";
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
@@ -50,7 +51,12 @@ async function details() {
 
     return (
         <div>
-            To add in trending videos but probably in grid form and can load more
+            <Box>
+                To create & add in NavBar for Trending
+            </Box>
+            <Box>
+                To add in trending videos but probably in grid form and can load more
+            </Box>
         </div>
     )
 };
