@@ -33,8 +33,8 @@ Develop a search feature that allows users to search for movies by title or keyw
 Review progress and ensure development is on track  
 
 **Week 5-7 (6 Jun - 26 Jun):**  
-Implement a filter feature that allows users to filter movies by genre and release date  
-Develop a movie detail page that displays information about the movie, including ratings, reviews, cast and crew  
+Implement a filter feature that allows users to filter movies by popularity, genre and release date  
+Develop a movie detail page that displays information about the movie, including ratings, reviews  
 Implement a review feature that allows users to leave ratings and reviews for movies  
 
 **Evaluation Milestone 2 (26 Jun):**  
@@ -58,7 +58,7 @@ Finalize documentation and user guides
 
 
 ### SWE Practices
-- As a student-led project, we are taking into consideration that the product we are developing is in an environment susceptible to change. Therefore, we are using the Scrum methodology, in which we are breaking our tasks into delivery cycles called sprints, which generally lasts from a week to two. This way, work would be incremental and focused on previous work.
+- Agile methodology: As a student-led project, we are taking into consideration that the product we are developing is in an environment susceptible to change. Therefore, we are using the Scrum methodology, in which we are breaking our tasks into delivery cycles called sprints, which generally lasts from a week to two. This way, work would be incremental and focused on previous work.
 
 - Version Control: We would be ustilising a version control system (Git) to manage source code changes. We took the time to ensure that both team members are familiar with version control best practices. We would be creating branches for feature developments and also be performing regular code reviews.
 
