@@ -3,7 +3,7 @@ import firebase_app from "../firebase/config";
 import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
 import type { InferGetStaticPropsType, GetStaticProps } from 'next';
-import { Box, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import moment from "moment";
 import Link from 'next/link';
 
@@ -95,7 +95,7 @@ function fetchMovieData() {
           </Typography>
         </Box>
 
-        <Box className="container mx-auto flex overflow-x-scroll pb-5">
+        <Box className="container mx-auto flex overflow-x-scroll pb-5 scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-gray-300 scrollbar-track-sky-800" >
             <div className="flex flex-nowrap">
                 {showingInCinemas.results && showingInCinemas.results.map((item: any) => (
                   <Link href={"/details/" + item.id} key={item.id}>
@@ -110,11 +110,15 @@ function fetchMovieData() {
                         alt={item.title ? item.title : item.name}
                         />
                         <div className="pl-1">
-                        <a className="break-all">
-                            {item.title ? item.title : item.name}
-                        </a>
-                        <p>{moment(item.release_date).format("MMM DD, YYYY")}</p>
-                        <p>{item.vote_average}</p>
+                          <Typography sx={{ color: "#00adb5" }} variant="subtitle2" style = {{display: "-webkit-box", WebkitLineClamp: "1", WebkitBoxOrient: "vertical", overflow: "hidden", textOverflow: "ellipsis"}}>
+                              {item.title ? item.title : item.name}
+                          </Typography>
+                          <Typography sx={{ color: "#00adb5" }} variant="subtitle2" >
+                            {moment(item.release_date).format("YYYY")}
+                          </Typography>
+                          <Typography sx={{ color: "#00adb5" }} variant="subtitle2" >
+                            <p>{item.vote_average} / 10</p>
+                          </Typography>
                         </div>
                     </div>
                   </Link>
@@ -134,7 +138,7 @@ function fetchMovieData() {
           </Typography>
         </Box>
         
-        <Box className="container mx-auto flex overflow-x-scroll pb-5">
+        <Box className="container mx-auto flex overflow-x-scroll pb-5 scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-gray-300 scrollbar-track-sky-800" >
             <div className="flex flex-nowrap">
                 {topRated.results && topRated.results.map((item: any) => (
                   <Link href={"/details/" + item.id} key={item.id}>
@@ -149,11 +153,15 @@ function fetchMovieData() {
                         alt={item.title ? item.title : item.name}
                         />
                         <div className="pl-1">
-                        <a className="break-all">
-                            {item.title ? item.title : item.name}
-                        </a>
-                        <p>{moment(item.release_date).format("MMM DD, YYYY")}</p>
-                        <p>{item.vote_average}</p>
+                        <Typography sx={{ color: "#00adb5" }} variant="subtitle2" style = {{display: "-webkit-box", WebkitLineClamp: "1", WebkitBoxOrient: "vertical", overflow: "hidden", textOverflow: "ellipsis"}}>
+                              {item.title ? item.title : item.name}
+                          </Typography>
+                          <Typography sx={{ color: "#00adb5" }} variant="subtitle2" >
+                            {moment(item.release_date).format("YYYY")}
+                          </Typography>
+                          <Typography sx={{ color: "#00adb5" }} variant="subtitle2" >
+                            <p>{item.vote_average} / 10</p>
+                          </Typography>
                         </div>
                     </div>
                   </Link>
