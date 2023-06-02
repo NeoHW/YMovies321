@@ -10,20 +10,8 @@ import Link from 'next/link';
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
 
-// https://firebase.google.com/docs/firestore/manage-data/add-data
-async function addData() {    
-    // "cities" is the new collection's name
-    const citiesRef = collection(db, "cities");
-
-    await setDoc(doc(citiesRef, "SF"), {
-        name: "San Francisco", state: "CA", country: "USA",
-        capital: false, population: 860000,
-        regions: ["west_coast", "norcal"] }
-    );
-}
-
 // https://firebase.google.com/docs/firestore/query-data/get-data
-async function fetchData() {
+async function fetchDataFromDB() {
     // getting data
     const docRef = doc(db, "cities", "SF");
     const docSnap = await getDoc(docRef);
@@ -42,7 +30,7 @@ interface MovieData {
   }
 
 
-function fetchMovieData() {
+function fetchMovieDataAPI() {
   const options = {
     method: 'GET',
     headers: {
@@ -71,7 +59,7 @@ function fetchMovieData() {
     const [movieData, setMovieData] = useState<MovieData>({ showingInCinemas: null, topRated: null });
   
     useEffect(() => {
-      fetchMovieData().then((data) => {
+      fetchMovieDataAPI().then((data) => {
         setMovieData(data);
       }).catch((error) => {
         console.error('Error fetching movie data:', error);
@@ -98,7 +86,7 @@ function fetchMovieData() {
         <Box className="container mx-auto flex overflow-x-scroll pb-5 scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-gray-300 scrollbar-track-sky-800" >
             <div className="flex flex-nowrap">
                 {showingInCinemas.results && showingInCinemas.results.map((item: any) => (
-                  <Link href={"/details/" + item.id} key={item.id}>
+                  <Link href={"/pages/details/" + item.id} key={item.id}>
                     <div className="ml-3 w-40 h-128 max-w-xs overflow-hidden cursor-pointer" key={item.id}>
                         <img
                         onError={(e) => {
@@ -141,7 +129,7 @@ function fetchMovieData() {
         <Box className="container mx-auto flex overflow-x-scroll pb-5 scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-gray-300 scrollbar-track-sky-800" >
             <div className="flex flex-nowrap">
                 {topRated.results && topRated.results.map((item: any) => (
-                  <Link href={"/details/" + item.id} key={item.id}>
+                  <Link href={"/pages/details/" + item.id} key={item.id}>
                     <div className="ml-3 w-40 h-128 max-w-xs overflow-hidden cursor-pointer" key={item.id}>
                         <img
                         onError={(e) => {

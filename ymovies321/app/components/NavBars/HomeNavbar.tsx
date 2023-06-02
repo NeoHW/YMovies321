@@ -4,12 +4,12 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image';
-import companyLogo from "../navigation/YMoviesLogo.jpg";
-import avatar from "../navigation/avatar.png";
+import companyLogo from "../../navigation/YMoviesLogo.jpg";
+import avatar from "../../navigation/avatar.png";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-
-import { signIn } from "../authContext/auth"
+import Link from 'next/link';
+import { signIn } from "../../authContext/auth"
 import { User, UserCredential } from 'firebase/auth';
 
 interface ButtonProps {
@@ -20,10 +20,11 @@ interface ButtonProps {
   }
 
 const nav = [
-    { name: 'Home', href: '#', current: true },
-    { name: 'Trending', href: '#', current: false },
+    { name: 'Home', href: '/', current: true },
+    { name: 'Trending', href: '/pages/trending', current: false },
 ]
 
+// to add in the pages for reviews and watchlist under href
 const navLoggedInExtra = [
     { name: 'Reviews', href: '#', current: false },
     { name: 'Watchlist', href: '#', current: false },
@@ -68,7 +69,7 @@ function Navbar({ isSignedIn, profile, handleSignIn, handleSignOut }: ButtonProp
                                 <div className="hidden sm:ml-6 sm:block">
                                     <div className="flex space-x-2">
                                         {nav.map((item) => (
-                                            <a
+                                            <Link
                                                 key={item.name}
                                                 href={item.href}
                                                 className={classNames(
@@ -78,11 +79,11 @@ function Navbar({ isSignedIn, profile, handleSignIn, handleSignOut }: ButtonProp
                                                 aria-current={item.current ? 'page' : undefined}
                                             >
                                                 {item.name}
-                                            </a>
+                                            </Link>
                                         ))}
                                         {isSignedIn ? ( // reviews & watchlist buttons when signed in
                                             navLoggedInExtra.map((item) => (
-                                                <a
+                                                <Link
                                                     key={item.name}
                                                     href={item.href}
                                                     className={classNames(
@@ -92,7 +93,7 @@ function Navbar({ isSignedIn, profile, handleSignIn, handleSignOut }: ButtonProp
                                                     aria-current={item.current ? 'page' : undefined}
                                                 >
                                                     {item.name}
-                                                </a>
+                                                </Link>
                                             )))
                                                 : (
                                                     <span></span>

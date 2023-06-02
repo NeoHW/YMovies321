@@ -2,32 +2,23 @@
 "use client";
 
 import { User, UserCredential } from "firebase/auth";
-import firebase_app from "../../firebase/config";
+import HomeNavBar from "../../../components/NavBars/HomeNavbar";
+import firebase_app from "../../../firebase/config";
 import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth, signIn , signOut} from "../../../authContext/auth";
 import React, { useState, useEffect } from "react";
 import type { InferGetStaticPropsType, GetStaticProps } from 'next';
 import moment from "moment";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Reviews from "../../components/Reviews";
+import Reviews from "../../../components/ReviewForm";
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
 
-// https://firebase.google.com/docs/firestore/manage-data/add-data
-async function addData() {    
-    // "cities" is the new collection's name
-    const citiesRef = collection(db, "cities");
-
-    await setDoc(doc(citiesRef, "SF"), {
-        name: "San Francisco", state: "CA", country: "USA",
-        capital: false, population: 860000,
-        regions: ["west_coast", "norcal"] }
-    );
-}
-
 // https://firebase.google.com/docs/firestore/query-data/get-data
-async function fetchData() {
+async function fetchDataFromDB() {
     // getting data
     const docRef = doc(db, "cities", "SF");
     const docSnap = await getDoc(docRef);
@@ -51,7 +42,7 @@ function extractIdFromPath() {
     const pathName = usePathname();
     console.log(pathName);
     // extracting out the id from URL path
-    const regex = /\/details\/(\d+)/;
+    const regex = /\/pages\/details\/(\d+)/;
         const match = pathName.match(regex);
         
         if (match && match[1]) {
@@ -62,7 +53,7 @@ function extractIdFromPath() {
 }
 
 
-async function fetchMovieData() {
+async function fetchMovieDataAPI() {
     const movieId = extractIdFromPath();
 
     const options = {
@@ -82,11 +73,17 @@ async function fetchMovieData() {
 async function details() {
     const movieId = extractIdFromPath();
 
-    const data = await fetchMovieData();
+    const data = await fetchMovieDataAPI();
     console.log(data);
 
+    //const [user] = useAuthState(auth);
+
     return (
+        
         <div>
+            { /*
+                <HomeNavBar isSignedIn={user ? true : false} profile={user} handleSignIn={signIn} handleSignOut={signOut} />
+            */ }
             <h2 className="text-xl font-bold">
                 Movie details here
             </h2>
