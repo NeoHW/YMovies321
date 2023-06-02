@@ -20,8 +20,6 @@ export default function Page() {
     return (
       <div>
         <Navbar isSignedIn={user ? true : false} profile={user} handleSignIn={signIn} handleSignOut={signOut} />
-
-        <h1 className="text-3xl font-bold underline">Home Page</h1>
         {user
           ? (
             <div>
@@ -29,7 +27,7 @@ export default function Page() {
             </div>
           )
           :
-          (<p>LOGGED OUT</p>)
+          <div></div>
         }
 
         <MoviesScrollBars />

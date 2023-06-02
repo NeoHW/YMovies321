@@ -87,7 +87,7 @@ function fetchMovieData() {
     <div>
 
         <Box sx={{ textAlign: "center" }}>
-          <Typography variant="h4">
+          <Typography variant="subtitle2" sx ={{fontSize: "32px", fontWeight: "400"}}>
             Showing In Cinemas
           </Typography>
           <Typography variant="body1">
@@ -130,7 +130,7 @@ function fetchMovieData() {
         <Box sx={{ height: 50}}></Box>
 
         <Box sx={{ textAlign: "center" }}>
-          <Typography variant="h4">
+          <Typography variant="subtitle2" sx ={{fontSize: "32px", fontWeight: "400"}}>
             Top Rated
           </Typography>
           <Typography variant="body1">
