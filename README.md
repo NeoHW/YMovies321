@@ -27,13 +27,12 @@ Conduct research on movie databases and APIs
 **Week 2-4 (16 May - 5 Jun):**  
 Implement user authentication and user account system  
 Set up the movie database and integrate with an API to retrieve movie data  
-Develop a search feature that allows users to search for movies by title or keyword  
 
 **Evaluation Milestone 1 (29 May):**  
 Review progress and ensure development is on track  
 
 **Week 5-7 (6 Jun - 26 Jun):**  
-Implement a filter feature that allows users to filter movies by popularity, genre and release date  
+Develop a search feature that allows users to search for movies by title or keyword  
 Develop a movie detail page that displays information about the movie, including ratings, reviews  
 Implement a review feature that allows users to leave ratings and reviews for movies  
 
