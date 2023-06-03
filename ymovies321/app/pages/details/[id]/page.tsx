@@ -38,10 +38,7 @@ interface MovieData {
   }
 
 
-function extractIdFromPath() {
-    // getting URL path
-    const pathName = usePathname();
-    console.log(pathName);
+function extractIdFromPath(pathName : string) {
     // extracting out the id from URL path
     const regex = /\/pages\/details\/(\d+)/;
         const match = pathName.match(regex);
@@ -54,8 +51,8 @@ function extractIdFromPath() {
 }
 
 
-async function fetchMovieDataAPI() {
-    const movieId = extractIdFromPath();
+async function fetchMovieDataAPI(movieId : string | null) {
+    // const movieId = extractIdFromPath();
 
     const options = {
         method: 'GET',
@@ -71,27 +68,39 @@ async function fetchMovieDataAPI() {
 }
 
 
-async function details() {
-    const [user] = useAuthState(auth);
-    console.log(user);
+function Details({ user, data }: { user: User | null | undefined; data: any }) {
+    // getting URL path
+    const pathName = usePathname();
 
-    const movieId = extractIdFromPath();
-
-    const data = await fetchMovieDataAPI();
-    console.log(data);
-
-    //const [user] = useAuthState(auth);
-
+    const movieId = extractIdFromPath(pathName);
+  
     return (
-        
-        <div>
-            <HomeNavBar isSignedIn={user ? true : false} profile={user} handleSignIn={signIn} handleSignOut={signOut} />
-            <h2 className="text-xl font-bold">
-                Movie details here
-            </h2>
-            <Reviews movieId = {movieId} />
-        </div>
-    )
-};
+      <div>
+        <HomeNavBar
+          isSignedIn={user ? true : false}
+          profile={user}
+          handleSignIn={signIn}
+          handleSignOut={signOut}
+        />
+        <h2 className="text-xl font-bold">Movie details here</h2>
+        <Reviews movieId={movieId} />
+      </div>
+    );
+  }
+  
+  export default function MovieDetails() {
+    const [user] = useAuthState(auth);
+    const [data, setData] = useState(null);
 
-export default details;
+    // getting URL path
+    const pathName = usePathname();
+  
+    useEffect(() => {
+        const movieId = extractIdFromPath(pathName);
+        fetchMovieDataAPI(movieId).then((movieData) => {
+            setData(movieData);
+        });
+    }, []);
+  
+    return <Details user={user} data={data} />;
+  }
