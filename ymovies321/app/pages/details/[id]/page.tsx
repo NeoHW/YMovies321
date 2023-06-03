@@ -72,6 +72,9 @@ async function fetchMovieDataAPI() {
 
 
 async function details() {
+    const [user] = useAuthState(auth);
+    console.log(user);
+
     const movieId = extractIdFromPath();
 
     const data = await fetchMovieDataAPI();
@@ -82,9 +85,7 @@ async function details() {
     return (
         
         <div>
-            { /*
-                <HomeNavBar isSignedIn={user ? true : false} profile={user} handleSignIn={signIn} handleSignOut={signOut} />
-            */ }
+            <HomeNavBar isSignedIn={user ? true : false} profile={user} handleSignIn={signIn} handleSignOut={signOut} />
             <h2 className="text-xl font-bold">
                 Movie details here
             </h2>
