@@ -1,4 +1,4 @@
-// this will be a page containing all the details for the specified movieId
+// this will be the page for specific user watchlist movies
 "use client";
 
 import { User, UserCredential } from "firebase/auth";
@@ -47,20 +47,34 @@ function fetchMovieDataAPI() {
   }
 
 
-async function details() {
-    const [user] = useAuthState(auth);
-
-    const data = await fetchMovieDataAPI();
-    console.log(data);
-
+  function Details({ user, data }: { user: User | null | undefined; data: any }) {
     return (
         <div>
-            <WatchlistNavBar isSignedIn={user ? true : false} profile={user} handleSignIn={signIn} handleSignOut={signOut} />
+            <WatchlistNavBar
+                isSignedIn={user ? true : false}
+                profile={user}
+                handleSignIn={signIn}
+                handleSignOut={signOut}
+            />
             <Box>
                 To add in watchlist videos but probably in grid form and can load more
             </Box>
         </div>
-    )
-};
+    );
+}
+  
+export default function WatchListMovies() {
+    const [user] = useAuthState(auth);
+    const [data, setData] = useState(null);
 
-export default details;
+    useEffect(() => {
+        fetchMovieDataAPI().then((movieData) => {
+        setData(movieData);
+        });
+    }, []);
+
+    console.log(user);
+    console.log(data);
+
+    return <Details user={user} data={data} />;
+}

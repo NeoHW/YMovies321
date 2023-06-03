@@ -1,4 +1,4 @@
-// this will be a page containing all the details for the specified movieId
+// this will be the page for all trending movies
 "use client";
 
 import { User, UserCredential } from "firebase/auth";
@@ -34,33 +34,47 @@ async function fetchDataFromDB() {
 
 function fetchMovieDataAPI() {
     const options = {
-      method: 'GET',
-      headers: {
+        method: 'GET',
+        headers: {
         accept: 'application/json',
         // Authorization: `Bearer ${process.env.MOVIE_API_READ_ACCESS_TOKEN}`
         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZDI1NmMyZWVjNzhmNzk0OTg1ZWQwYjdjMzVjY2JiMCIsInN1YiI6IjY0NzFjZDM3YTE5OWE2MDExNmM2ZDk1ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MjVdbubEYW3r_vtxBOcq4zxOo6lteIShmCykxu1m8co'
-      }
+        }
     }
-  
+
     return fetch(`https://api.themoviedb.org/3/trending/movie/day?language=en-US`, options)
         .then(response => response.json());
-  }
+}
 
 
-async function details() {
-    const [user] = useAuthState(auth);
-
-    const data = await fetchMovieDataAPI();
-    console.log(data);
-
+function Details({ user, data }: { user: User | null | undefined; data: any }) {
     return (
         <div>
-            <TrendingNavBar isSignedIn={user ? true : false} profile={user} handleSignIn={signIn} handleSignOut={signOut} />
+            <TrendingNavBar
+                isSignedIn={user ? true : false}
+                profile={user}
+                handleSignIn={signIn}
+                handleSignOut={signOut}
+            />
             <Box>
                 To add in trending videos but probably in grid form and can load more
             </Box>
         </div>
-    )
-};
+    );
+}
+  
+export default function TrendingMovies() {
+    const [user] = useAuthState(auth);
+    const [data, setData] = useState(null);
 
-export default details;
+    useEffect(() => {
+        fetchMovieDataAPI().then((movieData) => {
+        setData(movieData);
+        });
+    }, []);
+
+    console.log(user);
+    console.log(data);
+
+    return <Details user={user} data={data} />;
+}
