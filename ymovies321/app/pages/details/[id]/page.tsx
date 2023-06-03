@@ -2,7 +2,7 @@
 "use client";
 
 import { User, UserCredential } from "firebase/auth";
-import HomeNavBar from "../../../components/NavBars/HomeNavbar";
+import HomeNavBar from "../../../components/NavBars/HomeNavBar";
 import firebase_app from "../../../firebase/config";
 import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 import { useAuthState } from 'react-firebase-hooks/auth';

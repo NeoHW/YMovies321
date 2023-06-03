@@ -21,8 +21,8 @@ interface ButtonProps {
 }
 
 const nav = [
-    { name: 'Home', href: '/', current: true },
-    { name: 'Trending', href: '/pages/trending', current: false },
+    { name: 'Home', href: '/', current: false },
+    { name: 'Trending', href: '/pages/trending', current: true },
 ]
 
 // to add in the pages for reviews and watchlist under href

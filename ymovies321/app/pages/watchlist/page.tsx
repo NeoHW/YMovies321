@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Reviews from "../../components/ReviewForm";
 import { Box, Typography } from "@mui/material";
-import TrendingNavBar from "../../components/NavBars/TrendingNavBar";
+import WatchlistNavBar from "../../components/NavBars/WatchlistNavBar";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, signIn , signOut} from "../../authContext/auth";
 
@@ -55,9 +55,9 @@ async function details() {
 
     return (
         <div>
-            <TrendingNavBar isSignedIn={user ? true : false} profile={user} handleSignIn={signIn} handleSignOut={signOut} />
+            <WatchlistNavBar isSignedIn={user ? true : false} profile={user} handleSignIn={signIn} handleSignOut={signOut} />
             <Box>
-                To add in trending videos but probably in grid form and can load more
+                To add in watchlist videos but probably in grid form and can load more
             </Box>
         </div>
     )

@@ -21,13 +21,13 @@ interface ButtonProps {
 }
 
 const nav = [
-    { name: 'Home', href: '/', current: true },
+    { name: 'Home', href: '/', current: false },
     { name: 'Trending', href: '/pages/trending', current: false },
 ]
 
 // to add in the pages for reviews and watchlist under href
 const navLoggedInExtra = [
-    { name: 'Watchlist', href: '/pages/watchlist', current: false },
+    { name: 'Watchlist', href: '/pages/watchlist', current: true },
 ]
 
 function classNames(...classes: unknown[]): string {

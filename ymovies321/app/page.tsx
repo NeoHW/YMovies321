@@ -1,7 +1,7 @@
 "use client"
 import 'firebase/firestore';
 
-import HomeNavbar from "./components/NavBars/HomeNavbar";
+import HomeNavbar from "./components/NavBars/HomeNavBar";
 import MoviesScrollBars from "./components/MoviesScrollBars";
 import { useState } from "react";
 import { useAuthState } from 'react-firebase-hooks/auth';
