@@ -42,18 +42,19 @@ async function exportData() {
     try {
       await db.runTransaction(async (transaction) => {
         // Retry the operation in case of failures
-        return transaction.set(docRef, {
+        const movie = {
           id: movieId,
           name: movieTitle,
-          original_language: movieData.original_language,
-          genres: movieData.genres,
-          overview: movieData.overview,
-          poster_image: movieData.poster_image,
-          release_date: movieData.release_date,
-          runtime: movieData.runtime,
-          vote_average: movieData.vote_average,
-          vote_count: movieData.vote_count
-        });
+          original_language: movieData.original_language || "",
+          genres: movieData.genres || [],
+          overview: movieData.overview || "",
+          poster_image: movieData.poster_image || "",
+          release_date: movieData.release_date || "",
+          runtime: movieData.runtime || 0,
+          vote_average: movieData.vote_average || 0,
+          vote_count: movieData.vote_count || 0
+        };
+        return transaction.set(docRef, movie);
       });
 
       console.log(`Movie ID ${movieId} added to Firestore.`);
