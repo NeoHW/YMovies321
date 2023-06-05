@@ -6,6 +6,7 @@ import type { InferGetStaticPropsType, GetStaticProps } from 'next';
 import { Box, CircularProgress, Typography } from "@mui/material";
 import moment from "moment";
 import Link from 'next/link';
+import MovieCard from "./MovieCard";
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
@@ -87,30 +88,7 @@ function MoviesComponent() {
       <Box className="container mx-auto flex overflow-x-scroll pb-5 scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-gray-300 scrollbar-track-sky-800" >
         <div className="flex flex-nowrap">
           {showingInCinemas.results && showingInCinemas.results.map((item: any) => (
-            <Link href={"/pages/details/" + item.id} key={item.id}>
-              <div className="ml-3 w-40 h-128 max-w-xs overflow-hidden cursor-pointer" key={item.id}>
-                <img
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.onerror = null;
-                    target.src = "../images/no-image-available.png";
-                  }}
-                  src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
-                  alt={item.title ? item.title : item.name}
-                />
-                <div className="pl-1">
-                  <Typography sx={{ color: "#00adb5" }} variant="subtitle2" style={{ display: "-webkit-box", WebkitLineClamp: "1", WebkitBoxOrient: "vertical", overflow: "hidden", textOverflow: "ellipsis" }}>
-                    {item.title ? item.title : item.name}
-                  </Typography>
-                  <Typography sx={{ color: "#00adb5" }} variant="subtitle2" >
-                    {moment(item.release_date).format("YYYY")}
-                  </Typography>
-                  <Typography sx={{ color: "#00adb5" }} variant="subtitle2" >
-                    <p>{item.vote_average} / 10</p>
-                  </Typography>
-                </div>
-              </div>
-            </Link>
+            <MovieCard item={item} />
           ))}
         </div>
       </Box>
@@ -130,30 +108,7 @@ function MoviesComponent() {
       <Box className="container mx-auto flex overflow-x-scroll pb-5 scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-gray-300 scrollbar-track-sky-800" >
         <div className="flex flex-nowrap">
           {topRated.results && topRated.results.map((item: any) => (
-            <Link href={"/pages/details/" + item.id} key={item.id}>
-              <div className="ml-3 w-40 h-128 max-w-xs overflow-hidden cursor-pointer" key={item.id}>
-                <img
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.onerror = null;
-                    target.src = "../images/no-image-available.png";
-                  }}
-                  src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
-                  alt={item.title ? item.title : item.name}
-                />
-                <div className="pl-1">
-                  <Typography sx={{ color: "#00adb5" }} variant="subtitle2" style={{ display: "-webkit-box", WebkitLineClamp: "1", WebkitBoxOrient: "vertical", overflow: "hidden", textOverflow: "ellipsis" }}>
-                    {item.title ? item.title : item.name}
-                  </Typography>
-                  <Typography sx={{ color: "#00adb5" }} variant="subtitle2" >
-                    {moment(item.release_date).format("YYYY")}
-                  </Typography>
-                  <Typography sx={{ color: "#00adb5" }} variant="subtitle2" >
-                    <p>{item.vote_average} / 10</p>
-                  </Typography>
-                </div>
-              </div>
-            </Link>
+            <MovieCard item={item} />
           ))}
         </div>
       </Box>

@@ -1,19 +1,15 @@
 // this will be the page for all trending movies
 "use client";
 
-import { User, UserCredential } from "firebase/auth";
+import { User } from "firebase/auth";
 import firebase_app from "../../firebase/config";
-import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
-import type { InferGetStaticPropsType, GetStaticProps } from 'next';
-import moment from "moment";
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import Reviews from "../../components/ReviewForm";
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import TrendingNavBar from "../../components/NavBars/TrendingNavBar";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, signIn, signOut } from "../../authContext/auth";
+import MovieCard from "../../components/MovieCard";
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
@@ -52,36 +48,6 @@ function fetchMovieDataAPI() {
         });
 }
 
-function MovieCard({ item }) {
-    return (
-        <Link href={"/pages/details/" + item.id} key={item.id}>
-            <div className="ml-3 w-40 h-128 max-w-xs overflow-hidden cursor-pointer" key={item.id}>
-                <img
-                    onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.onerror = null;
-                        target.src = "../images/no-image-available.png";
-                    }}
-                    src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
-                    alt={item.title ? item.title : item.name}
-                />
-                <div className="pl-1">
-                    <Typography sx={{ color: "#00adb5" }} variant="subtitle2" style={{ display: "-webkit-box", WebkitLineClamp: "1", WebkitBoxOrient: "vertical", overflow: "hidden", textOverflow: "ellipsis" }}>
-                        {item.title ? item.title : item.name}
-                    </Typography>
-                    <Typography sx={{ color: "#00adb5" }} variant="subtitle2" >
-                        {moment(item.release_date).format("YYYY")}
-                    </Typography>
-                    <Typography sx={{ color: "#00adb5" }} variant="subtitle2" >
-                        <p>{item.vote_average} / 10</p>
-                    </Typography>
-                </div>
-            </div>
-        </Link>
-    )
-}
-
-
 function Details({ user, data }: { user: User | null | undefined; data: any }) {
     const row1 = data.slice(0, 5);
     const row2 = data.slice(5, 10);
@@ -95,20 +61,20 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
                 handleSignIn={signIn}
                 handleSignOut={signOut}
             />
-            <Grid 
-                className = "p-6"
+            <Grid
+                className="p-6"
                 container
                 justifyContent="center"
                 direction="column"
                 alignItems="stretch"
-                
+
             >
                 <Grid
                     className="flex"
                     justifyContent="space-around"
                 >
                     {row1.map((item: any) => (
-                        MovieCard({ item })
+                        <MovieCard item={item}></MovieCard>
                     ))}
                 </Grid>
                 <Grid
@@ -116,23 +82,23 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
                     justifyContent="space-around"
                 >
                     {row2.map((item: any) => (
-                        MovieCard({ item })
+                        <MovieCard item={item}></MovieCard>
                     ))}
                 </Grid>
                 <Grid
                     className="flex"
                     justifyContent="space-around"
-                >                    
+                >
                     {row3.map((item: any) => (
-                        MovieCard({ item })
+                        <MovieCard item={item}></MovieCard>
                     ))}
                 </Grid>
                 <Grid
                     className="flex"
                     justifyContent="space-around"
-                >                    
+                >
                     {row4.map((item: any) => (
-                        MovieCard({ item })
+                        <MovieCard item={item}></MovieCard>
                     ))}
                 </Grid>
             </Grid>
