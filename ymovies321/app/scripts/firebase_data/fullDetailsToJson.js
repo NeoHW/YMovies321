@@ -78,4 +78,4 @@ async function fetchOtherDetailsByAPI(movieId) {
 
 // testing individual movies
 // const movieData = await getData(2059);
-//console.log(JSON.stringify(movieData));
+// console.log(JSON.stringify(movieData));
