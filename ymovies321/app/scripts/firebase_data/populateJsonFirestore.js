@@ -17,8 +17,8 @@ import readline from "readline";
 // Initialise Firestore and get a reference to the database
 initializeApp({
   credential: applicationDefault(),
-  // databaseURL: 'https://orbital-ymovies321.firebaseio.com'
-  databaseURL: 'https://orbital-test.firebaseio.com'
+  databaseURL: 'https://orbital-ymovies321.firebaseio.com'
+  // databaseURL: 'https://orbital-test.firebaseio.com'
 });
 
 const db = getFirestore();
@@ -36,8 +36,8 @@ async function exportData() {
     const movieId = movieData.id.toString(); // Convert to string as document ID in Firestore
     const movieTitle = movieData.original_title;
 
-    // const docRef = db.collection('MoviesID_TMDB_database').doc(movieId);
-    const docRef = db.collection('Movies_test_DB_updated').doc(movieId);
+    const docRef = db.collection('MoviesID_TMDB_database').doc(movieId);
+    // const docRef = db.collection('Movies_test_DB_updated').doc(movieId);
 
     try {
       await db.runTransaction(async (transaction) => {
