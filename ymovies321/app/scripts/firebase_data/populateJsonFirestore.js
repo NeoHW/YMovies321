@@ -17,8 +17,8 @@ import readline from "readline";
 // Initialise Firestore and get a reference to the database
 initializeApp({
   credential: applicationDefault(),
-  // databaseURL: 'https://orbital-ymovies321.firebaseio.com'
-  databaseURL: 'https://orbital-test.firebaseio.com'
+  // databaseURL: 'https://orbital-ymovies321.firebaseio.com' //official database
+  databaseURL: 'https://orbital-test.firebaseio.com' // test database
 });
 
 const db = getFirestore();
@@ -27,7 +27,7 @@ const db = getFirestore();
 async function exportData() {
   // Read the downloaded file line by line
   const lineReader = readline.createInterface({
-    input: createReadStream("./movie_ids_trimmed.json"),
+    input: createReadStream("./full_movie_data.json"),
   });
 
   // Process each line (JSON object) and store the movie ID in the database
@@ -37,16 +37,24 @@ async function exportData() {
     const movieTitle = movieData.original_title;
 
     const docRef = db.collection('MoviesID_TMDB_database').doc(movieId);
+    // const docRef = db.collection('Movies_test_DB_updated').doc(movieId);
 
     try {
       await db.runTransaction(async (transaction) => {
         // Retry the operation in case of failures
-        return transaction.set(docRef, {
+        const movie = {
           id: movieId,
           name: movieTitle,
-          averageReviewRating: 0,
-          numReviews: 0
-        });
+          original_language: movieData.original_language || "",
+          genres: movieData.genres || [],
+          overview: movieData.overview || "",
+          poster_image: movieData.poster_image || "",
+          release_date: movieData.release_date || "",
+          runtime: movieData.runtime || 0,
+          vote_average: movieData.vote_average || 0,
+          vote_count: movieData.vote_count || 0
+        };
+        return transaction.set(docRef, movie);
       });
 
       console.log(`Movie ID ${movieId} added to Firestore.`);
@@ -60,7 +68,7 @@ async function exportData() {
   });
 }
 
-// exportData();
+exportData();
 
 // to use API to fetch using movieID
 async function fetchOtherDetailsByAPI(movieId) {

@@ -1,9 +1,9 @@
 import { createReadStream, writeFileSync} from "fs";
 import readline from "readline";
 
-/*
+
 // Specify the path of the JSON file to save the movie data
-const inputFile = "./movie_ids_trimmed.json";
+const inputFile = "./missed_out.json";
 const outputFile = './full_movie_data.json';
 
 // Create a readline interface
@@ -34,7 +34,6 @@ rl.on('line', async (jsonLine) => {
 rl.on("close", () => {
     console.log("Filtered JSON file created:", outputFile);
 });
-*/
 
 
 // Adding data from the JSON file
@@ -78,5 +77,5 @@ async function fetchOtherDetailsByAPI(movieId) {
 
 
 // testing individual movies
-const movieData = await getData(2059);
-console.log(JSON.stringify(movieData));
+// const movieData = await getData(2059);
+//console.log(JSON.stringify(movieData));
