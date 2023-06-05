@@ -17,8 +17,8 @@ import readline from "readline";
 // Initialise Firestore and get a reference to the database
 initializeApp({
   credential: applicationDefault(),
-  databaseURL: 'https://orbital-ymovies321.firebaseio.com'
-  // databaseURL: 'https://orbital-test.firebaseio.com'
+  // databaseURL: 'https://orbital-ymovies321.firebaseio.com'
+  databaseURL: 'https://orbital-test.firebaseio.com'
 });
 
 const db = getFirestore();
