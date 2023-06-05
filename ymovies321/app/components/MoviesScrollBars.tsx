@@ -67,8 +67,9 @@ function fetchMovieDataAPI() {
     }, []);
   
     if (movieData.showingInCinemas === null || movieData.topRated === null) {
-        return <div>Loading...</div>;
-      }
+      return <div>Loading...</div>;
+    }
+    
     const { showingInCinemas, topRated } = movieData;
     
     return (
