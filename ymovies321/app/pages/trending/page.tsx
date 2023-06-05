@@ -13,7 +13,7 @@ import Reviews from "../../components/ReviewForm";
 import { Box, Typography } from "@mui/material";
 import TrendingNavBar from "../../components/NavBars/TrendingNavBar";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, signIn , signOut} from "../../authContext/auth";
+import { auth, signIn, signOut } from "../../authContext/auth";
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
@@ -25,10 +25,10 @@ async function fetchDataFromDB() {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
+        console.log("Document data:", docSnap.data());
     } else {
-    // docSnap.data() will be undefined in this case
-    console.log("No such document!");
+        // docSnap.data() will be undefined in this case
+        console.log("No such document!");
     }
 }
 
@@ -36,14 +36,17 @@ function fetchMovieDataAPI() {
     const options = {
         method: 'GET',
         headers: {
-        accept: 'application/json',
-        // Authorization: `Bearer ${process.env.MOVIE_API_READ_ACCESS_TOKEN}`
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZDI1NmMyZWVjNzhmNzk0OTg1ZWQwYjdjMzVjY2JiMCIsInN1YiI6IjY0NzFjZDM3YTE5OWE2MDExNmM2ZDk1ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MjVdbubEYW3r_vtxBOcq4zxOo6lteIShmCykxu1m8co'
+            accept: 'application/json',
+            // Authorization: `Bearer ${process.env.MOVIE_API_READ_ACCESS_TOKEN}`
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZDI1NmMyZWVjNzhmNzk0OTg1ZWQwYjdjMzVjY2JiMCIsInN1YiI6IjY0NzFjZDM3YTE5OWE2MDExNmM2ZDk1ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MjVdbubEYW3r_vtxBOcq4zxOo6lteIShmCykxu1m8co'
         }
     }
 
     return fetch(`https://api.themoviedb.org/3/trending/movie/day?language=en-US`, options)
-        .then(response => response.json());
+        .then(response => {
+            response.json();
+            return response;
+        });
 }
 
 
@@ -57,21 +60,27 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
                 handleSignOut={signOut}
             />
             <Box>
-                To add in trending videos but probably in grid form and can load more
+            
             </Box>
         </div>
     );
 }
-  
+
 export default function TrendingMovies() {
     const [user] = useAuthState(auth);
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        fetchMovieDataAPI().then((movieData) => {
-        setData(movieData);
+        fetchMovieDataAPI().then((data) => {
+            setData(data);
+        }).catch((error) => {
+            console.error('Error fetching movie data:', error);
         });
     }, []);
+
+    if (data == null) {
+        return <div>Loading...</div>
+    }
 
     console.log(user);
     console.log(data);
