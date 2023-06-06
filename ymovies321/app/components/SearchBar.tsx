@@ -1,40 +1,125 @@
 "use client";
 
 import firebase_app from "../firebase/config";
-import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import Image from 'next/image';
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { Box, Typography } from "@mui/material";
-
+import { collection, doc, getDoc, getDocs, setDoc, getFirestore, query, where} from "firebase/firestore";
+import { Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { Box, Button, InputBase, LinearProgress, Typography } from "@mui/material";
+import { styled, alpha } from "@mui/material/styles";
+import SearchIcon from "@mui/icons-material/Search";
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
 
-const citiesRef = collection(db, "cities");
+const moviesRef = collection(db, "MoviesID_TMDB_database");
 
-// https://firebase.google.com/docs/firestore/query-data/get-data
-async function fetchDataFromDB() {
-    // getting data
-    const docRef = doc(db, "cities", "SF");
-    const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-    } else {
-    // docSnap.data() will be undefined in this case
-    console.log("No such document!");
-    }
-}
-
+async function fetchDataFromDB(queryText: string) {
+    setIsFetching(true); // Set isFetching to true before fetching data
+  
+    const q = query(
+      moviesRef,
+      where("name", ">=", queryText),
+      where("name", "<=", queryText + "\uf8ff")
+    );
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+    });
+  
+    setIsFetching(false); // Set isFetching to false after fetching data
+  }
 
 function SearchBar() {
+    // states
+    const [searchVal, setSearchVal] = useState<string>();
+    const [isResultsVisible, setIsResultsVisible] = useState<boolean>(false);
+    const [isFetching, setIsFetching] = useState(false);
 
     return (
+    <Search>
+        <SearchIconWrapper>
+            <SearchIcon />
+        </SearchIconWrapper>
+        <StyledInputBase
+        placeholder="Search…"
+        inputProps={{ "aria-label": "search" }}
+        value={searchVal || ""}
+        onChange={(e) => setSearchVal(e.target.value)}
+        onFocus={() => setIsResultsVisible(true)}
+        onBlur={() => setIsResultsVisible(false)}
+        /*
+        onKeyUp={(e) => {
+            if (e.key == "Enter") {
+            e.currentTarget.blur();
+            customRedirect("/search?q=" + (searchVal ?? ""));
+            }
+        }}
+        */
+        />
 
-    )
-};
+        {isFetching && (
+        <LinearProgress
+            color="secondary"
+            sx={{
+            backgroundColor: "lightblue",
+            position: "absolute",
+            top: "100%",
+            left: 0,
+            width: "100%",
+            zIndex: 2,
+            }}
+        />
+        )}
+    </Search>
+    );
+}
+
+const Search = styled("div")(({ theme }) => ({
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "auto",
+    },
+  }));
+  
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+}));
+  
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: "inherit",
+    [theme.breakpoints.down("md")]: {
+        display: "flex",
+    },
+    "& .MuiInputBase-input": {
+        padding: theme.spacing(1, 1, 1, 0),
+        // vertical padding + font size from searchIcon
+        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+        transition: theme.transitions.create("width"),
+        width: "100%",
+        [theme.breakpoints.up("md")]: {
+        width: "12ch",
+        "&:focus": {
+            width: "20ch",
+        },
+        },
+    },
+}));
+
 
 export default SearchBar;
