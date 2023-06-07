@@ -123,5 +123,4 @@ export default function TrendingMovies() {
 
     const { trending } = movieData;
     return <Details user={user} data={trending?.results} />;
-
 }
