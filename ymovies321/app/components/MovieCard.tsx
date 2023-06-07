@@ -60,7 +60,7 @@ export type ClipResults = {
 export default function MovieCard({ item } : {item: MovieResult}) {
     return (
         <Link href={"/pages/details/" + item.id} key={item.id}>
-            <div className="ml-3 w-40 h-128 max-w-xs overflow-hidden cursor-pointer" key={item.id}>
+            <div className="ml-3 w-40 h-128 max-w-xs overflow-hidden cursor-pointer">
                 <img
                     onError={(e) => {
                         const target = e.target as HTMLImageElement;

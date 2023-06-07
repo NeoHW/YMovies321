@@ -13,32 +13,39 @@ import SearchIcon from "@mui/icons-material/Search";
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
-
 const moviesRef = collection(db, "MoviesID_TMDB_database");
 
-
 async function fetchDataFromDB(searchVal: string, setIsFetching: (isFetching: boolean) => void) {
-    setIsFetching(true); // Set isFetching to true before fetching data
-  
+  setIsFetching(true); // Set isFetching to true before fetching data
+
+  if (searchVal) {
     const q = query(
       moviesRef,
       where("name", ">=", searchVal),
       where("name", "<=", searchVal + "\uf8ff")
     );
+
     const querySnapshot = await getDocs(q);
+
     querySnapshot.forEach((doc) => {
       console.log(doc.id, " => ", doc.data());
     });
-  
-    setIsFetching(false); // Set isFetching to false after fetching data
   }
+
+  setIsFetching(false); // Set isFetching to false after fetching data
+}
 
 function SearchBar() {
     // states
     const [searchVal, setSearchVal] = useState<string>();
+    // const [results, setResults] = useState([]);
     const [isResultsVisible, setIsResultsVisible] = useState<boolean>(false);
     const [isFetching, setIsFetching] = useState(false);
-
+    
+    useEffect(() => {
+      fetchDataFromDB(searchVal, setIsFetching);
+    }, [searchVal]);
+    
     return (
     <Search>
         <SearchIconWrapper>
