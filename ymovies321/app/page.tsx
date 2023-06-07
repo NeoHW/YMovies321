@@ -1,6 +1,7 @@
 "use client"
 import 'firebase/firestore';
 
+import Navbar from "./components/Navbar";
 import MoviesScrollBars from "./components/MoviesScrollBars";
 import { useState } from "react";
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -19,6 +20,22 @@ export default function Page() {
 
     return (
       <div>
+        <Navbar
+          isSignedIn={user ? true : false}
+          profile={user}
+          handleSignIn={signIn}
+          handleSignOut={signOut}
+          nav={"Home"}
+        />
+        {user
+          ? (
+            <div>
+              <ContentLoggedIn profile={user} />
+            </div>
+          )
+          :
+          <div></div>
+        }
         <MoviesScrollBars />
       </div>
     );
