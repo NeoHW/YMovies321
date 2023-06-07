@@ -9,27 +9,26 @@ const DropDownItemContent = styled("div")({
 });
 
 const DropDownItem = (item: any) => {
-    console.log(item);
-    console.log(item.title);
-    console.log(item.poster_path);
-    console.log(item);
+    // for some reason item is nested within another item??
+    item = item.item;
+
     return (
         <DropDownItemContent>
             <img
-                src={item.poster_path 
-                    ? `https://image.tmdb.org/t/p/w220_and_h330_face${item.poster_path}`
+                src={item.poster_image
+                    ? `https://image.tmdb.org/t/p/w220_and_h330_face${item.poster_image}`
                     : "../images/no-image-available.png"}
                 width={24}
                 height={24}
-                alt={item.title ? item.title : item.original_title}
+                alt={item.name}
             />
             <div>
-                <Typography variant="subtitle1">{item.title}</Typography>
+                <Typography variant="subtitle1">{item.name}</Typography>
                 <Typography variant="body2">
                     {moment(item.release_date).format("YYYY")}
                 </Typography>
                 <Typography variant="body2">
-                    {item.vote_average ? item.vote_average.toFixed(1) / 10 : "N/A"}
+                    {item.vote_average ? item.vote_average.toFixed(1) / 10 : "NA"}
                 </Typography>
             </div>
         </DropDownItemContent>

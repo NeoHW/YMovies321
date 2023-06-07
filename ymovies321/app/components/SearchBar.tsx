@@ -30,8 +30,8 @@ import DropDownItem from "./DropDownItem";
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
-const moviesRef = collection(db, "MoviesID_TMDB_database");
-// const moviesRef = collection(db, "test_MoviesID_TMDB_database");
+// const moviesRef = collection(db, "MoviesID_TMDB_database");
+const moviesRef = collection(db, "test_MoviesID_TMDB_database");
 
 async function fetchDataFromDB( searchVal: string | undefined, setIsFetching: (isFetching: boolean) => void, setResults: any) {
   setIsFetching(true); // Set isFetching to true before fetching data
@@ -44,12 +44,13 @@ async function fetchDataFromDB( searchVal: string | undefined, setIsFetching: (i
     );
 
     const querySnapshot = await getDocs(q);
+    console.log(querySnapshot);
 
     const fetchedResults: any[] = [];
     querySnapshot.forEach((doc) => {
       fetchedResults.push(doc.data());
     });
-
+    
     setResults(fetchedResults);
   }
 
@@ -59,7 +60,7 @@ async function fetchDataFromDB( searchVal: string | undefined, setIsFetching: (i
 function SearchBar() {
   // states
   const [searchVal, setSearchVal] = useState<string>();
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState<any[]>([]);
   const [isResultsVisible, setIsResultsVisible] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState(false);
 
@@ -69,9 +70,11 @@ function SearchBar() {
 
   console.log(results);
 
-  const displayedResults = results.length != 0 && results.length <4 
+  const displayedResults = results.length != 0 && results.length <= 4 
   ? results
   : results.slice(0, 4); // Take the top 4 results
+
+  console.log(displayedResults);
 
   return (
     <Search>
