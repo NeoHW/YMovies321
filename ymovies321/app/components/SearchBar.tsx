@@ -52,15 +52,16 @@ function SearchBar() {
 
   useEffect(() => {
     fetchDataFromDB(searchVal, setIsFetching, setResults);
+    console.log(results);
   }, [searchVal]);
 
-  console.log(results);
+  //console.log(results);
 
   const displayedResults = results.length != 0 && results.length <= 4 
   ? results
   : results.slice(0, 4); // Take the top 4 results
 
-  console.log(displayedResults);
+  // console.log(displayedResults);
 
   return (
     <Search>
