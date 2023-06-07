@@ -10,12 +10,14 @@ import Link from "next/link";
 import { Box, Button, InputBase, LinearProgress, Typography } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
+import { blueGrey } from '@mui/material/colors';
+
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
 const moviesRef = collection(db, "MoviesID_TMDB_database");
 
-async function fetchDataFromDB(searchVal: string, setIsFetching: (isFetching: boolean) => void) {
+async function fetchDataFromDB(searchVal: string | undefined, setIsFetching: (isFetching: boolean) => void, setResults: any) {
   setIsFetching(true); // Set isFetching to true before fetching data
 
   if (searchVal) {
@@ -26,10 +28,13 @@ async function fetchDataFromDB(searchVal: string, setIsFetching: (isFetching: bo
     );
 
     const querySnapshot = await getDocs(q);
-
+    
+    const fetchedResults: any[] = [];
     querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
+      fetchedResults.push(doc.data());
     });
+
+    setResults(fetchedResults);
   }
 
   setIsFetching(false); // Set isFetching to false after fetching data
@@ -38,13 +43,17 @@ async function fetchDataFromDB(searchVal: string, setIsFetching: (isFetching: bo
 function SearchBar() {
     // states
     const [searchVal, setSearchVal] = useState<string>();
-    // const [results, setResults] = useState([]);
+    const [results, setResults] = useState([]);
     const [isResultsVisible, setIsResultsVisible] = useState<boolean>(false);
     const [isFetching, setIsFetching] = useState(false);
     
     useEffect(() => {
-      fetchDataFromDB(searchVal, setIsFetching);
+      fetchDataFromDB(searchVal, setIsFetching, setResults);
     }, [searchVal]);
+
+    console.log(results);
+    
+    const displayedResults = results.slice(0, 4); // Take the top 4 results
     
     return (
     <Search>
@@ -81,6 +90,14 @@ function SearchBar() {
             }}
         />
         )}
+
+        {isResultsVisible && displayedResults.length > 0 && (
+        <Dropdown>
+          {displayedResults.map((result) => (
+            <DropdownItem key={result.id}>{result.name}</DropdownItem>
+          ))}
+        </Dropdown>
+      )}
     </Search>
     );
 }
@@ -126,6 +143,27 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         },
         },
     },
+}));
+
+const Dropdown = styled("div")(({ theme }) => ({
+  position: "absolute",
+  top: "100%",
+  left: 0,
+  width: "100%",
+  backgroundColor: blueGrey[500],
+  boxShadow: theme.shadows[1],
+  zIndex: 3,
+  padding: theme.spacing(1),
+  maxHeight: 200,
+  overflowY: "auto",
+}));
+
+const DropdownItem = styled("div")(({ theme }) => ({
+  padding: theme.spacing(1),
+  cursor: "pointer",
+  "&:hover": {
+    backgroundColor: theme.palette.action.hover,
+  },
 }));
 
 
