@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { signIn } from "../authContext/auth"
 import { User, UserCredential } from 'firebase/auth';
 import { Box, Typography } from "@mui/material";
-import SearchBar from "../SearchBar";
+import SearchBar from "./SearchBar";
 
 interface ButtonProps {
     isSignedIn: boolean;
