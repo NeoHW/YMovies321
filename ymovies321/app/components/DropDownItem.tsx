@@ -8,33 +8,43 @@ const DropDownItemContent = styled("div")({
   flexDirection: "column",
 });
 
+const DropdownItem = styled("div")(({ theme }) => ({
+    padding: theme.spacing(1),
+    cursor: "pointer",
+    "&:hover": {
+        backgroundColor: theme.palette.action.hover,
+    },
+}));
+
 const DropDownItem = (item: any) => {
     // for some reason item is nested within another item??
     item = item.item;
 
     return (
         <Link href={"/pages/details/" + item.id} key={item.id}>
-            <DropDownItemContent>
-                <img
-                    src={item.poster_image
-                        ? `https://image.tmdb.org/t/p/w220_and_h330_face${item.poster_image}`
-                        : "../images/no-image-available.png"}
-                    width={24}
-                    height={24}
-                    alt={item.name}
-                />
-                <div>
-                    <Typography sx={{ color: "#000000" }} variant="subtitle2">
-                        {item.name}
-                    </Typography>
-                    <Typography sx={{ color: "#000000" }} variant="subtitle2">
-                        {moment(item.release_date).format("YYYY")}
-                    </Typography>
-                    <Typography sx={{ color: "#000000" }} variant="subtitle2">
-                        {item.vote_average.toFixed(1)} / 10
-                    </Typography>
-                </div>
-            </DropDownItemContent>
+            <DropdownItem>
+                <DropDownItemContent>
+                    <img
+                        src={item.poster_image
+                            ? `https://image.tmdb.org/t/p/w220_and_h330_face${item.poster_image}`
+                            : "../images/no-image-available.png"}
+                        width={24}
+                        height={24}
+                        alt={item.name}
+                    />
+                    <div>
+                        <Typography sx={{ color: "#000000" }} variant="subtitle2">
+                            {item.name}
+                        </Typography>
+                        <Typography sx={{ color: "#000000" }} variant="subtitle2">
+                            {moment(item.release_date).format("YYYY")}
+                        </Typography>
+                        <Typography sx={{ color: "#000000" }} variant="subtitle2">
+                            {item.vote_average.toFixed(1)} / 10
+                        </Typography>
+                    </div>
+                </DropDownItemContent>
+            </DropdownItem>
         </Link>
     );
 };

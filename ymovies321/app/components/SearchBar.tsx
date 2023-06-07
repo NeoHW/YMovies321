@@ -100,14 +100,9 @@ function SearchBar() {
 
       {isResultsVisible && displayedResults.length > 0 && (
         <Dropdown>
-          {displayedResults.map((item: any) => {
-            return (
-              // <DropdownItem key={item.id}>{item.name}</DropdownItem>
-              <DropdownItem>
-                <DropDownItem item = {item}/>
-              </DropdownItem>
-            );
-          })}
+          {displayedResults.map((item: any) => (
+            <DropDownItem item = {item}/>
+          ))}
         </Dropdown>
       )}
     </Search>
@@ -168,14 +163,6 @@ const Dropdown = styled("div")(({ theme }) => ({
   padding: theme.spacing(1),
   maxHeight: 200,
   overflowY: "auto",
-}));
-
-const DropdownItem = styled("div")(({ theme }) => ({
-  padding: theme.spacing(1),
-  cursor: "pointer",
-  "&:hover": {
-    backgroundColor: theme.palette.action.hover,
-  },
 }));
 
 export default SearchBar;
