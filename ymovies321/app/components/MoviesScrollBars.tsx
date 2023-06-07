@@ -7,6 +7,9 @@ import { Box, CircularProgress, Typography } from "@mui/material";
 import moment from "moment";
 import Link from 'next/link';
 import MovieCard from "./MovieCard";
+import Navbar from "./Navbar";
+import { auth, signIn , signOut} from "../authContext/auth";
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
@@ -57,6 +60,7 @@ function fetchMovieDataAPI() {
 }
 
 function MoviesComponent() {
+  const [user] = useAuthState(auth);
   const [movieData, setMovieData] = useState<MovieData>({ showingInCinemas: null, topRated: null });
 
   useEffect(() => {
@@ -72,10 +76,11 @@ function MoviesComponent() {
   }
 
   const { showingInCinemas, topRated } = movieData;
+    
 
   return (
     <div>
-
+      <Navbar isSignedIn={user ? true : false} profile={user} nav="Home" />
       <Box sx={{ textAlign: "center" }}>
         <Typography variant="subtitle2" sx={{ fontSize: "32px", fontWeight: "400" }}>
           Showing In Cinemas

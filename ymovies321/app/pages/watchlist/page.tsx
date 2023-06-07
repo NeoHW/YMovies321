@@ -53,8 +53,6 @@ function fetchMovieDataAPI() {
             <Navbar
                 isSignedIn={user ? true : false}
                 profile={user}
-                handleSignIn={signIn}
-                handleSignOut={signOut}
                 nav={"Watchlist"}
             />
             <Box>

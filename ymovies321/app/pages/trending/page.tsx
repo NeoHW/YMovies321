@@ -58,8 +58,6 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
             <Navbar
                 isSignedIn={user ? true : false}
                 profile={user}
-                handleSignIn={signIn}
-                handleSignOut={signOut}
                 nav={"Trending"}
             />
             <Grid

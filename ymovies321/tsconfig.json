@@ -23,6 +23,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/layout.js", "firebase/index.js", "app/Navigation/NavbarSignedIn.tsx", "app/profile.js", "app/pages/profile.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/layout.js", "firebase/index.js", "app/profile.js", "app/pages/profile.js"],
   "exclude": ["node_modules"]
 }

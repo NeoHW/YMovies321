@@ -1,24 +1,17 @@
-import { usePathname } from 'next/navigation';
+'use client'
 
-function extractIdFromPath(pathName : string) {
-    // extracting out the id from URL path
-    const regex = /\/pages\/profile\/(\d+)/;
-        const match = pathName.match(regex);
-        
-        if (match && match[1]) {
-            return match[1];
-        }
-        
-        return null;
-}
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from "../../../authContext/auth"
+import Navbar from '../../../components/Navbar';
 
-function Profile() {
-    console.log(extractIdFromPath(usePathname()));
+export default function Page() {
+    const [user] = useAuthState(auth);
     return (
         <div>
-            <h2>
-                hi
-            </h2>
+            <Navbar isSignedIn={true} profile={user} nav={null} ></Navbar>
+            <h1>My Profile</h1>
+            <div>{user?.displayName}</div>
+            <img src={user?.photoURL}></img>
         </div>
-    )
+    );
 }
