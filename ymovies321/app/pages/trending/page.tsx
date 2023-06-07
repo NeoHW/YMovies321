@@ -6,10 +6,10 @@ import firebase_app from "../../firebase/config";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
-import TrendingNavBar from "../../components/NavBars/TrendingNavBar";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, signIn, signOut } from "../../authContext/auth";
 import MovieCard from "../../components/MovieCard";
+import Navbar from "../../components/Navbar";
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
@@ -41,7 +41,7 @@ function fetchMovieDataAPI() {
 
     return fetch(`https://api.themoviedb.org/3/trending/movie/day?language=en-US`, options)
         .then(response => {
-            console.log(response);
+            // console.log(response);
             return Promise.all([response.json()]);
         }).then(([trending]) => {
             return { trending };
@@ -55,11 +55,12 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
     const row4 = data.slice(15, 21);
     return (
         <div>
-            <TrendingNavBar
+            <Navbar
                 isSignedIn={user ? true : false}
                 profile={user}
                 handleSignIn={signIn}
                 handleSignOut={signOut}
+                nav={"Trending"}
             />
             <Grid
                 className="p-6"
@@ -123,10 +124,6 @@ export default function TrendingMovies() {
     }
 
     const { trending } = movieData;
-
-    console.log(user);
-    console.log("trending", trending.results)
-
     return <Details user={user} data={trending.results} />;
 
 }

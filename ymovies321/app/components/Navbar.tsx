@@ -4,12 +4,12 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image';
-import companyLogo from "../../navigation/YMoviesLogo.jpg";
-import avatar from "../../navigation/avatar.png";
+import companyLogo from "../navigation/YMoviesLogo.jpg";
+import avatar from "../navigation/avatar.png";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { signIn } from "../../authContext/auth"
+import { signIn } from "../authContext/auth"
 import { User, UserCredential } from 'firebase/auth';
 import { Box, Typography } from "@mui/material";
 
@@ -18,23 +18,31 @@ interface ButtonProps {
     profile: User | null | undefined;
     handleSignIn: () => void;
     handleSignOut: () => void;
+    nav: any;
 }
 
-const nav = [
-    { name: 'Home', href: '/', current: true },
-    { name: 'Trending', href: '/pages/trending', current: false },
-]
+// Nav for home
+// const nav = [
+//     { name: 'Home', href: '/', current: true },
+//     { name: 'Trending', href: '/pages/trending', current: false },
+// ]
 
 // to add in the pages for reviews and watchlist under href
-const navLoggedInExtra = [
-    { name: 'Watchlist', href: '/pages/watchlist', current: false },
-]
+
 
 function classNames(...classes: unknown[]): string {
     return classes.filter(Boolean).join(' ');
 }
 
-function Navbar({ isSignedIn, profile, handleSignIn, handleSignOut }: ButtonProps) {
+function Navbar({ isSignedIn, profile, handleSignIn, handleSignOut, nav }: ButtonProps) {
+
+    const navigation = [
+        { name: 'Home', href: '/', current: nav == "Home" },
+        { name: 'Trending', href: '/pages/trending', current: nav == "Trending" },
+    ]
+    const navLoggedInExtra = [
+        { name: 'Watchlist', href: '/pages/watchlist', current: nav == "Watchlist" },
+    ]
 
     return (
         <Disclosure as="nav" className="bg-gray-800">
@@ -68,7 +76,7 @@ function Navbar({ isSignedIn, profile, handleSignIn, handleSignOut }: ButtonProp
                                 </div>
                                 <div className="hidden sm:ml-6 sm:block">
                                     <div className="flex space-x-2">
-                                        {nav.map((item) => (
+                                        {navigation.map((item) => (
                                             <Link
                                                 key={item.name}
                                                 href={item.href}
@@ -95,9 +103,9 @@ function Navbar({ isSignedIn, profile, handleSignIn, handleSignOut }: ButtonProp
                                                     {item.name}
                                                 </Link>
                                             )))
-                                                : (
-                                                    <span></span>
-                                                )
+                                            : (
+                                                <span></span>
+                                            )
                                         }
                                     </div>
                                 </div>
@@ -153,7 +161,7 @@ function Navbar({ isSignedIn, profile, handleSignIn, handleSignOut }: ButtonProp
                                                     <Menu.Item>
                                                         {({ active }) => (
                                                             <a
-                                                                href="#"
+                                                                href="https://www.google.com"
                                                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                             >
                                                                 Your Profile
@@ -192,7 +200,7 @@ function Navbar({ isSignedIn, profile, handleSignIn, handleSignOut }: ButtonProp
 
                     <Disclosure.Panel className="sm:hidden">
                         <div className="space-y-1 px-2 pb-3 pt-2">
-                            {nav.map((item) => (
+                            {navigation.map((item) => (
                                 <Disclosure.Button
                                     key={item.name}
                                     as="a"
