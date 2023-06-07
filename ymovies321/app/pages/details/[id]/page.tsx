@@ -25,24 +25,11 @@ async function fetchDataFromDB() {
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-  console.log("Document data:", docSnap.data());
+    console.log("Document data:", docSnap.data());
   } else {
-  // docSnap.data() will be undefined in this case
-  console.log("No such document!");
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!");
   }
-}
-
-
-function extractIdFromPath(pathName : string) {
-  // extracting out the id from URL path
-  const regex = /\/pages\/details\/(\d+)/;
-  const match = pathName.match(regex);
-  
-  if (match && match[1]) {
-      return match[1];
-  }
-  
-  return null;
 }
 
 
@@ -57,6 +44,7 @@ function extractIdFromPath(pathName: string) {
 
   return null;
 }
+
 
 
 async function fetchMovieDataAPI(movieId: string | null) {
@@ -95,6 +83,30 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
   );
 }
 
+// export default function MovieDetails() {
+//   const [user] = useAuthState(auth);
+//   const [data, setData] = useState(null);
+
+//   // getting URL path
+//   const pathName = usePathname();
+
+//   useEffect(() => {
+//     const movieId = extractIdFromPath(pathName);
+
+//     return (
+//       <div>
+//         <Navbar
+//           isSignedIn={user ? true : false}
+//           profile={user}
+//           nav={"Home"}
+//         />
+//         <h2 className="text-xl font-bold">Movie details here</h2>
+//         <Reviews movieId={movieId} />
+//       </div>
+//     );
+//   });
+// }
+
 export default function MovieDetails() {
   const [user] = useAuthState(auth);
   const [data, setData] = useState(null);
@@ -104,34 +116,9 @@ export default function MovieDetails() {
 
   useEffect(() => {
     const movieId = extractIdFromPath(pathName);
-  
-    return (
-      <div>
-        <Navbar
-          isSignedIn={user ? true : false}
-          profile={user}
-          handleSignIn={signIn}
-          handleSignOut={signOut}
-          nav={"Home"}
-        />
-        <h2 className="text-xl font-bold">Movie details here</h2>
-        <Reviews movieId={movieId} />
-      </div>
-    );
-  }
-  
-export default function MovieDetails() {
-  const [user] = useAuthState(auth);
-  const [data, setData] = useState(null);
-
-  // getting URL path
-  const pathName = usePathname();
-
-  useEffect(() => {
-      const movieId = extractIdFromPath(pathName);
-      fetchMovieDataAPI(movieId).then((movieData) => {
-          setData(movieData);
-      });
+    fetchMovieDataAPI(movieId).then((movieData) => {
+      setData(movieData);
+    });
   }, []);
 
   return <Details user={user} data={data} />;

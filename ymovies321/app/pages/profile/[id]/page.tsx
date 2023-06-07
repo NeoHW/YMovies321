@@ -27,7 +27,7 @@ export default function Page() {
                 <Grid item>
                     <Image
                         width={250}
-                        src={user?.photoURL}
+                        src={user ? user.photoURL : ""}
                     />
                 </Grid>
                 <Grid item>Email: {user.email}</Grid>

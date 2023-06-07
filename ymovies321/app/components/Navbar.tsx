@@ -142,7 +142,7 @@ function Navbar({ isSignedIn, profile, nav }: ButtonProps) {
                                                     <span className="sr-only">Open user menu</span>
                                                     <img
                                                         className="h-8 w-8 rounded-full"
-                                                        src={profile?.photoURL}
+                                                        src={profile ? profile.photoURL : ""}
                                                         alt=""
                                                     />
                                                 </Menu.Button>
