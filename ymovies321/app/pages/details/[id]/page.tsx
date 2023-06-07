@@ -2,7 +2,6 @@
 "use client";
 
 import { User, UserCredential } from "firebase/auth";
-import HomeNavBar from "../../../components/NavBars/HomeNavBar";
 import firebase_app from "../../../firebase/config";
 import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -14,6 +13,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Reviews from "../../../components/ReviewForm";
 import { Box, Typography } from "@mui/material";
+import Navbar from "../../../components/Navbar";
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
@@ -71,11 +71,12 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
   
     return (
       <div>
-        <HomeNavBar
+        <Navbar
           isSignedIn={user ? true : false}
           profile={user}
           handleSignIn={signIn}
           handleSignOut={signOut}
+          nav={"Home"}
         />
         <h2 className="text-xl font-bold">Movie details here</h2>
         <Reviews movieId={movieId} />

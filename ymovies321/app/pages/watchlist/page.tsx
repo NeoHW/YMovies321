@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Reviews from "../../components/ReviewForm";
 import { Box, Typography } from "@mui/material";
-import WatchlistNavBar from "../../components/NavBars/WatchlistNavBar";
+import Navbar from "../../components/Navbar";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, signIn , signOut} from "../../authContext/auth";
 
@@ -50,11 +50,12 @@ function fetchMovieDataAPI() {
   function Details({ user, data }: { user: User | null | undefined; data: any }) {
     return (
         <div>
-            <WatchlistNavBar
+            <Navbar
                 isSignedIn={user ? true : false}
                 profile={user}
                 handleSignIn={signIn}
                 handleSignOut={signOut}
+                nav={"Watchlist"}
             />
             <Box>
                 To add in watchlist videos but probably in grid form and can load more
