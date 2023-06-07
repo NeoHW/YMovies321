@@ -17,29 +17,27 @@ const db = getFirestore(firebase_app);
 const moviesRef = collection(db, "MoviesID_TMDB_database");
 
 
-
+async function fetchDataFromDB(searchVal: string, setIsFetching: (isFetching: boolean) => void) {
+    setIsFetching(true); // Set isFetching to true before fetching data
+  
+    const q = query(
+      moviesRef,
+      where("name", ">=", searchVal),
+      where("name", "<=", searchVal + "\uf8ff")
+    );
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+    });
+  
+    setIsFetching(false); // Set isFetching to false after fetching data
+  }
 
 function SearchBar() {
     // states
     const [searchVal, setSearchVal] = useState<string>();
     const [isResultsVisible, setIsResultsVisible] = useState<boolean>(false);
     const [isFetching, setIsFetching] = useState(false);
-
-    async function fetchDataFromDB(queryText: string) {
-      setIsFetching(true); // Set isFetching to true before fetching data
-    
-      const q = query(
-        moviesRef,
-        where("name", ">=", queryText),
-        where("name", "<=", queryText + "\uf8ff")
-      );
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-      });
-    
-      setIsFetching(false); // Set isFetching to false after fetching data
-    }
 
     return (
     <Search>
