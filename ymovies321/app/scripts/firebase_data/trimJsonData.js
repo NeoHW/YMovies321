@@ -10,9 +10,6 @@ const rl = readline.createInterface({
     crlfDelay: Infinity
 });
 
-// Array to store filtered movie entries
-const filteredMovies = [];
-
 // Process each line of the JSON file
 rl.on('line', (jsonLine) => {
     // Parse the JSON line
