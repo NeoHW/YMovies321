@@ -73,7 +73,7 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
                     justifyContent="space-around"
                 >
                     {row1.map((item: any) => (
-                        <MovieCard item={item}></MovieCard>
+                        <MovieCard item={item} />
                     ))}
                 </Grid>
                 <Grid
@@ -81,7 +81,7 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
                     justifyContent="space-around"
                 >
                     {row2.map((item: any) => (
-                        <MovieCard item={item}></MovieCard>
+                        <MovieCard item={item} />
                     ))}
                 </Grid>
                 <Grid
@@ -89,7 +89,7 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
                     justifyContent="space-around"
                 >
                     {row3.map((item: any) => (
-                        <MovieCard item={item}></MovieCard>
+                        <MovieCard item={item} />
                     ))}
                 </Grid>
                 <Grid
@@ -97,7 +97,7 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
                     justifyContent="space-around"
                 >
                     {row4.map((item: any) => (
-                        <MovieCard item={item}></MovieCard>
+                        <MovieCard item={item} />
                     ))}
                 </Grid>
             </Grid>
