@@ -1,28 +1,13 @@
 "use client";
 
 import firebase_app from "../firebase/config";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  setDoc,
-  getFirestore,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, setDoc, getFirestore, query, where } from "firebase/firestore";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import {
-  Box,
-  Button,
-  InputBase,
-  LinearProgress,
-  Typography,
-} from "@mui/material";
+import { Box, Button, InputBase, LinearProgress, Typography } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { blueGrey } from "@mui/material/colors";
@@ -58,6 +43,7 @@ async function fetchDataFromDB( searchVal: string | undefined, setIsFetching: (i
 }
 
 function SearchBar() {
+
   // states
   const [searchVal, setSearchVal] = useState<string>();
   const [results, setResults] = useState<any[]>([]);
@@ -117,9 +103,9 @@ function SearchBar() {
           {displayedResults.map((item: any) => {
             return (
               // <DropdownItem key={item.id}>{item.name}</DropdownItem>
-              <Link href={"/pages/details/" + item.id} key={item.id}>
-                <DropDownItem item={item} />
-              </Link>
+              <DropdownItem>
+                <DropDownItem item = {item}/>
+              </DropdownItem>
             );
           })}
         </Dropdown>
