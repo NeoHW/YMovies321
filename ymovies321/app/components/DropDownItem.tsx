@@ -23,12 +23,14 @@ const DropDownItem = (item: any) => {
                 alt={item.name}
             />
             <div>
-                <Typography variant="subtitle1">{item.name}</Typography>
-                <Typography variant="body2">
+                <Typography sx={{ color: "#000000" }} variant="subtitle2">
+                    {item.name}
+                </Typography>
+                <Typography sx={{ color: "#000000" }} variant="subtitle2">
                     {moment(item.release_date).format("YYYY")}
                 </Typography>
-                <Typography variant="body2">
-                    {item.vote_average ? item.vote_average.toFixed(1) / 10 : "NA"}
+                <Typography sx={{ color: "#000000" }} variant="subtitle2">
+                    {item.vote_average.toFixed(1)} / 10
                 </Typography>
             </div>
         </DropDownItemContent>
