@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { signIn } from "../authContext/auth"
 import { User, UserCredential } from 'firebase/auth';
 import { Box, Typography } from "@mui/material";
+import SearchBar from "./SearchBar";
 
 interface ButtonProps {
     isSignedIn: boolean;
@@ -128,15 +129,9 @@ function Navbar({ isSignedIn, profile, handleSignIn, handleSignOut, nav }: Butto
                                 }
 
                                 {/* Profile dropdown */}
-                                {isSignedIn ? (
-                                    <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                                        <button
-                                            type="button"
-                                            className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                        >
-                                            <span className="sr-only">View notifications</span>
-                                            <BellIcon className="h-6 w-6" aria-hidden="true" />
-                                        </button>
+                                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                                    <SearchBar />
+                                    {isSignedIn ? (
                                         <Menu as="div" className="relative ml-3">
                                             <div>
                                                 <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -192,8 +187,8 @@ function Navbar({ isSignedIn, profile, handleSignIn, handleSignOut, nav }: Butto
                                                 </Menu.Items>
                                             </Transition>
                                         </Menu>
-                                    </div>) : (<span></span>)}
-
+                                    ) : (<span></span>)}
+                                </div>
                             </div>
                         </div>
                     </div>

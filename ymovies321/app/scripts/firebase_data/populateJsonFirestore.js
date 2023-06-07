@@ -34,7 +34,7 @@ async function exportData() {
   lineReader.on("line", async (line) => {
     const movieData = JSON.parse(line);
     const movieId = movieData.id.toString(); // Convert to string as document ID in Firestore
-    const movieTitle = movieData.original_title;
+    const movieTitle = movieData.title.toLowerCase();
 
     const docRef = db.collection('MoviesID_TMDB_database').doc(movieId);
     // const docRef = db.collection('Movies_test_DB_updated').doc(movieId);
@@ -45,6 +45,7 @@ async function exportData() {
         const movie = {
           id: movieId,
           name: movieTitle,
+          original_name: movieData.original_title,
           original_language: movieData.original_language || "",
           genres: movieData.genres || [],
           overview: movieData.overview || "",

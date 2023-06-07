@@ -20,34 +20,29 @@ const db = getFirestore(firebase_app);
 
 // https://firebase.google.com/docs/firestore/query-data/get-data
 async function fetchDataFromDB() {
-    // getting data
-    const docRef = doc(db, "cities", "SF");
-    const docSnap = await getDoc(docRef);
+  // getting data
+  const docRef = doc(db, "cities", "SF");
+  const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-    } else {
-    // docSnap.data() will be undefined in this case
-    console.log("No such document!");
-    }
-}
-
-interface MovieData {
-    showingInCinemas: any;
-    topRated: any; 
+  if (docSnap.exists()) {
+  console.log("Document data:", docSnap.data());
+  } else {
+  // docSnap.data() will be undefined in this case
+  console.log("No such document!");
   }
+}
 
 
 function extractIdFromPath(pathName : string) {
-    // extracting out the id from URL path
-    const regex = /\/pages\/details\/(\d+)/;
-        const match = pathName.match(regex);
-        
-        if (match && match[1]) {
-            return match[1];
-        }
-        
-        return null;
+  // extracting out the id from URL path
+  const regex = /\/pages\/details\/(\d+)/;
+  const match = pathName.match(regex);
+  
+  if (match && match[1]) {
+      return match[1];
+  }
+  
+  return null;
 }
 
 
@@ -89,19 +84,19 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
     );
   }
   
-  export default function MovieDetails() {
-    const [user] = useAuthState(auth);
-    const [data, setData] = useState(null);
+export default function MovieDetails() {
+  const [user] = useAuthState(auth);
+  const [data, setData] = useState(null);
 
-    // getting URL path
-    const pathName = usePathname();
-  
-    useEffect(() => {
-        const movieId = extractIdFromPath(pathName);
-        fetchMovieDataAPI(movieId).then((movieData) => {
-            setData(movieData);
-        });
-    }, []);
-  
-    return <Details user={user} data={data} />;
-  }
+  // getting URL path
+  const pathName = usePathname();
+
+  useEffect(() => {
+      const movieId = extractIdFromPath(pathName);
+      fetchMovieDataAPI(movieId).then((movieData) => {
+          setData(movieData);
+      });
+  }, []);
+
+  return <Details user={user} data={data} />;
+}
