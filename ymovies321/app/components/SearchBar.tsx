@@ -1,23 +1,39 @@
 "use client";
 
 import firebase_app from "../firebase/config";
-import { collection, doc, getDoc, getDocs, setDoc, getFirestore, query, where} from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+  getFirestore,
+  query,
+  where,
+} from "firebase/firestore";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Box, Button, InputBase, LinearProgress, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  InputBase,
+  LinearProgress,
+  Typography,
+} from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
-import { blueGrey } from '@mui/material/colors';
-
+import { blueGrey } from "@mui/material/colors";
+import DropDownItem from "./DropDownItem";
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
-const moviesRef = collection(db, "MoviesID_TMDB_database");
+// const moviesRef = collection(db, "MoviesID_TMDB_database");
+const moviesRef = collection(db, "test_MoviesID_TMDB_database");
 
-async function fetchDataFromDB(searchVal: string | undefined, setIsFetching: (isFetching: boolean) => void, setResults: any) {
+async function fetchDataFromDB( searchVal: string | undefined, setIsFetching: (isFetching: boolean) => void, setResults: any) {
   setIsFetching(true); // Set isFetching to true before fetching data
 
   if (searchVal) {
@@ -28,12 +44,13 @@ async function fetchDataFromDB(searchVal: string | undefined, setIsFetching: (is
     );
 
     const querySnapshot = await getDocs(q);
-    
+    console.log(querySnapshot);
+
     const fetchedResults: any[] = [];
     querySnapshot.forEach((doc) => {
       fetchedResults.push(doc.data());
     });
-
+    
     setResults(fetchedResults);
   }
 
@@ -41,26 +58,30 @@ async function fetchDataFromDB(searchVal: string | undefined, setIsFetching: (is
 }
 
 function SearchBar() {
-    // states
-    const [searchVal, setSearchVal] = useState<string>();
-    const [results, setResults] = useState([]);
-    const [isResultsVisible, setIsResultsVisible] = useState<boolean>(false);
-    const [isFetching, setIsFetching] = useState(false);
-    
-    useEffect(() => {
-      fetchDataFromDB(searchVal, setIsFetching, setResults);
-    }, [searchVal]);
+  // states
+  const [searchVal, setSearchVal] = useState<string>();
+  const [results, setResults] = useState<any[]>([]);
+  const [isResultsVisible, setIsResultsVisible] = useState<boolean>(false);
+  const [isFetching, setIsFetching] = useState(false);
 
-    console.log(results);
-    
-    const displayedResults = results.slice(0, 4); // Take the top 4 results
-    
-    return (
+  useEffect(() => {
+    fetchDataFromDB(searchVal, setIsFetching, setResults);
+  }, [searchVal]);
+
+  console.log(results);
+
+  const displayedResults = results.length != 0 && results.length <= 4 
+  ? results
+  : results.slice(0, 4); // Take the top 4 results
+
+  console.log(displayedResults);
+
+  return (
     <Search>
-        <SearchIconWrapper>
-            <SearchIcon />
-        </SearchIconWrapper>
-        <StyledInputBase
+      <SearchIconWrapper>
+        <SearchIcon />
+      </SearchIconWrapper>
+      <StyledInputBase
         placeholder="Search…"
         inputProps={{ "aria-label": "search" }}
         value={searchVal || ""}
@@ -75,74 +96,79 @@ function SearchBar() {
             }
         }}
         */
-        />
+      />
 
-        {isFetching && (
+      {isFetching && (
         <LinearProgress
-            color="secondary"
-            sx={{
+          color="secondary"
+          sx={{
             backgroundColor: "lightblue",
             position: "absolute",
             top: "100%",
             left: 0,
             width: "100%",
             zIndex: 2,
-            }}
+          }}
         />
-        )}
+      )}
 
-        {isResultsVisible && displayedResults.length > 0 && (
+      {isResultsVisible && displayedResults.length > 0 && (
         <Dropdown>
-          {displayedResults.map((result) => (
-            <DropdownItem key={result.id}>{result.name}</DropdownItem>
-          ))}
+          {displayedResults.map((item: any) => {
+            return (
+              // <DropdownItem key={item.id}>{item.name}</DropdownItem>
+              <Link href={"/pages/details/" + item.id} key={item.id}>
+                <DropDownItem item={item} />
+              </Link>
+            );
+          })}
         </Dropdown>
       )}
     </Search>
-    );
+  );
 }
 
 const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "auto",
-    },
-  }));
-  
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    width: "auto",
+  },
 }));
-  
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "inherit",
-    [theme.breakpoints.down("md")]: {
-        display: "flex",
+  color: "inherit",
+  [theme.breakpoints.down("md")]: {
+    display: "flex",
+  },
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
+      },
     },
-    "& .MuiInputBase-input": {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create("width"),
-        width: "100%",
-        [theme.breakpoints.up("md")]: {
-        width: "12ch",
-        "&:focus": {
-            width: "20ch",
-        },
-        },
-    },
+  },
 }));
 
 const Dropdown = styled("div")(({ theme }) => ({
@@ -165,6 +191,5 @@ const DropdownItem = styled("div")(({ theme }) => ({
     backgroundColor: theme.palette.action.hover,
   },
 }));
-
 
 export default SearchBar;
