@@ -2,7 +2,6 @@
 
 import firebase_app from "../firebase/config";
 import { collection, doc, getDoc, getDocs, setDoc, getFirestore, query, where } from "firebase/firestore";
-import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -102,7 +101,7 @@ function SearchBar() {
       {isResultsVisible && displayedResults.length > 0 && (
         <Dropdown>
           {displayedResults.map((item: any) => (
-            <DropDownItem item = {item}/>
+            <DropDownItem item = {item} />
           ))}
         </Dropdown>
       )}
