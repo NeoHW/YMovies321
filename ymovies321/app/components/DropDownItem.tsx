@@ -4,8 +4,8 @@ import { Typography } from "@mui/material";
 import moment from "moment";
 
 const DropDownItemContent = styled("div")({
-  display: "flex",
-  flexDirection: "column",
+    display: "flex",
+    alignItems: "center",
 });
 
 const DropdownItem = styled("div")(({ theme }) => ({
@@ -16,20 +16,26 @@ const DropdownItem = styled("div")(({ theme }) => ({
     },
 }));
 
+const ImageWrapper = styled("div")({
+    marginRight: "16px", // Add margin to create space between the image and text
+});
+
 const DropDownItem = ({ item }: { item: any }) => {
 
     return (
         <Link href={"/pages/details/" + item.id} key={item.id}>
             <DropdownItem>
                 <DropDownItemContent>
-                    <img
-                        src={item.poster_image
-                            ? `https://image.tmdb.org/t/p/w220_and_h330_face${item.poster_image}`
-                            : "../images/no-image-available.png"}
-                        width={64}
-                        height={64}
-                        alt={item.name}
-                    />
+                    <ImageWrapper>
+                        <img
+                            src={item.poster_image
+                                ? `https://image.tmdb.org/t/p/w220_and_h330_face${item.poster_image}`
+                                : "../images/no-image-available.png"}
+                            width={64}
+                            height={64}
+                            alt={item.name}
+                        />
+                    </ImageWrapper>
                     <div>
                         <Typography sx={{ color: "#000000" }} variant="subtitle2">
                             {item.name}
