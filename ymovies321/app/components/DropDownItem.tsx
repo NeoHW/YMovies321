@@ -20,10 +20,18 @@ const ImageWrapper = styled("div")({
     marginRight: "16px", // Add margin to create space between the image and text
 });
 
-const DropDownItem = ({ item }: { item: any }) => {
+
+
+const DropDownItem = ({ item, onClick}: { item: any; onClick:() => void } ) => {
+    const handleItemClick = () => {
+        if (onClick) {
+            onClick();
+        }
+        // Add any other logic or actions you want to perform when the item is clicked
+    };
 
     return (
-        <Link href={"/pages/details/" + item.id} key={item.id}>
+        <Link href={"/pages/details/" + item.id} key={item.id} onClick={handleItemClick}>
             <DropdownItem>
                 <DropDownItemContent>
                     <ImageWrapper>
