@@ -98,7 +98,7 @@ function SearchBar() {
         />
       )}
 
-      {isResultsVisible && displayedResults.length > 0 && (
+      {displayedResults.length > 0 && (
         <Dropdown>
           {displayedResults.map((item: any) => (
             <DropDownItem item = {item} />
