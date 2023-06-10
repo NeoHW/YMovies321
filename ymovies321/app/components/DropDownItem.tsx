@@ -22,16 +22,10 @@ const ImageWrapper = styled("div")({
 
 
 
-const DropDownItem = ({ item, onClick}: { item: any; onClick:() => void } ) => {
-    const handleItemClick = () => {
-        if (onClick) {
-            onClick();
-        }
-        // Add any other logic or actions you want to perform when the item is clicked
-    };
+const DropDownItem = ({ item }: { item: any } ) => {
 
     return (
-        <Link href={"/pages/details/" + item.id} key={item.id} onClick={handleItemClick}>
+        <Link href={"/pages/details/" + item.id} key={item.id} >
             <DropdownItem>
                 <DropDownItemContent>
                     <ImageWrapper>
