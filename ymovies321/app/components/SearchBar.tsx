@@ -28,7 +28,7 @@ async function fetchDataFromDB( searchVal: string | undefined, setIsFetching: (i
     );
 
     const querySnapshot = await getDocs(q);
-    console.log(querySnapshot);
+    // console.log(querySnapshot);
 
     const fetchedResults: any[] = [];
     querySnapshot.forEach((doc) => {
@@ -51,7 +51,7 @@ function SearchBar() {
 
   useEffect(() => {
     fetchDataFromDB(searchVal, setIsFetching, setResults);
-    console.log(results);
+    // console.log(results);
   }, [searchVal]);
 
   //console.log(results);

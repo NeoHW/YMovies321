@@ -12,8 +12,9 @@ import moment from "moment";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Reviews from "../../../components/ReviewForm";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import Navbar from "../../../components/Navbar";
+import { addToWatchlist, removeFromWatchlist, isMovieInWatchlist } from '../../../authContext/userDatabase';
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
@@ -63,12 +64,21 @@ async function fetchMovieDataAPI(movieId: string | null) {
     .then(response => response.json());
 }
 
+async function checkMovie(user, movieId) {
+  console.log("checkMovie");
+  // isMovieInWatchlist(user, movieId).then((res) => {return res;});
+}
+
 
 function Details({ user, data }: { user: User | null | undefined; data: any }) {
   // getting URL path
   const pathName = usePathname();
 
   const movieId = extractIdFromPath(pathName);
+
+  const [inWatchlist, setInWatchlist] = useState(false);
+  isMovieInWatchlist(user, movieId).then(res => setInWatchlist(res));
+
 
   return (
     <div>
@@ -78,6 +88,32 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
         nav={"Home"}
       />
       <h2 className="text-xl font-bold">Movie details here</h2>
+
+      {inWatchlist ? (<Button
+        variant="contained"
+        color="info"
+        onClick={() => {
+          removeFromWatchlist(user, movieId).then(() => {
+            setInWatchlist(false);
+            console.log(inWatchlist);
+          })
+
+        }}
+      > remove from watchlist
+      </Button>) : (<Button
+        variant="outlined"
+        onClick={() => {
+          addToWatchlist(user, movieId).then(() => {          
+            setInWatchlist(true);
+            console.log(inWatchlist);});
+        }}
+      >
+        add to watch list
+      </Button>)}
+      
+
+      
+
       <Reviews movieId={movieId} />
     </div>
   );
