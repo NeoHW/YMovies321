@@ -3,14 +3,14 @@ import firebase_app from "../firebase/config";
 import { auth } from "./auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import {Button} from "@mui/material";
+import { Button } from "@mui/material";
 
 const db = getFirestore(firebase_app);
 
 
 export async function addUserToDB(user) {
     console.log("adding user")
-    if ((await findUser(user)).empty) {
+    if ((await findUser(user)).size == 0) {
         try {
             const docRef = await setDoc(doc(db, "users", user.email), {
                 displayName: user.displayName,
@@ -26,6 +26,7 @@ export async function addUserToDB(user) {
 }
 
 export async function findUser(user) {
+
     console.log("finding user");
 
     const usersRef = collection(db, "users");
@@ -33,7 +34,7 @@ export async function findUser(user) {
 
     const querySnapshot = await getDocs(q);
     // console.log(querySnapshot);
-    console.log("found user")
+    // console.log("found user")
     return querySnapshot;
 }
 
@@ -72,7 +73,7 @@ export async function addToWatchlist(user, movieId) {
         })
     }
 
-    console.log("added to watchlist")
+    // console.log("added to watchlist")
 }
 
 export async function removeFromWatchlist(user, movieId) {
@@ -95,7 +96,27 @@ export async function removeFromWatchlist(user, movieId) {
             watchlist: array
         })
     }
-    console.log("removed from watchlist")
+    // console.log("removed from watchlist")
+}
+
+export async function getWatchlist(user) {
+    const userRes = await findUser(user);
+
+    if (userRes.size > 0) {
+        let id = "";
+        let array = [];
+        userRes.forEach(doc => {
+            id = doc.id;
+            array = doc.data()["watchlist"];
+        })
+
+        console.log(array);
+        return array;
+
+    } else {
+        return [];
+    }
+
 }
 
 // TEST COMPONENT
@@ -105,16 +126,16 @@ export default function UserDatabase() {
     return (<div>
         <Button
             variant="contained"
-        onClick = {() => {
-            addUserToDB(user);
-        }}> add user 
+            onClick={() => {
+                addUserToDB(user);
+            }}> add user
         </Button>
         <Button
             variant="contained"
-            onClick = {() => {
+            onClick={() => {
                 findUser(user);
             }}>
-             find user  
+            find user
         </Button>
         <Button
             variant="contained"
@@ -122,14 +143,14 @@ export default function UserDatabase() {
                 addToWatchlist(user, "6969")
             }}
         >
-            add to watch list 
+            add to watch list
         </Button>
         <Button
             variant="contained"
             onClick={() => {
                 removeFromWatchlist(user, "6969")
             }}
-        > remove from watchlist 
+        > remove from watchlist
         </Button>
         <Button
             onClick={() => {
@@ -139,6 +160,7 @@ export default function UserDatabase() {
         >
             in watchlist?
         </Button>
+        <Button onClick={() => getWatchlist(user)}>console log watchlist</Button>
 
     </div>)
 }

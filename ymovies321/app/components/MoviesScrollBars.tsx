@@ -82,7 +82,7 @@ function MoviesComponent() {
 
   return (
     <div>
-      <UserDatabase></UserDatabase>
+      {/* <UserDatabase></UserDatabase> */}
       <Navbar isSignedIn={user ? true : false} profile={user} nav="Home" />
       <Box sx={{ textAlign: "center" }}>
         <Typography variant="subtitle2" sx={{ fontSize: "32px", fontWeight: "400" }}>
