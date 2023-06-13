@@ -2,13 +2,13 @@ import { collection, doc, getDoc, getDocs, addDoc, setDoc, getFirestore, query, 
 import firebase_app from "../firebase/config";
 import { auth, signIn, signOut} from "./auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { GoogleAuthProvider, deleteUser, reauthenticateWithCredential } from "firebase/auth";
+import { GoogleAuthProvider, deleteUser, reauthenticateWithCredential, User } from "firebase/auth";
 import { Button } from "@mui/material";
 
 const db = getFirestore(firebase_app);
 
 
-export async function addUserToDB(user) {
+export async function addUserToDB(user: User) {
     if ((await findUser(user)).size == 0) {
         try {
             const docRef = await setDoc(doc(db, "users", user.uid), {
@@ -26,7 +26,7 @@ export async function addUserToDB(user) {
     }
 }
 
-export async function reauthenticateUser(user) {
+export async function reauthenticateUser(user: User) {
     const userCredential = await signIn();
     const authCredential = GoogleAuthProvider.credentialFromResult(userCredential);
 
@@ -43,7 +43,7 @@ export async function reauthenticateUser(user) {
 
 // note that after deleting a user, users data will still be shown in firestore
 // only after a new login, then data will be updated to a new blank state user
-export async function deleteUserFromDB(user) {
+export async function deleteUserFromDB(user: User) {
     await reauthenticateUser(user);
 
     deleteUser(user).then(() => {
@@ -54,7 +54,7 @@ export async function deleteUserFromDB(user) {
     });
 }
 
-export async function findUser(user) {
+export async function findUser(user: User) {
 
     console.log("finding user");
 
@@ -71,13 +71,13 @@ export async function findUser(user) {
     return querySnapshot;
 }
 
-export async function isMovieInWatchlist(user, movieId) {
+export async function isMovieInWatchlist(user: User, movieId : string) {
     const userRes = await findUser(user);
 
     if (userRes.size > 0) {
         // console.log("id is " + id);
         const id = user.uid;
-        let array = [];
+        let array: string[] = [];
         userRes.forEach(doc => {
             array = doc.data()["watchlist"];
             // console.log("watchlist is " + (doc.data()["watchlist"]));
@@ -87,12 +87,12 @@ export async function isMovieInWatchlist(user, movieId) {
     }
 }
 
-export async function addToWatchlist(user, movieId) {
+export async function addToWatchlist(user: User, movieId: string) {
     const userRes = await findUser(user);
 
     if (userRes.size > 0) {
         const id = user.uid;
-        let array = [];
+        let array: string[] = [];
         userRes.forEach(doc => {
             array = doc.data()["watchlist"];
             // console.log("JSON IS " + (doc.data()["email"]));
@@ -107,12 +107,12 @@ export async function addToWatchlist(user, movieId) {
     }
 }
 
-export async function removeFromWatchlist(user, movieId) {
+export async function removeFromWatchlist(user: User, movieId: string) {
     const userRes = await findUser(user);
 
     if (userRes.size > 0) {
         const id = user.uid;
-        let array = [];
+        let array: string[] = [];
         userRes.forEach(doc => {
             array = doc.data()["watchlist"];
         })
@@ -128,12 +128,12 @@ export async function removeFromWatchlist(user, movieId) {
     }
 }
 
-export async function getWatchlist(user) {
+export async function getWatchlist(user: User) {
     const userRes = await findUser(user);
 
     if (userRes.size > 0) {
         const id = user.uid;
-        let array = [];
+        let array: string[] = [];
         userRes.forEach(doc => {
             array = doc.data()["watchlist"];
         })
