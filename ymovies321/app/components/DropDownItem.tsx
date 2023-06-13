@@ -32,7 +32,7 @@ const DropDownItem = ({ item }: { item: any } ) => {
                         <img
                             src={item.poster_image
                                 ? `https://image.tmdb.org/t/p/w220_and_h330_face${item.poster_image}`
-                                : "../images/no-image-available.png"}
+                                : "/images/no-image-available.png"}
                             width={64}
                             height={64}
                             alt={item.name}

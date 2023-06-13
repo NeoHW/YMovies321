@@ -61,7 +61,7 @@ async function fetchMovieDataAPI(movieId: string | null) {
   }
 
   return fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`, options)
-    .then(response => response.json());
+    .then(response => response.json())
 }
 
 async function checkMovie(user, movieId) {
@@ -70,7 +70,7 @@ async function checkMovie(user, movieId) {
 }
 
 
-function Details({ user, data }: { user: User | null | undefined; data: any }) {
+function Details({ user, APIdata }: { user: User | null | undefined; APIdata: any }) {
   // getting URL path
   const pathName = usePathname();
 
@@ -79,6 +79,7 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
   const [inWatchlist, setInWatchlist] = useState(false);
   isMovieInWatchlist(user, movieId).then(res => setInWatchlist(res));
 
+  // console.log(APIdata);
 
   return (
     <div>
