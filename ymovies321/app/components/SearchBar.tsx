@@ -56,9 +56,9 @@ function SearchBar() {
 
   //console.log(results);
 
-  const displayedResults = results.length != 0 && results.length <= 4 
+  const displayedResults = results.length != 0 && results.length <= 5
   ? results
-  : results.slice(0, 4); // Take the top 4 results
+  : results.slice(0, 5); // Take the top 5 results
 
   // console.log(displayedResults);
 

@@ -59,6 +59,7 @@ export async function findUser(user) {
     console.log("finding user");
 
     const usersRef = collection(db, "users");
+    console.log("user.uid = " , user.uid);
     const q = query(usersRef, where("uid", "==", user.uid));
 
     const querySnapshot = await getDocs(q);
