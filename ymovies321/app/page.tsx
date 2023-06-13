@@ -20,7 +20,7 @@ export default function Page() {
 
     return (
       <div>
-        <UserDatabase />
+         { /* <UserDatabase /> */}
         <Navbar isSignedIn={user ? true : false} profile={user} nav="Home" />
         <MoviesScrollBars />
       </div>

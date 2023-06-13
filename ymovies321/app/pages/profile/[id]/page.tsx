@@ -4,9 +4,11 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from "../../../authContext/auth"
 import Navbar from '../../../components/Navbar';
 import Profile from '../../../components/Profile';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Button } from '@mui/material';
 import Image from 'mui-image';
 import { Typography } from '@mui/material';
+import { deleteUserFromDB } from "../../../authContext/userDatabase";
+import { signOut } from "../../../authContext/auth";
 
 export default function Page() {
     const [user] = useAuthState(auth);
@@ -32,8 +34,15 @@ export default function Page() {
                 </Grid>
                 <Grid item>Email: {user.email}</Grid>
             </Grid>
-
-            <Profile user={user} ></Profile>
+            <Button variant="contained">
+                <a onClick={async () => {
+                    if (user) {
+                        await deleteUserFromDB(user); // delete the user
+                    }
+                    window.location.href = "/"; // Redirect to "/"
+                }}>Delete Account</a>
+                </Button>
+            <Profile user={user} />
         </div>
     ) : <div></div>;
 }

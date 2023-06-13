@@ -1,7 +1,8 @@
 import { collection, doc, getDoc, getDocs, addDoc, setDoc, getFirestore, query, where, updateDoc } from "firebase/firestore";
 import firebase_app from "../firebase/config";
-import { auth } from "./auth";
+import { auth, signIn, signOut} from "./auth";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { GoogleAuthProvider, deleteUser, reauthenticateWithCredential } from "firebase/auth";
 import { Button } from "@mui/material";
 
 const db = getFirestore(firebase_app);
@@ -24,6 +25,34 @@ export async function addUserToDB(user) {
             console.error("Error adding document: ", e);
         }
     }
+}
+
+export async function reauthenticateUser(user) {
+    const userCredential = await signIn();
+    const authCredential = GoogleAuthProvider.credentialFromResult(userCredential);
+
+    if (authCredential === null) {
+        throw new Error("Reauthentication failed. Invalid credentials.");
+    }
+
+    reauthenticateWithCredential(user, authCredential).then(() => {
+        console.log("user reauthenticated")
+    }).catch((e) => {
+        console.error("Error reauthenticating user: ",  e);
+    });
+}
+
+// note that after deleting a user, users data will still be shown in firestore
+// only after a new login, then data will be updated to a new blank state user
+export async function deleteUserFromDB(user) {
+    await reauthenticateUser(user);
+
+    deleteUser(user).then(() => {
+        console.log("user deleted")
+        signOut();
+    }).catch((e) => {
+        console.error("Error deleting user: ",  e);
+    });
 }
 
 export async function findUser(user) {
@@ -161,7 +190,10 @@ export default function UserDatabase() {
         >
             in watchlist?
         </Button>
-        <Button onClick={() => getWatchlist(user)}>console log watchlist</Button>
+        <div>
+            <Button onClick={() => getWatchlist(user)}>console log watchlist</Button>
+            <Button variant="contained" onClick={() => deleteUserFromDB(user)}>delete current user</Button>
+        </div>
 
     </div>)
 }
