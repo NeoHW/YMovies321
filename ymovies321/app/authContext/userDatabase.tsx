@@ -11,16 +11,15 @@ const db = getFirestore(firebase_app);
 export async function addUserToDB(user) {
     if ((await findUser(user)).size == 0) {
         try {
-            const docRef = await setDoc(doc(db, "users", user.email), {
+            const docRef = await setDoc(doc(db, "users", user.uid), {
                 uid : user.uid,
                 displayName: user.displayName,
                 email: user.email,
                 photoURL: user.photoURL,
                 watchlist: [],
-                // reviews: ,
+                // map : movie id & score
             });
-            // console.log("Document written with ID: ", docRef.id);
-            console.log("added user with email " + user.email);
+            console.log("added user with uid & email " + user.uid + user.email);
         } catch (e) {
             console.error("Error adding document: ", e);
         }
@@ -63,8 +62,11 @@ export async function findUser(user) {
     const q = query(usersRef, where("uid", "==", user.uid));
 
     const querySnapshot = await getDocs(q);
+    
     // console.log(querySnapshot);
+    // console.log(querySnapshot.docs);
     // console.log("found user")
+    
     return querySnapshot;
 }
 
@@ -72,12 +74,13 @@ export async function isMovieInWatchlist(user, movieId) {
     const userRes = await findUser(user);
 
     if (userRes.size > 0) {
-        let id = "";
+        // console.log("id is " + id);
+        const id = user.uid;
         let array = [];
         userRes.forEach(doc => {
-            id = doc.id;
             array = doc.data()["watchlist"];
-            // console.log("JSON IS " + (doc.data()["email"]));
+            // console.log("watchlist is " + (doc.data()["watchlist"]));
+            // console.log("email is " + (doc.data()["email"]));
         })
         return array.includes(movieId);
     }
@@ -87,10 +90,9 @@ export async function addToWatchlist(user, movieId) {
     const userRes = await findUser(user);
 
     if (userRes.size > 0) {
-        let id = "";
+        const id = user.uid;
         let array = [];
         userRes.forEach(doc => {
-            id = doc.id;
             array = doc.data()["watchlist"];
             // console.log("JSON IS " + (doc.data()["email"]));
         })
@@ -102,51 +104,43 @@ export async function addToWatchlist(user, movieId) {
             watchlist: array
         })
     }
-
-    // console.log("added to watchlist")
 }
 
 export async function removeFromWatchlist(user, movieId) {
     const userRes = await findUser(user);
 
     if (userRes.size > 0) {
-        let id = "";
+        const id = user.uid;
         let array = [];
         userRes.forEach(doc => {
-            id = doc.id;
             array = doc.data()["watchlist"];
         })
 
-        const userRef = doc(db, "users", id);
         if (array.includes(movieId)) {
             array = array.filter(id => id != movieId);
         }
-
+        
+        const userRef = doc(db, "users", id);
         await updateDoc(userRef, {
             watchlist: array
         })
     }
-    // console.log("removed from watchlist")
 }
 
 export async function getWatchlist(user) {
     const userRes = await findUser(user);
 
     if (userRes.size > 0) {
-        let id = "";
+        const id = user.uid;
         let array = [];
         userRes.forEach(doc => {
-            id = doc.id;
             array = doc.data()["watchlist"];
         })
-
         console.log(array);
         return array;
-
     } else {
-        return [];
+        return null;
     }
-
 }
 
 // TEST COMPONENT

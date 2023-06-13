@@ -87,6 +87,7 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
         profile={user}
         nav={"Home"}
       />
+      
       <h2 className="text-xl font-bold">Movie details here</h2>
 
       {inWatchlist ? (<Button
@@ -111,37 +112,10 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
         add to watch list
       </Button>)}
       
-
-      
-
       <Reviews movieId={movieId} />
     </div>
   );
 }
-
-// export default function MovieDetails() {
-//   const [user] = useAuthState(auth);
-//   const [data, setData] = useState(null);
-
-//   // getting URL path
-//   const pathName = usePathname();
-
-//   useEffect(() => {
-//     const movieId = extractIdFromPath(pathName);
-
-//     return (
-//       <div>
-//         <Navbar
-//           isSignedIn={user ? true : false}
-//           profile={user}
-//           nav={"Home"}
-//         />
-//         <h2 className="text-xl font-bold">Movie details here</h2>
-//         <Reviews movieId={movieId} />
-//       </div>
-//     );
-//   });
-// }
 
 export default function MovieDetails() {
   const [user] = useAuthState(auth);
