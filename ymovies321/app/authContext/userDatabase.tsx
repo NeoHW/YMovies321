@@ -2,20 +2,21 @@ import { collection, doc, getDoc, getDocs, addDoc, setDoc, getFirestore, query, 
 import firebase_app from "../firebase/config";
 import { auth } from "./auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-
 import { Button } from "@mui/material";
 
 const db = getFirestore(firebase_app);
 
 
 export async function addUserToDB(user) {
-    console.log("adding user")
     if ((await findUser(user)).size == 0) {
         try {
             const docRef = await setDoc(doc(db, "users", user.email), {
+                uid : user.uid,
                 displayName: user.displayName,
                 email: user.email,
+                photoURL: user.photoURL,
                 watchlist: [],
+                // reviews: ,
             });
             // console.log("Document written with ID: ", docRef.id);
             console.log("added user with email " + user.email);
@@ -30,7 +31,7 @@ export async function findUser(user) {
     console.log("finding user");
 
     const usersRef = collection(db, "users");
-    const q = query(usersRef, where("email", "==", user.email));
+    const q = query(usersRef, where("uid", "==", user.uid));
 
     const querySnapshot = await getDocs(q);
     // console.log(querySnapshot);

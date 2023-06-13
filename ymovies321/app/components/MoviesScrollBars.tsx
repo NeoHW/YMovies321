@@ -10,7 +10,6 @@ import MovieCard from "./MovieCard";
 import Navbar from "./Navbar";
 import { auth, signIn , signOut} from "../authContext/auth";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import UserDatabase from "../authContext/userDatabase";
 
 
 // initialise cloud firestone and get ref to service
@@ -82,8 +81,6 @@ function MoviesComponent() {
 
   return (
     <div>
-      {/* <UserDatabase></UserDatabase> */}
-      <Navbar isSignedIn={user ? true : false} profile={user} nav="Home" />
       <Box sx={{ textAlign: "center" }}>
         <Typography variant="subtitle2" sx={{ fontSize: "32px", fontWeight: "400" }}>
           Showing In Cinemas

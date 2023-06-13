@@ -9,6 +9,8 @@ import { auth, signIn , signOut} from "./authContext/auth";
 import { UserCredential } from 'firebase/auth';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { Box, Typography } from "@mui/material";
+import UserDatabase from "./authContext/userDatabase";
+
 
 export default function Page() {
   { 
@@ -18,7 +20,8 @@ export default function Page() {
 
     return (
       <div>
-
+        <UserDatabase />
+        <Navbar isSignedIn={user ? true : false} profile={user} nav="Home" />
         <MoviesScrollBars />
       </div>
     );
