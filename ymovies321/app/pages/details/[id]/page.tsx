@@ -132,5 +132,5 @@ export default function MovieDetails() {
     });
   }, []);
 
-  return <Details user={user} data={data} />;
+  return <Details user={user} APIdata={data} />;
 }
