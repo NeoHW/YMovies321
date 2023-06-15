@@ -12,9 +12,12 @@ import moment from "moment";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Reviews from "../../../components/ReviewForm";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Grid, Button } from "@mui/material";
 import Navbar from "../../../components/Navbar";
 import { addToWatchlist, removeFromWatchlist, isMovieInWatchlist } from '../../../authContext/userDatabase';
+import MovieDetails from "../../../components/MovieDetails";
+import AddIcon from '@mui/icons-material/Add';
+import DoneIcon from '@mui/icons-material/Done';
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
@@ -49,8 +52,6 @@ function extractIdFromPath(pathName: string) {
 
 
 async function fetchMovieDataAPI(movieId: string | null) {
-  // const movieId = extractIdFromPath();
-
   const options = {
     method: 'GET',
     headers: {
@@ -64,10 +65,6 @@ async function fetchMovieDataAPI(movieId: string | null) {
     .then(response => response.json())
 }
 
-async function checkMovie(user, movieId) {
-  console.log("checkMovie");
-  // isMovieInWatchlist(user, movieId).then((res) => {return res;});
-}
 
 
 function Details({ user, APIdata }: { user: User | null | undefined; APIdata: any }) {
@@ -79,7 +76,7 @@ function Details({ user, APIdata }: { user: User | null | undefined; APIdata: an
   const [inWatchlist, setInWatchlist] = useState(false);
   isMovieInWatchlist(user, movieId).then(res => setInWatchlist(res));
 
-  // console.log(APIdata);
+
 
   return (
     <div>
@@ -88,37 +85,61 @@ function Details({ user, APIdata }: { user: User | null | undefined; APIdata: an
         profile={user}
         nav={"Home"}
       />
+
       
-      <h2 className="text-xl font-bold">Movie details here</h2>
 
-      {inWatchlist ? (<Button
-        variant="contained"
-        color="info"
-        onClick={() => {
-          removeFromWatchlist(user, movieId).then(() => {
-            setInWatchlist(false);
-            console.log(inWatchlist);
-          })
-
-        }}
-      > remove from watchlist
-      </Button>) : (<Button
-        variant="outlined"
-        onClick={() => {
-          addToWatchlist(user, movieId).then(() => {          
-            setInWatchlist(true);
-            console.log(inWatchlist);});
-        }}
+      <Grid
+        container
+        direction="column" alignItems="center"
+        sx={{ p: 2, justifyContent:'center'}}
+        spacing={3}
       >
-        add to watch list
-      </Button>)}
+        <Grid item><MovieDetails item={APIdata}></MovieDetails></Grid>
+        <Grid item>
+        {inWatchlist ? (<Button
+          variant="contained"
+          startIcon={<DoneIcon />}
+          color="info"
+          onClick={() => {
+            removeFromWatchlist(user, movieId).then(() => {
+              setInWatchlist(false);
+            })
+
+          }}
+        > remove from watchlist
+        </Button>) : (<Button
+          variant="outlined"
+          startIcon={<AddIcon />}
+          onClick={() => {
+            addToWatchlist(user, movieId).then(() => {
+              setInWatchlist(true);
+            });
+          }}
+        >
+          add to watchlist
+        </Button>)}
+        </Grid>
+        <Grid item><Reviews movieId={movieId} /></Grid>
       
-      <Reviews movieId={movieId} />
+      </Grid>
+
+
+      <div className="text-lg font-bold">
+        TODO:
+        <ol>
+          <li>1. Reviews component: </li>
+          <li>  a. Update user side for reviews map of  [movieId : review]</li>
+          <li>  b. Update movie side for reviews map of [uuid : review]</li>
+          <li>2. Ratings component: </li>
+          <li>  a. Update user side for ratings map of  [movieId : rating]</li>
+          <li>  b. Update movie side for overall rating score (number): calculate new score based on user input </li>
+        </ol>
+      </div>
     </div>
   );
 }
 
-export default function MovieDetails() {
+export default function ReturnMovieDetails() {
   const [user] = useAuthState(auth);
   const [data, setData] = useState(null);
 
@@ -132,5 +153,9 @@ export default function MovieDetails() {
     });
   }, []);
 
+<<<<<<< Updated upstream
   return <Details user={user} APIdata={data} />;
+=======
+  return data != null ? <Details user={user} APIdata={data} /> : <div></div>;
+>>>>>>> Stashed changes
 }
