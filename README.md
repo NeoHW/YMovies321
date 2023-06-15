@@ -63,6 +63,9 @@ Finalize documentation and user guides
 
 - Code Reviews: We have implemented a code review process to maintain code quality and catch potential issues early. We will be conducting regular code reviews among team members to provide feedback, identify bugs, improve code readability, and enforce coding standards.
 
+### Database UML diagram
+![UML diagram](/Ymovies321%20DB%20planning.png)
+
 ### Tech Stack
 
 - Front-end: React
