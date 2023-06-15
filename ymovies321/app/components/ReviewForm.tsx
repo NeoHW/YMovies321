@@ -8,7 +8,6 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 import Link from 'next/link';
 import { Fragment } from 'react'
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Box, Button, Typography } from "@mui/material";
 import { auth, signIn, signOut } from "../authContext/auth";
