@@ -18,28 +18,13 @@ import { isMovieInWatchlist } from "../../../authContext/isMovieInWatchlist";
 import { addToWatchlist } from "../../../authContext/addToWatchlist";
 import MovieDetails from "../../../components/MovieDetails";
 import ReviewForm from "../../../components/ReviewForm";
+import ReviewsFromDB from "../../../components/ReviewsFromDB";
 import AddIcon from '@mui/icons-material/Add';
 import DoneIcon from '@mui/icons-material/Done';
 
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
-
-
-// https://firebase.google.com/docs/firestore/query-data/get-data
-async function fetchDataFromDB() {
-  // getting data
-  const docRef = doc(db, "cities", "SF");
-  const docSnap = await getDoc(docRef);
-
-  if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-  } else {
-    // docSnap.data() will be undefined in this case
-    console.log("No such document!");
-  }
-}
-
 
 function extractIdFromPath(pathName: string) {
   // extracting out the id from URL path
@@ -52,8 +37,6 @@ function extractIdFromPath(pathName: string) {
 
   return null;
 }
-
-
 
 async function fetchMovieDataAPI(movieId: string | null) {
   const options = {
@@ -68,8 +51,6 @@ async function fetchMovieDataAPI(movieId: string | null) {
   return fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`, options)
     .then(response => response.json())
 }
-
-
 
 function Details({ user, APIdata }: { user: User | null | undefined; APIdata: any }) {
   // getting URL path
@@ -142,6 +123,7 @@ function Details({ user, APIdata }: { user: User | null | undefined; APIdata: an
       </div>
 
       <ReviewForm user={user} movieId={movieId} />
+      <ReviewsFromDB movieId={movieId} />
     </div>
   );
 }

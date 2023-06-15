@@ -23,9 +23,9 @@ import { Box, Typography } from "@mui/material";
 const db = getFirestore(firebase_app);
 
 // https://firebase.google.com/docs/firestore/query-data/get-data
-async function fetchDataFromDB() {
+async function getDocFromMovieDB(movieId : string) {
     // getting data
-    const docRef = doc(db, "cities", "SF");
+    const docRef = doc(db, "test_MoviesID_TMDB_database", movieId);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
@@ -37,7 +37,8 @@ async function fetchDataFromDB() {
 }
 
 
-export default function Reviews({ movieId } : { movieId : string | null }) {
+function Reviews({ movieId, reviewData} : { movieId : string | null; reviewData : any }) {
+
     return (
         <div>
             <Box>
@@ -48,3 +49,13 @@ export default function Reviews({ movieId } : { movieId : string | null }) {
         </div>
     )
 }
+
+export default function ReturnReviews({ movieId } : { movieId : string | null }) {
+  
+    useEffect(() => {
+        const doc = getDocFromMovieDB(movieId);
+        console.log(doc);
+    }, []);
+  
+    return doc != null ? <Reviews movieId={movieId} reviewData={doc} /> : <div></div>;
+  }
