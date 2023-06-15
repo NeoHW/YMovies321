@@ -27,7 +27,7 @@ export default function ReviewSection({ user, movieId } : { user: User | null | 
                             </textarea>
                         </div>
                         <button type="submit"
-                            className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                            className ="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
                             Post comment
                         </button>
                     </form>
@@ -36,12 +36,12 @@ export default function ReviewSection({ user, movieId } : { user: User | null | 
                             <div className="flex items-center">
                                 <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                                     <Image
-                                        className="mr-2 w-6 h-6 rounded-full"
+                                        className="mr-8 w-6 h-6 rounded-full"
                                         width={24}
                                         height={24}
                                         src={user ? user.photoURL : ""}
-                                        alt="Michael Gough"
-                                    />
+                                        alt={user.displayName}
+                                    />{user.displayName}
                                 </p>
                                 <p className="text-sm text-gray-600 dark:text-gray-400"><time 
                                         title="February 12th, 2022">Feb. 12, 2022</time></p>
@@ -88,16 +88,17 @@ export default function ReviewSection({ user, movieId } : { user: User | null | 
                             </button>
                         </div>
                     </article>
+                    {/* 
                     <article className="p-6 mb-6 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900">
                         <footer className="flex justify-between items-center mb-2">
                             <div className="flex items-center">
                                 <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                                     <Image
-                                        className="mr-2 w-6 h-6 rounded-full"
+                                        className="mr-8 w-6 h-6 rounded-full"
                                         width={24}
                                         src={user ? user.photoURL : ""}
-                                        alt="Jese Leos"
-                                    /> Jese Leos</p>
+                                        alt={user.displayName}
+                                    /> {user.displayName}</p>
                                 <p className="text-sm text-gray-600 dark:text-gray-400"><time 
                                         title="February 12th, 2022">Feb. 12, 2022</time></p>
                             </div>
@@ -112,7 +113,7 @@ export default function ReviewSection({ user, movieId } : { user: User | null | 
                                 </svg>
                                 <span className="sr-only">Comment settings</span>
                             </button>
-                            {/*Dropdown Menu */}
+                            !!!! {dropdown menu comment}
                             <div id="dropdownComment2"
                                 className="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                                 <ul className="py-1 text-sm text-gray-700 dark:text-gray-200"
@@ -141,16 +142,18 @@ export default function ReviewSection({ user, movieId } : { user: User | null | 
                             </button>
                         </div>
                     </article>
+                    */}
                     <article className="p-6 mb-6 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900">
                         <footer className="flex justify-between items-center mb-2">
                             <div className="flex items-center">
                                 <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                                     <Image
-                                        className="mr-2 w-6 h-6 rounded-full"
+                                        className="mr-8 w-6 h-6 rounded-full"
+                                        height={24}
                                         width={24}
                                         src={user ? user.photoURL : ""}
-                                        alt="Bonnie Green" 
-                                    /> Bonnie Green</p>
+                                        alt={user.displayName}
+                                    /> {user.displayName}</p>
                                 <p className="text-sm text-gray-600 dark:text-gray-400"><time 
                                         title="March 12th, 2022">Mar. 12, 2022</time></p>
                             </div>
@@ -199,11 +202,12 @@ export default function ReviewSection({ user, movieId } : { user: User | null | 
                             <div className="flex items-center">
                                 <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                                     <Image
-                                        className="mr-2 w-6 h-6 rounded-full"
+                                        className="mr-8 w-6 h-6 rounded-full"
                                         width={24}
+                                        height={24}
                                         src={user ? user.photoURL : ""}
-                                        alt="Helene Engels"
-                                    /> Helene Engels
+                                        alt={user.displayName}
+                                    /> {user.displayName}
                                 </p>
                                 <p className="text-sm text-gray-600 dark:text-gray-400"><time
                                         title="June 23rd, 2022">Jun. 23, 2022</time></p>
