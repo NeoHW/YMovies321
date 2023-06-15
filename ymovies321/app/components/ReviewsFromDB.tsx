@@ -17,30 +17,12 @@ import avatar from "../navigation/avatar.png";
 import { useRouter } from 'next/router';
 import { signIn } from "../authContext/auth"
 import { Box, Typography } from "@mui/material";
-
-
-// initialise cloud firestone and get ref to service
-const db = getFirestore(firebase_app);
-
-// https://firebase.google.com/docs/firestore/query-data/get-data
-async function getDocFromMovieDB(movieId : string) {
-    // getting data
-    const docRef = doc(db, "test_MoviesID_TMDB_database", movieId);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-    } else {
-    // docSnap.data() will be undefined in this case
-    console.log("No such document!");
-    }
-
-    return docSnap.data();
-}
+import getDocFromMovieDB from "../authContext/getDocfromMovieDB";
 
 
 function Reviews({ movieId, reviewData} : { movieId : string | null; reviewData : any }) {
-    
+    // console.log(reviewData)
+
     return (
         <div>
             <Box>
