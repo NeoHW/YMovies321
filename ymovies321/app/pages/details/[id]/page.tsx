@@ -19,6 +19,7 @@ import { addToWatchlist } from "../../../authContext/addToWatchlist";
 import MovieDetails from "../../../components/MovieDetails";
 import ReviewForm from "../../../components/ReviewForm";
 import ReviewsFromDB from "../../../components/ReviewsFromDB";
+import ReviewSection from "../../../components/ReviewSection";
 import AddIcon from '@mui/icons-material/Add';
 import DoneIcon from '@mui/icons-material/Done';
 
@@ -121,7 +122,8 @@ function Details({ user, APIdata }: { user: User | null | undefined; APIdata: an
           <li>  b. Update movie side for overall rating score (number): calculate new score based on user input </li>
         </ol>
       </div>
-
+      
+      <ReviewSection user={user} movieId={movieId}/>
       <ReviewForm user={user} movieId={movieId} />
       <ReviewsFromDB movieId={movieId} />
     </div>

@@ -1,7 +1,5 @@
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "./reauthenticateUser";
-import { signIn } from "./auth";
-
 
 export default async function getDocFromMovieDB(movieId : string) {
     // getting data

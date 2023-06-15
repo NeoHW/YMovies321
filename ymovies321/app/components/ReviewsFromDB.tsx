@@ -41,7 +41,7 @@ function Reviews({ movieId, reviewData} : { movieId : string | null; reviewData 
                 </h1>
             </Box>
         </div>
-    )
+    );
 }
 
 export default function ReturnReviews({ movieId } : { movieId : string | null }) {
@@ -55,4 +55,4 @@ export default function ReturnReviews({ movieId } : { movieId : string | null })
     }, []);
 
     return data != null ? <Reviews movieId={movieId} reviewData={data} /> : <div></div>;
-  }
+}
