@@ -3,11 +3,17 @@ import { auth } from '../authContext/auth';
 import { Typography, Rating } from '@mui/material';
 import { useAuthState } from "react-firebase-hooks/auth"
 import { MovieResult } from '../interfaces/TMDBapi';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import playerWriteNewMovieScore from '../authContext/playerWriteNewMovieScore';
+import movieWriteNewScore from '../authContext/movieWriteNewScore';
+
 
 export default function Score({ movie }: { movie: MovieResult }) {
     const [user] = useAuthState(auth);
+
+    // Annoyance: after voting, score does not stay at selected score after refreshing
     const [value, setValue] = useState(0);
+
 
     return (
         <div>
@@ -19,7 +25,8 @@ export default function Score({ movie }: { movie: MovieResult }) {
                 max={10}
                 onChange={(event, newValue) => {
                     setValue(newValue);
-                    console.log("changed rating to " + newValue)
+                    playerWriteNewMovieScore(user, movie.id, newValue)
+                    movieWriteNewScore(user, movie.id, newValue);
                 }}
             />
 

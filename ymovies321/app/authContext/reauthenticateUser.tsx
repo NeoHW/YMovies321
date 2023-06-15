@@ -11,6 +11,7 @@ import { findUser } from "./findUser";
 import { addToWatchlist } from "./addToWatchlist";
 import { isMovieInWatchlist } from "./isMovieInWatchlist";
 import { removeFromWatchlist } from "./removeFromWatchlist";
+import playerWriteNewMovieScore from "./playerWriteNewMovieScore";
 
 export const db = getFirestore(firebase_app);
 
@@ -74,6 +75,8 @@ export default function UserDatabase() {
             <Button onClick={() => getWatchlist(user)}>console log watchlist</Button>
             <Button variant="contained" onClick={() => deleteUserFromDB(user)}>delete current user</Button>
         </div>
+
+        <Button onClick={() => playerWriteNewMovieScore(6969, 2)}>playerWriteNewMovieScore</Button>
 
     </div>)
 }
