@@ -5,11 +5,6 @@ import { User, UserCredential } from "firebase/auth";
 import firebase_app from "../../firebase/config";
 import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
-import type { InferGetStaticPropsType, GetStaticProps } from 'next';
-import moment from "moment";
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import Reviews from "../../components/ReviewForm";
 import { Box, Typography } from "@mui/material";
 import Navbar from "../../components/Navbar";
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -43,8 +38,9 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
                 nav={"Watchlist"}
             />
             <Box>
+                TODO for lk!! make this into grid of movie cards
                 {data && data.map(item => (
-                    <div>{item}</div>
+                    <div key={item}>{item}</div>
                 ))}
             </Box>
         </div>
@@ -56,15 +52,17 @@ export default function Watchlist() {
     const [movieData, setMovieData] = useState([]);
 
     useEffect(() => {
-        getWatchlist(user).then((data) => {
-            // console.log("from useeffect " + data);
-            setMovieData(data);
-        }).catch((error) => {
-            console.error('Error fetching movie data:', error);
-        });
+        if (user != null) {
+            getWatchlist(user).then((data) => {
+                // console.log("from useeffect " + data);
+                setMovieData(data);
+            }).catch((error) => {
+                console.error('Error fetching movie data:', error);
+            });
+        }
     }, []);
 
-    if (movieData == null) {
+    if (user == null || movieData == null) {
         return <div>Loading...</div>;
     }
 

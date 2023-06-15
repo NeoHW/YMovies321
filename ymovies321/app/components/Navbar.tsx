@@ -37,9 +37,12 @@ function Navbar({ isSignedIn, profile, nav }: ButtonProps) {
 
     const [token, setToken] = useState("");
 
-    profile?.getIdTokenResult().then((t) => {
-        setToken(t.token);
-    });
+    useEffect(() => {
+        profile?.getIdTokenResult().then((t) => {
+            setToken(t.token);
+        });
+    }, [])
+
 
     const navigation = [
         { name: 'Home', href: '/', current: nav == "Home" },

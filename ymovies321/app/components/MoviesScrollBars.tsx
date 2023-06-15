@@ -8,7 +8,7 @@ import moment from "moment";
 import Link from 'next/link';
 import MovieCard from "./MovieCard";
 import Navbar from "./Navbar";
-import { auth, signIn , signOut} from "../authContext/auth";
+import { auth, signIn, signOut } from "../authContext/auth";
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 
@@ -77,7 +77,7 @@ function MoviesComponent() {
   }
 
   const { showingInCinemas, topRated } = movieData;
-    
+
 
   return (
     <div>
@@ -93,7 +93,7 @@ function MoviesComponent() {
       <Box className="container mx-auto flex overflow-x-scroll pb-5 scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-gray-300 scrollbar-track-sky-800" >
         <div className="flex flex-nowrap">
           {showingInCinemas.results && showingInCinemas.results.map((item: any) => (
-            <MovieCard item={item} />
+            <MovieCard key={item.id} item={item} />
           ))}
         </div>
       </Box>
@@ -113,7 +113,7 @@ function MoviesComponent() {
       <Box className="container mx-auto flex overflow-x-scroll pb-5 scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-gray-300 scrollbar-track-sky-800" >
         <div className="flex flex-nowrap">
           {topRated.results && topRated.results.map((item: any) => (
-            <MovieCard item={item} />
+            <MovieCard key={item.id} item={item} />
           ))}
         </div>
       </Box>

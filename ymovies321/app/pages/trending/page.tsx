@@ -49,10 +49,17 @@ function fetchMovieDataAPI() {
 }
 
 function Details({ user, data }: { user: User | null | undefined; data: any }) {
+    // console.log(data);
+
     const row1 = data.slice(0, 5);
     const row2 = data.slice(5, 10);
     const row3 = data.slice(10, 15);
-    const row4 = data.slice(15, 21);
+    const row4 = data.slice(15, 20);
+
+    // console.log(row1.map(i => i.original_title));
+    // console.log(row2.map(i => i.original_title));
+    // console.log(row3.map(i => i.original_title));
+    // console.log(row4.map(i => i.original_title));
     return (
         <div>
             <Navbar
@@ -73,7 +80,7 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
                     justifyContent="space-around"
                 >
                     {row1.map((item: any) => (
-                        <MovieCard item={item} />
+                        <MovieCard key={item.id} item={item} />
                     ))}
                 </Grid>
                 <Grid
@@ -81,7 +88,7 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
                     justifyContent="space-around"
                 >
                     {row2.map((item: any) => (
-                        <MovieCard item={item} />
+                        <MovieCard key={item.id} item={item} />
                     ))}
                 </Grid>
                 <Grid
@@ -89,7 +96,7 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
                     justifyContent="space-around"
                 >
                     {row3.map((item: any) => (
-                        <MovieCard item={item} />
+                        <MovieCard key={item.id} item={item} />
                     ))}
                 </Grid>
                 <Grid
@@ -97,7 +104,7 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
                     justifyContent="space-around"
                 >
                     {row4.map((item: any) => (
-                        <MovieCard item={item} />
+                        <MovieCard key={item.id} item={item} />
                     ))}
                 </Grid>
             </Grid>

@@ -56,10 +56,9 @@ export async function deleteUserFromDB(user: User) {
 
 export async function findUser(user: User) {
 
-    console.log("finding user");
+    // console.log("finding user " + user.displayName + " id " + user.uid);
 
     const usersRef = collection(db, "users");
-    console.log("user.uid = " , user.uid);
     const q = query(usersRef, where("uid", "==", user.uid));
 
     const querySnapshot = await getDocs(q);
@@ -76,7 +75,6 @@ export async function isMovieInWatchlist(user: User, movieId : string) {
 
     if (userRes.size > 0) {
         // console.log("id is " + id);
-        const id = user.uid;
         let array: string[] = [];
         userRes.forEach(doc => {
             array = doc.data()["watchlist"];
@@ -132,7 +130,6 @@ export async function getWatchlist(user: User) {
     const userRes = await findUser(user);
 
     if (userRes.size > 0) {
-        const id = user.uid;
         let array: string[] = [];
         userRes.forEach(doc => {
             array = doc.data()["watchlist"];
