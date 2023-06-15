@@ -1,7 +1,8 @@
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import firebase_app from "../firebase/config";
 import { useState } from 'react';
-import { addUserToDB, findUser } from "./userDatabase";
+import { findUser } from "./findUser";
+import { addUserToDB } from "./addUserToDB";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 

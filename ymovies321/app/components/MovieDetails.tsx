@@ -1,6 +1,7 @@
 import { Typography, Grid } from "@mui/material";
 import moment from "moment";
 import { MovieResult } from "../interfaces/TMDBapi";
+import Score from "./Score";
 
 
 
@@ -42,9 +43,8 @@ export default function MovieDetails({ item }: { item: MovieResult }) {
                     item
                     className="pl-1"
                 >
-                    <Typography sx={{ color: "#d8dbda" }} variant="subtitle1" >
-                        <p>{item.vote_average.toFixed(1)} / 10</p>
-                    </Typography>
+
+                    <Score movie={item}></Score>
                 </Grid>
                 
                     <Typography sx={{ color: "#ffffff" }} variant="subtitle1">

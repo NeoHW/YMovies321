@@ -9,7 +9,7 @@ import { auth, signIn , signOut} from "./authContext/auth";
 import { UserCredential } from 'firebase/auth';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { Box, Typography } from "@mui/material";
-import UserDatabase from "./authContext/userDatabase";
+import UserDatabase from "./authContext/reauthenticateUser";
 
 
 export default function Page() {
