@@ -153,9 +153,5 @@ export default function ReturnMovieDetails() {
     });
   }, []);
 
-<<<<<<< Updated upstream
-  return <Details user={user} APIdata={data} />;
-=======
   return data != null ? <Details user={user} APIdata={data} /> : <div></div>;
->>>>>>> Stashed changes
 }
