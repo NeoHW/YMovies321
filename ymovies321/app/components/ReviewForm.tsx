@@ -27,7 +27,8 @@ export default function Form({ user, movieId } : { user: User | null | undefined
           <Button
             variant="contained"
             onClick={() => {
-              addReviewToUserDB(user, movieId, "test review 2");
+              addReviewToUserDB(user, movieId, "test review 1");
+              addReviewToMovieDB(user, movieId, "test review 1");
             }}
           >
             add review

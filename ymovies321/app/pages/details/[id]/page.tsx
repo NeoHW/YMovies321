@@ -98,7 +98,9 @@ function Details({ user, APIdata }: { user: User | null | undefined; APIdata: an
         sx={{ p: 2, justifyContent:'center'}}
         spacing={3}
       >
-        <Grid item><MovieDetails item={APIdata}></MovieDetails></Grid>
+        <Grid item> 
+          <MovieDetails item={APIdata} />
+        </Grid>
         <Grid item>
         {inWatchlist ? (<Button
           variant="contained"

@@ -16,9 +16,9 @@ export async function addReviewToUserDB(user: User, movieId: string, review: str
         const userRef = doc(db, "users", id);
 
         await updateDoc(userRef, {
-            reviews : arrayUnion(
+            reviews_given : arrayUnion(
                 {
-                    movidId: movieId,
+                    movie_id: movieId,
                     review: review,
                 }
             )

@@ -1,25 +1,27 @@
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { User } from "firebase/auth";
 import { findUser } from "./findUser";
 import { db } from "./reauthenticateUser";
+import { signIn } from "./auth";
 
-
-export async function addReviewToMovieDB(user: User, movieId: string) {
+export async function addReviewToMovieDB(user: User, movieId: string, review: string) {
     const userRes = await findUser(user);
 
+    if (userRes == null) {
+        signIn();
+    }
+
     if (userRes != null && userRes.size > 0) {
-        const id = user.uid;
-        let array: string[] = [];
-        userRes.forEach(doc => {
-            array = doc.data()["watchlist"];
-            // console.log("JSON IS " + (doc.data()["email"]));
-        });
-        const userRef = doc(db, "users", id);
-        if (!array.includes(movieId)) {
-            array.push(movieId);
-        }
+        const uid = user.uid;
+        const userRef = doc(db, "test_MoviesID_TMDB_database", movieId);
+
         await updateDoc(userRef, {
-            watchlist: array
+            reviews : arrayUnion(
+                {
+                    uid: uid,
+                    review: review,
+                }
+            )
         });
     }
 }
