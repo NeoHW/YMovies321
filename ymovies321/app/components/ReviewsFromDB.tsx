@@ -34,11 +34,13 @@ async function getDocFromMovieDB(movieId : string) {
     // docSnap.data() will be undefined in this case
     console.log("No such document!");
     }
+
+    return docSnap.data();
 }
 
 
 function Reviews({ movieId, reviewData} : { movieId : string | null; reviewData : any }) {
-
+    
     return (
         <div>
             <Box>
@@ -51,11 +53,14 @@ function Reviews({ movieId, reviewData} : { movieId : string | null; reviewData 
 }
 
 export default function ReturnReviews({ movieId } : { movieId : string | null }) {
+
+    const [data, setData] = useState(null);
   
     useEffect(() => {
-        const doc = getDocFromMovieDB(movieId);
-        console.log(doc);
+        getDocFromMovieDB(movieId).then((movieData) => {
+        setData(movieData);
+      });
     }, []);
-  
-    return doc != null ? <Reviews movieId={movieId} reviewData={doc} /> : <div></div>;
+
+    return data != null ? <Reviews movieId={movieId} reviewData={data} /> : <div></div>;
   }
