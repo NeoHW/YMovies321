@@ -124,7 +124,6 @@ function Details({ user, APIdata }: { user: User | null | undefined; APIdata: an
       </div>
       
       <ReviewSection user={user} movieId={movieId}/>
-      <ReviewForm user={user} movieId={movieId} />
       <ReviewsFromDB movieId={movieId} />
     </div>
   );

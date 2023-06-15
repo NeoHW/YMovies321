@@ -8,29 +8,14 @@ import avatar from "../navigation/avatar.png";
 import { signIn } from "../authContext/auth"
 import { Box, Typography } from "@mui/material";
 import getDocFromMovieDB from "../authContext/getDocfromMovieDB";
-
+import ReviewForm from "./ReviewForm";
 
 export default function ReviewSection({ user, movieId } : { user: User | null | undefined; movieId : string | null }) {
     return (
         <div>
             <section className="bg-white dark:bg-gray-900 py-8 lg:py-16">
-            <div className="max-w-2xl mx-auto px-4">
-                    <div className="flex justify-between items-center mb-6">
-                        <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion </h2>
-                    </div>
-                    <form className="mb-6">
-                        <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                            <label htmlFor="comment" className="sr-only">Your comment</label>
-                            <textarea id="comment" rows="6"
-                                className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
-                                placeholder="Write a comment..." required>
-                            </textarea>
-                        </div>
-                        <button type="submit"
-                            className ="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-                            Post comment
-                        </button>
-                    </form>
+                <div className="max-w-2xl mx-auto px-4">
+                    <ReviewForm user={user} movieId={movieId} />
                     <article className="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
                         <footer className="flex justify-between items-center mb-2">
                             <div className="flex items-center">
@@ -40,8 +25,8 @@ export default function ReviewSection({ user, movieId } : { user: User | null | 
                                         width={24}
                                         height={24}
                                         src={user ? user.photoURL : ""}
-                                        alt={user.displayName}
-                                    />{user.displayName}
+                                        alt={user ? user.displayName : ""}
+                                    />{user ? user.displayName : ""}
                                 </p>
                                 <p className="text-sm text-gray-600 dark:text-gray-400"><time 
                                         title="February 12th, 2022">Feb. 12, 2022</time></p>
@@ -97,8 +82,8 @@ export default function ReviewSection({ user, movieId } : { user: User | null | 
                                         className="mr-8 w-6 h-6 rounded-full"
                                         width={24}
                                         src={user ? user.photoURL : ""}
-                                        alt={user.displayName}
-                                    /> {user.displayName}</p>
+                                        alt={user ? user.displayName : ""}
+                                    /> {user ? user.displayName : ""}</p>
                                 <p className="text-sm text-gray-600 dark:text-gray-400"><time 
                                         title="February 12th, 2022">Feb. 12, 2022</time></p>
                             </div>
@@ -152,8 +137,8 @@ export default function ReviewSection({ user, movieId } : { user: User | null | 
                                         height={24}
                                         width={24}
                                         src={user ? user.photoURL : ""}
-                                        alt={user.displayName}
-                                    /> {user.displayName}</p>
+                                        alt={user ? user.displayName : ""}
+                                    /> {user ? user.displayName : ""}</p>
                                 <p className="text-sm text-gray-600 dark:text-gray-400"><time 
                                         title="March 12th, 2022">Mar. 12, 2022</time></p>
                             </div>
@@ -206,8 +191,8 @@ export default function ReviewSection({ user, movieId } : { user: User | null | 
                                         width={24}
                                         height={24}
                                         src={user ? user.photoURL : ""}
-                                        alt={user.displayName}
-                                    /> {user.displayName}
+                                        alt={user ? user.displayName : ""}
+                                    /> {user ? user.displayName : ""}
                                 </p>
                                 <p className="text-sm text-gray-600 dark:text-gray-400"><time
                                         title="June 23rd, 2022">Jun. 23, 2022</time></p>
