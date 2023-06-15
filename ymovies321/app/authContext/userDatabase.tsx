@@ -9,9 +9,10 @@ const db = getFirestore(firebase_app);
 
 
 export async function addUserToDB(user: User) {
-    if ((await findUser(user)).size == 0) {
+    const userRes = await findUser(user);
+    if (userRes != null && userRes.size == 0) {
         try {
-            const docRef = await setDoc(doc(db, "users", user.uid), {
+            await setDoc(doc(db, "users", user.uid), {
                 uid : user.uid,
                 displayName: user.displayName,
                 email: user.email,
@@ -55,25 +56,27 @@ export async function deleteUserFromDB(user: User) {
 }
 
 export async function findUser(user: User) {
+    if (user != null) {
 
-    // console.log("finding user " + user.displayName + " id " + user.uid);
+        // console.log("finding user " + user.displayName + " id " + user.uid);
 
-    const usersRef = collection(db, "users");
-    const q = query(usersRef, where("uid", "==", user.uid));
+        const usersRef = collection(db, "users");
+        const q = query(usersRef, where("uid", "==", user.uid));
 
-    const querySnapshot = await getDocs(q);
-    
-    // console.log(querySnapshot);
-    // console.log(querySnapshot.docs);
-    // console.log("found user")
-    
-    return querySnapshot;
+        const querySnapshot = await getDocs(q);
+        
+        // console.log(querySnapshot);
+        // console.log(querySnapshot.docs);
+        // console.log("found user")
+        
+        return querySnapshot;
+    }
 }
 
 export async function isMovieInWatchlist(user: User, movieId : string) {
     const userRes = await findUser(user);
 
-    if (userRes.size > 0) {
+    if (userRes != null && userRes.size > 0) {
         // console.log("id is " + id);
         let array: string[] = [];
         userRes.forEach(doc => {
@@ -83,12 +86,13 @@ export async function isMovieInWatchlist(user: User, movieId : string) {
         })
         return array.includes(movieId);
     }
+    
 }
 
 export async function addToWatchlist(user: User, movieId: string) {
     const userRes = await findUser(user);
 
-    if (userRes.size > 0) {
+    if (userRes != null && userRes.size > 0) {
         const id = user.uid;
         let array: string[] = [];
         userRes.forEach(doc => {
@@ -108,7 +112,7 @@ export async function addToWatchlist(user: User, movieId: string) {
 export async function removeFromWatchlist(user: User, movieId: string) {
     const userRes = await findUser(user);
 
-    if (userRes.size > 0) {
+    if (userRes != null && userRes.size > 0) {
         const id = user.uid;
         let array: string[] = [];
         userRes.forEach(doc => {
@@ -129,7 +133,7 @@ export async function removeFromWatchlist(user: User, movieId: string) {
 export async function getWatchlist(user: User) {
     const userRes = await findUser(user);
 
-    if (userRes.size > 0) {
+    if (userRes != null && userRes.size > 0) {
         let array: string[] = [];
         userRes.forEach(doc => {
             array = doc.data()["watchlist"];
