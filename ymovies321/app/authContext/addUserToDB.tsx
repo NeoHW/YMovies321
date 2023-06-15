@@ -15,7 +15,6 @@ export async function addUserToDB(user: User) {
                 email: user.email,
                 photoURL: user.photoURL,
                 watchlist: [],
-                // map : movie id & score
             });
             console.log("added user with uid & email " + user.uid + user.email);
         } catch (e) {

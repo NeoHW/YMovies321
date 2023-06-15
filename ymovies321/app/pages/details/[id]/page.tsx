@@ -11,18 +11,20 @@ import type { InferGetStaticPropsType, GetStaticProps } from 'next';
 import moment from "moment";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Reviews from "../../../components/ReviewForm";
 import { Box, Typography, Grid, Button } from "@mui/material";
 import Navbar from "../../../components/Navbar";
 import { removeFromWatchlist } from "../../../authContext/removeFromWatchlist";
 import { isMovieInWatchlist } from "../../../authContext/isMovieInWatchlist";
 import { addToWatchlist } from "../../../authContext/addToWatchlist";
 import MovieDetails from "../../../components/MovieDetails";
+import ReviewForm from "../../../components/ReviewForm";
 import AddIcon from '@mui/icons-material/Add';
 import DoneIcon from '@mui/icons-material/Done';
 
+
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
+
 
 // https://firebase.google.com/docs/firestore/query-data/get-data
 async function fetchDataFromDB() {
@@ -121,7 +123,6 @@ function Details({ user, APIdata }: { user: User | null | undefined; APIdata: an
           add to watchlist
         </Button>)}
         </Grid>
-        <Grid item><Reviews movieId={movieId} /></Grid>
       
       </Grid>
 
@@ -137,6 +138,8 @@ function Details({ user, APIdata }: { user: User | null | undefined; APIdata: an
           <li>  b. Update movie side for overall rating score (number): calculate new score based on user input </li>
         </ol>
       </div>
+
+      <ReviewForm user={user} movieId={movieId} />
     </div>
   );
 }
