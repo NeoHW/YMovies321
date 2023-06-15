@@ -21,7 +21,17 @@ import getDocFromMovieDB from "../authContext/getDocfromMovieDB";
 
 
 function Reviews({ movieId, reviewData} : { movieId : string | null; reviewData : any }) {
-    // console.log(reviewData)
+    // console.log(reviewData.reviews);
+
+    if(reviewData.reviews) {
+        reviewData.reviews.map((item: any) => {
+            console.log(item.review);
+            console.log(item.uid);
+            console.log(item.name);
+            return null;
+        });
+    }
+    
 
     return (
         <div>
