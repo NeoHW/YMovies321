@@ -16,13 +16,12 @@ export default async function movieWriteNewScore(user, movieId: number, newScore
         const movieDocument = querySnapshot.docs[0];
         console.log(movieDocument.data())
         allRatings = movieDocument.userScores;
-
-        // allRatings[uid] = newScore;
-
-        // const movieRef = doc(db, "test_MoviesID_TMDB_database", movieDocument.id);
-        // await updateDoc(userRef, {
-        //     userScores: allRatings
-        // })
+        if (allRatings == null || allRatings == undefined) {
+            await updateDoc(doc(db, "test_MoviesID_TMDB_database", movieDocument.id), {userScores: {uid: newScore}});
+        } else {
+            await updateDoc(doc(db, "test_MoviesID_TMDB_database", movieDocument.id), {userScores: allRatings});
+        }
+        console.log(allRatings);
     }
 
     // if (user) {

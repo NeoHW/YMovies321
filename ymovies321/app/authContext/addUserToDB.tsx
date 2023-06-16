@@ -20,7 +20,7 @@ export async function addUserToDB(user: User) {
                 movieScores: {},
 
                 // movieId: review as a string
-                movieReviews: {}
+                reviews_given: {}
                 // map : movie id & score
             });
             console.log("added user with uid & email " + user.uid + user.email);
