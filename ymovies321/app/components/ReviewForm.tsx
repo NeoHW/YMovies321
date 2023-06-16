@@ -12,8 +12,8 @@ import { useRouter } from 'next/router';
 import { Box, Button, Typography } from "@mui/material";
 import { auth, signIn, signOut } from "../authContext/auth";
 import { findUser } from "../authContext/findUser";
-import { addReviewToMovieDB } from "../authContext/addReviewToMovieDB";
-import { addReviewToUserDB } from "../authContext/addReviewToUserDB";
+import { addReviewToMovieDB } from "../authContext/reviews/addReviewToMovieDB";
+import { addReviewToUserDB } from "../authContext/reviews/addReviewToUserDB";
 
 
 export default function Form({ user, movieId } : { user: User | null | undefined; movieId : string | null }) {
@@ -53,7 +53,7 @@ export default function Form({ user, movieId } : { user: User | null | undefined
           type="submit"
           className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-sky-700 rounded-lg focus:ring-4 focus:ring-sky-200 dark:focus:ring-sky-900 hover:bg-sky-800"
         >
-          Post comment
+          Review
         </button>
       </form>
     </div>

@@ -1,8 +1,8 @@
 import { doc, updateDoc, arrayUnion, Timestamp} from "firebase/firestore";
 import { User } from "firebase/auth";
-import { findUser } from "./findUser";
-import { db } from "./reauthenticateUser";
-import { signIn } from "./auth";
+import { findUser } from "../findUser";
+import { db } from "../reauthenticateUser";
+import { signIn } from "../auth";
 
 export async function addReviewToMovieDB(user: User, movieId: string, review: string) {
     const userRes = await findUser(user);
