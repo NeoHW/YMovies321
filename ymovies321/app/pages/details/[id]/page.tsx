@@ -109,19 +109,6 @@ function Details({ user, APIdata }: { user: User | null | undefined; APIdata: an
         </Grid>
       
       </Grid>
-
-
-      <div className="text-lg font-bold">
-        TODO:
-        <ol>
-          <li>1. Reviews component: </li>
-          <li>  a. Update user side for reviews map of  [movieId : review]</li>
-          <li>  b. Update movie side for reviews map of [uuid : review]</li>
-          <li>2. Ratings component: </li>
-          <li>  a. Update user side for ratings map of  [movieId : rating]</li>
-          <li>  b. Update movie side for overall rating score (number): calculate new score based on user input </li>
-        </ol>
-      </div>
       
       <ReviewSection user={user} movieId={movieId}/>
       
