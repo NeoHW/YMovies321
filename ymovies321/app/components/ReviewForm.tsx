@@ -16,35 +16,55 @@ import companyLogo from "../navigation/YMoviesLogo.jpg";
 import avatar from "../navigation/avatar.png";
 import { useRouter } from 'next/router';
 import { signIn } from "../authContext/auth"
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, TextField, Grid, Button } from "@mui/material";
 
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
 
 // https://firebase.google.com/docs/firestore/manage-data/add-data
-async function addDataToDB() {    
+async function addDataToDB() {
     // "cities" is the new collection's name
     const citiesRef = collection(db, "cities");
 
     await setDoc(doc(citiesRef, "SF"), {
         name: "San Francisco", state: "CA", country: "USA",
         capital: false, population: 860000,
-        regions: ["west_coast", "norcal"] }
+        regions: ["west_coast", "norcal"]
+    }
     );
 }
 
-export default function Reviews({ movieId } : { movieId : string | null }) {
+export default function Reviews({ movieId }: { movieId: string | null }) {
+    const [review, setReview] = useState("");
+
     return (
-        <div>
+        <Grid
+        container
+        alignItems="center"
+        justifyContent="center"
+        >
             <Box>
                 <h1>
-                    input review form {movieId}
+                    Write a review..
                 </h1>
             </Box>
-            <Box>
+            <TextField
+                variant="filled"
+                multiline
+                minRows={3}
+                maxRows={5}
+                sx={{margin:"10px", width: "300%", "bgcolor":"#363636"}}
+                inputProps={{"style": {color: "white"}}}
+                
+                />
+            <Button
+                onClick={() => {
+
+                }}
+            >
                 button to submit?
-            </Box>
-        </div>
+            </Button>
+        </Grid>
     )
 }

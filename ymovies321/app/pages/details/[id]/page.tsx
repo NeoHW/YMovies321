@@ -93,7 +93,7 @@ function Details({ user, APIdata }: { user: User | null | undefined; APIdata: an
       <Grid
         container
         direction="column" alignItems="center"
-        sx={{ p: 2, justifyContent:'center'}}
+        sx={{ p: 2}}
         spacing={3}
       >
         <Grid item><MovieDetails item={APIdata}></MovieDetails></Grid>
