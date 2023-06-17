@@ -10,7 +10,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { signIn, signOut } from "../authContext/auth"
-import { User, UserCredential } from 'firebase/auth';
+import { User, UserCredential, getIdToken } from 'firebase/auth';
 import { Box, Typography } from "@mui/material";
 import SearchBar from "./SearchBar";
 
@@ -38,11 +38,11 @@ function Navbar({ isSignedIn, profile, nav }: ButtonProps) {
     const [token, setToken] = useState("");
 
     useEffect(() => {
-        profile?.getIdTokenResult().then((t) => {
-            setToken(t.token);
-        });
+        //profile?.getIdTokenResult().then((t) => {
+        //    setToken(t.token);
+        //});
+        setToken(profile?.uid);
     }, [])
-
 
     const navigation = [
         { name: 'Home', href: '/', current: nav == "Home" },
