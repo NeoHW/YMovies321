@@ -11,21 +11,12 @@ import ReviewArticle from "./ReviewArticle";
 
 
 function Reviews({ user, movieId, reviewData} : {user: User | null | undefined; movieId : string | null; reviewData : any }) {
-    // console.log(reviewData.reviews);
-    if(reviewData.reviews) {
-        reviewData.reviews.map((item: any) => {
-            console.log(item.review);
-            console.log(item.uid);
-            console.log(item.name);
-            return null;
-        });
-    }
 
     return (
         <div>
 
             {reviewData.reviews ?  
-                (reviewData.reviews.map((indivReview: any) => (
+                (reviewData.reviews.reverse().map((indivReview: any) => (
                     <ReviewArticle user={user} movieId={movieId} reviewData={indivReview} />
                 )))
                 : 
