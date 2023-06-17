@@ -16,7 +16,7 @@ import { addReviewToMovieDB } from "../authContext/reviews/addReviewToMovieDB";
 import { addReviewToUserDB } from "../authContext/reviews/addReviewToUserDB";
 
 
-export default function Form({ user, movieId } : { user: User | null | undefined; movieId : string | null }) {
+export default function Form({ user, movieId, handleFormSubmit } : { user: User | null | undefined; movieId : string | null; handleFormSubmit: () => void }) {
   const [comment, setComment] = useState('');
 
   const handleCommentChange = (event) => {
@@ -29,6 +29,8 @@ export default function Form({ user, movieId } : { user: User | null | undefined
     addReviewToMovieDB(user, movieId, comment);
     // Reset the comment field after submission
     setComment('');
+    // Call the handleFormSubmit function passed from the parent component
+    handleFormSubmit();
   };
 
   return (
