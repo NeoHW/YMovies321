@@ -82,7 +82,7 @@ function MoviesComponent() {
 
   return (
     <div>
-      <UserDatabase></UserDatabase>
+      {/* <UserDatabase></UserDatabase> */}
       <Box sx={{ textAlign: "center" }}>
         <Typography variant="subtitle2" sx={{ fontSize: "32px", fontWeight: "400" }}>
           Showing In Cinemas

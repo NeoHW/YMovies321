@@ -5,23 +5,23 @@ import { db } from "./reauthenticateUser";
 
 
 export default async function movieWriteNewScore(user, movieId: number, newScore: number) {
-    const uid = user.uid;
+    const newRating: any = {};
+    newRating[user.uid] = newScore;
 
     const moviesRef = collection(db, "test_MoviesID_TMDB_database");
     const q = query(moviesRef, where("id", "==", movieId.toString()));
-    let allRatings = {};
 
     const querySnapshot = await getDocs(q);
     if (!querySnapshot.empty) {
-        const movieDocument = querySnapshot.docs[0];
-        console.log(movieDocument.data())
-        allRatings = movieDocument.userScores;
-        if (allRatings == null || allRatings == undefined) {
-            await updateDoc(doc(db, "test_MoviesID_TMDB_database", movieDocument.id), {userScores: {uid: newScore}});
+        const movieDocument = querySnapshot.docs[0].data();
+        const movieRef = doc(db, "test_MoviesID_TMDB_database", movieId.toString());
+        if (movieDocument["userScores"] == undefined) {
+            await updateDoc(movieRef, {userScores: newRating});
         } else {
-            await updateDoc(doc(db, "test_MoviesID_TMDB_database", movieDocument.id), {userScores: allRatings});
+            const allRatings = movieDocument["userScores"];
+            allRatings[user.uid] = newScore;
+            await updateDoc(movieRef, {userScores: allRatings});
         }
-        console.log(allRatings);
     }
 
     // if (user) {
