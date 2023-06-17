@@ -17,8 +17,8 @@ import readline from "readline";
 // Initialise Firestore and get a reference to the database
 initializeApp({
   credential: applicationDefault(),
-  databaseURL: 'https://orbital-ymovies321.firebaseio.com' //official database
-  // databaseURL: 'https://orbital-test.firebaseio.com' // test database
+  // databaseURL: 'https://orbital-ymovies321.firebaseio.com' //official database
+  databaseURL: 'https://orbital-test.firebaseio.com' // test database
 });
 
 const db = getFirestore();
@@ -27,7 +27,7 @@ const db = getFirestore();
 async function exportData() {
   // Read the downloaded file line by line
   const lineReader = readline.createInterface({
-    input: createReadStream("./full_movie_data.json"),
+    input: createReadStream("./full_movie_data_vote_count_10.json"),
   });
 
   // Process each line (JSON object) and store the movie ID in the database
@@ -36,8 +36,8 @@ async function exportData() {
     const movieId = movieData.id.toString(); // Convert to string as document ID in Firestore
     const movieTitle = movieData.title.toLowerCase();
 
-    const docRef = db.collection('MoviesID_TMDB_database').doc(movieId);
-    // const docRef = db.collection('Movies_test_DB_updated').doc(movieId);
+    const docRef = db.collection('test_MoviesID_TMDB_database').doc(movieId);
+    // const docRef = db.collection('MoviesID_TMDB_database').doc(movieId);
 
     try {
       await db.runTransaction(async (transaction) => {
@@ -70,30 +70,3 @@ async function exportData() {
 }
 
 exportData();
-
-// to use API to fetch using movieID
-async function fetchOtherDetailsByAPI(movieId) {
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZDI1NmMyZWVjNzhmNzk0OTg1ZWQwYjdjMzVjY2JiMCIsInN1YiI6IjY0NzFjZDM3YTE5OWE2MDExNmM2ZDk1ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MjVdbubEYW3r_vtxBOcq4zxOo6lteIShmCykxu1m8co'
-    }
-  };
-  
-  return fetch(`https://api.themoviedb.org/3/movie/${movieId}?append_to_response=images&language=en-US&include_image_language=en,null`, options)
-    .then(response => response.json())
-}
-
-// trying to check if data exists
-async function getData() {
-  const docRef = db.collection('MoviesID_TMDB_database').doc("10003");
-  const doc = await docRef.get();
-  if (!doc.exists) {
-    console.log('No such document!');
-  } else {
-    console.log('Document data:', doc.data());
-  }
-}
-
-// getData();
