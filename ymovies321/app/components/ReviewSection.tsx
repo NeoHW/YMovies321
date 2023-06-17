@@ -21,7 +21,7 @@ export default function ReviewSection({ user, movieId, formSubmitted, handleForm
                     <ReviewsFromDB user={user} movieId={movieId} key={formSubmitted ? 'refresh' : 'default'} />
 
                     <Button variant="contained" onClick={() => removeReviewFromMovieDB(user, movieId)}>
-                        remove review from DB
+                        remove review from DB (NOT DONE)
                     </Button>
                 </div>
             </section>
