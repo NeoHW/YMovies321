@@ -10,6 +10,8 @@ import getDocFromMovieDB from "../authContext/getDocfromMovieDB";
 
 export default function ReviewArticle({ user, movieId, reviewData} : {user: User | null | undefined; movieId : string | null; reviewData : any }) {
     
+    const date = reviewData.created.toDate().toDateString()
+
     return (
         <div>
             <article className="p-6 mb-6 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900">
@@ -25,7 +27,7 @@ export default function ReviewArticle({ user, movieId, reviewData} : {user: User
                             />{user ? user.displayName : ""}
                         </p>
                         <p className="text-sm text-gray-600 dark:text-gray-400"><time 
-                                title="February 12th, 2022">Feb. 12, 2022</time></p>
+                                title="date">{date}</time></p>
                     </div>
                     <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
                         className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -58,9 +60,7 @@ export default function ReviewArticle({ user, movieId, reviewData} : {user: User
                         </ul>
                     </div>
                 </footer>
-                <p className="text-gray-500 dark:text-gray-400">Very straight-to-point article. Really worth time reading. Thank you! But tools are just the
-                    instruments for the UX designers. The knowledge of the design tools are as important as the
-                    creation of the design strategy.</p>
+                <p className="text-gray-500 dark:text-gray-400">{reviewData.review}</p>
                 { /* (reply button )
                 <div className="flex items-center mt-4 space-x-4">
                     <button type="button"
