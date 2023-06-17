@@ -72,4 +72,6 @@ Finalize documentation and user guides
 
 - Back-end: Node.js
 
-- Database & deployment: Google Firebase
+- Database: Google Firebase
+
+- Deployment: Vercel

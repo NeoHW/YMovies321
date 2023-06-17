@@ -7,8 +7,6 @@ import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestor
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, signIn, signOut } from "../../../authContext/auth";
 import React, { useState, useEffect } from "react";
-import type { InferGetStaticPropsType, GetStaticProps } from 'next';
-import moment from "moment";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Box, Typography, Grid, Button } from "@mui/material";
@@ -17,8 +15,6 @@ import { removeFromWatchlist } from "../../../authContext/removeFromWatchlist";
 import { isMovieInWatchlist } from "../../../authContext/isMovieInWatchlist";
 import { addToWatchlist } from "../../../authContext/addToWatchlist";
 import MovieDetails from "../../../components/MovieDetails";
-import ReviewForm from "../../../components/ReviewForm";
-import ReviewsFromDB from "../../../components/ReviewsFromDB";
 import ReviewSection from "../../../components/ReviewSection";
 import AddIcon from '@mui/icons-material/Add';
 import DoneIcon from '@mui/icons-material/Done';

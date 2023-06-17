@@ -3,9 +3,6 @@ import moment from "moment";
 import { MovieResult } from "../interfaces/TMDBapi";
 import Score from "./Score";
 
-
-
-
 export default function MovieDetails({ item }: { item: MovieResult }) {
     return (
         <div>
