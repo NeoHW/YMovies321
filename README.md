@@ -119,6 +119,27 @@ Finalize documentation and user guides
 ### Database UML diagram
 ![UML diagram](/Ymovies321%20DB%20planning.png)
 
+### Design principles and patterns
+
+- Responsive Design: The application is designed to be responsive and adapt to different screen sizes and devices. This ensures that users can access and interact with the application effectively on desktops, laptops, tablets, and mobile devices.
+
+- Minimalistic and Intuitive UI: The user interface (UI) follows a minimalistic design approach, focusing on clarity, simplicity, and ease of use. Clear navigation, intuitive icons, and well-organized content help users quickly find and access the desired features and information.
+
+- Consistency and Visual Hierarchy: The application maintains a consistent design language, including color schemes, typography, and iconography. A clear visual hierarchy is established to guide users' attention and highlight important information, such as movie titles, ratings, and user reviews.
+
+- Feedback and Error Handling: Interactive elements provide visual feedback to indicate user actions and system responses. Error handling is implemented to provide informative and user-friendly error messages when necessary, helping users understand and resolve any issues that may occur.
+
+### Design Decisions
+
+- Card-based Layout: The movie listings, search results, and movie details pages are designed using a card-based layout. Each card represents a movie and displays key information, such as the movie poster, title, genre, and average rating. This layout provides a visually appealing and organized way to present movie information and encourages users to explore different movies.
+
+- Intuitive Navigation: The application utilizes a clear and intuitive navigation system. A top navigation bar provides access to different sections, such as Home, Search, Watchlist, and Profile. A drop-down menu is used to access additional features, including profiles and settings. This navigation structure ensures that users can easily navigate between different pages and sections of the application.
+
+- Ratings and Reviews: The user interface for rating and reviewing movies is designed to be straightforward and user-friendly. Users can provide ratings using a star-based system and write reviews in a text input field. Users would be able to see other users' reviews too!
+
+- Interactive Watchlist: The watchlist feature is designed to be interactive, allowing users to add and remove movies easily. A dedicated watchlist page displays the saved movies, and users can manage their watchlist by marking movies as watched or removing them from the list.
+
+
 ### SWE Practices
 - Agile methodology: As a student-led project, we are taking into consideration that the product we are developing is in an environment susceptible to change. Therefore, we are using the Scrum methodology, in which we are breaking our tasks into delivery cycles called sprints, which generally last from a week to two. This way, work would be incremental and focused on previous work.
 
