@@ -1,10 +1,10 @@
-<center><h1>NUS Orbital 2023 - Milestone 1</h1></center>
+<center><h1>NUS Orbital 2023</h1></center>
 
 ### Proposed Level of Achievement:
-Project Gemini
+Project Apollo
 
 ### Motivation:
-As university students, we have little free time to enjoy ourselves, and given the huge selection of movies available to us, we are spoilt for choice. We all know the feeling of browsing movies only to realise our free time was wasted, or even worse, sat through a boring movie.  
+As university students, we have little free time to enjoy ourselves, and given the huge selection of movies available to us, we are spoilt for choice. We all know the feeling of browsing movies only to realise our free time was wasted, or even worse, sitting through a boring movie.  
 Why not use a local movie review website which is frequented by many other moviegoers of similar ages?
 
 ### Aim:  
@@ -26,7 +26,7 @@ Conduct research on movie databases and APIs
 
 **Week 2-4 (16 May - 5 Jun):**  
 Implement user authentication and user account system  
-Set up the movie database and integrate with an API to retrieve movie data  
+Set up the movie database and integrate it with an API to retrieve movie data  
 
 **Evaluation Milestone 1 (29 May):**  
 Review progress and ensure development is on track  
@@ -56,17 +56,53 @@ Deploy the web application to a production environment
 Finalize documentation and user guides  
 
 
-### SWE Practices
-- Agile methodology: As a student-led project, we are taking into consideration that the product we are developing is in an environment susceptible to change. Therefore, we are using the Scrum methodology, in which we are breaking our tasks into delivery cycles called sprints, which generally lasts from a week to two. This way, work would be incremental and focused on previous work.
 
-- Version Control: We would be ustilising a version control system (Git) to manage source code changes. We took the time to ensure that both team members are familiar with version control best practices. We would be creating branches for feature developments and also be performing regular code reviews.
+### Use Cases and Features
+1. User Registration:
+    - Feature: Allow users to create an account by providing their email and password.
+    - Use Case: As a user, I want to register for an account so that I can access additional features and participate in the community.
 
-- Code Reviews: We have implemented a code review process to maintain code quality and catch potential issues early. We will be conducting regular code reviews among team members to provide feedback, identify bugs, improve code readability, and enforce coding standards.
+2. User Login:
+    - Feature: Enable users to log in to their accounts securely.
+    - Use Case: As a registered user, I want to log in to my account to access personalized content and preferences.
 
-### Database UML diagram
-![UML diagram](/Ymovies321%20DB%20planning.png)
+3. Movie Search:
+    - Feature: Provide a search functionality to allow users to search for movies by title or keyword.
+    - Use Case: As a user, I want to search for movies based on my interests or specific criteria.
 
-### Tech Stack
+4. Movie Details:
+    - Feature: Display detailed information about a selected movie, including synopsis, release date, genre, and cast.
+    - Use Case: As a user, I want to view comprehensive information about a movie before deciding to watch it.
+
+5. User Ratings and Reviews:
+    - Feature: Allow users to rate and write reviews for movies they have watched.
+    - Use Case: As a user, I want to share my opinions and experiences by rating and reviewing movies.
+
+6. Watchlist:
+    - Feature: Enable users to create and manage a watchlist of movies they plan to watch.
+    - Use Case: As a user, I want to save movies to my watchlist for future reference and easy access.
+
+7. Recommendations:
+    - Feature: Provide personalized movie recommendations based on user ratings and watch history.
+    - Use Case: As a user, I want to receive movie suggestions tailored to my preferences and interests.
+
+8. User Profile:
+    - Feature: Allow users to customize their profiles, including adding a profile picture and bio.
+    - Use Case: As a user, I want to personalize my profile and share information about myself with the community.
+
+### Flow and Architecture
+
+1. User Registration and Login: Users can register for an account using their Google account. Once registered, they can log in securely using their credentials.
+
+2. Movie Search and Details: Users can search for movies based on titles or keywords. The search results display a list of matching movies, and users can click on a movie to view its detailed information, including synopsis, release date, genre, and cast.
+
+3. User Ratings and Reviews: Users can rate and write reviews for movies they have watched. They can express their opinions, provide ratings, and share their thoughts with other users.
+
+4. Watchlist and Recommendations: Users can add movies to their watchlist to keep track of movies they plan to watch. The system provides personalized recommendations based on the user's ratings and watch history to suggest movies that align with their interests.
+
+5. User Profile and Playlists: Users can customize their profiles by adding a profile picture and bio.
+
+### Architecture & tech-stack
 
 - Front-end: React
 
@@ -75,3 +111,17 @@ Finalize documentation and user guides
 - Database: Google Firebase
 
 - Deployment: Vercel
+
+### Reasons for choosing React
+1. Component-Based Architecture: React follows a component-based architecture, which allows us to break down the user interface into smaller, reusable components. This modular approach promotes code reusability, maintainability, and scalability. We can create components for different sections of our application, such as movie lists, search bars, movie details, reviews, and user authentication. This modular structure will make it easier to develop and update different parts of the application independently.
+2. Virtual DOM: React utilizes a virtual DOM that efficiently updates and renders only the necessary components when changes occur. This approach minimizes the number of actual DOM manipulations, resulting in improved performance and faster rendering. In YMovies321, where users can interact with various components and update data dynamically, React's virtual DOM will enhance the overall user experience by providing smooth and responsive interactions.
+
+### Database UML diagram
+![UML diagram](/Ymovies321%20DB%20planning.png)
+
+### SWE Practices
+- Agile methodology: As a student-led project, we are taking into consideration that the product we are developing is in an environment susceptible to change. Therefore, we are using the Scrum methodology, in which we are breaking our tasks into delivery cycles called sprints, which generally last from a week to two. This way, work would be incremental and focused on previous work.
+
+- Version Control: We would be utilising a version control system (Git) to manage source code changes. We took the time to ensure that both team members are familiar with version control best practices. We would be creating branches for feature developments and also performing regular code reviews.
+
+- Code Reviews: We have implemented a code review process to maintain code quality and catch potential issues early. We will be conducting regular code reviews among team members to provide feedback, identify bugs, improve code readability, and enforce coding standards.
