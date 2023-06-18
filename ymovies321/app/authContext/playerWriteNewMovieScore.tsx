@@ -1,7 +1,7 @@
 import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./auth";
-import { findUser } from "./findUser";
+import { findUser } from "./users/findUser";
 import { db } from "./reauthenticateUser";
 
 

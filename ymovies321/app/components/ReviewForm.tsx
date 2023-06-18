@@ -11,18 +11,18 @@ import { Fragment } from 'react'
 import { useRouter } from 'next/router';
 import { Box, Typography, TextField, Grid, Button } from "@mui/material";
 import { auth, signIn, signOut } from "../authContext/auth";
-import { findUser } from "../authContext/findUser";
+import { findUser } from "../authContext/users/findUser";
 import { addReviewToMovieDB } from "../authContext/reviews/addReviewToMovieDB";
 import { addReviewToUserDB } from "../authContext/reviews/addReviewToUserDB";
 
 export default function Form({ user, movieId, handleFormSubmit } : { user: User | null | undefined; movieId : string | null; handleFormSubmit: () => void }) {
   const [comment, setComment] = useState('');
 
-  const handleCommentChange = (event) => {
+  const handleCommentChange = (event : any) => {
     setComment(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event : any) => {
     event.preventDefault();
     addReviewToUserDB(user, movieId, comment);
     addReviewToMovieDB(user, movieId, comment);

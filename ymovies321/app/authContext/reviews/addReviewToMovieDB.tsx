@@ -1,6 +1,6 @@
 import { doc, updateDoc, arrayUnion, Timestamp} from "firebase/firestore";
 import { User } from "firebase/auth";
-import { findUser } from "../findUser";
+import { findUser } from "../users/findUser";
 import { db } from "../reauthenticateUser";
 import { signIn } from "../auth";
 

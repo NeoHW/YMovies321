@@ -1,6 +1,6 @@
 import { doc, setDoc } from "firebase/firestore";
 import { User } from "firebase/auth";
-import { db } from "./reauthenticateUser";
+import { db } from "../reauthenticateUser";
 import { findUser } from "./findUser";
 
 
