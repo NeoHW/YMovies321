@@ -1,6 +1,6 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { User } from "firebase/auth";
-import { db } from "./reauthenticateUser";
+import { db } from "../reauthenticateUser";
 
 
 export async function findUser(user: User) {

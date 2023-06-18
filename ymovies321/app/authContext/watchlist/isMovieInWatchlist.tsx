@@ -1,5 +1,5 @@
 import { User } from "firebase/auth";
-import { findUser } from "./findUser";
+import { findUser } from "../users/findUser";
 
 
 export async function isMovieInWatchlist(user: User, movieId: string) {

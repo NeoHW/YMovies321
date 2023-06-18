@@ -9,7 +9,7 @@ import { Box, Typography } from "@mui/material";
 import Navbar from "../../components/Navbar";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, signIn, signOut } from "../../authContext/auth";
-import { getWatchlist } from "../../authContext/getWatchlist";
+import { getWatchlist } from "../../authContext/watchlist/getWatchlist";
 
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);

@@ -1,6 +1,6 @@
-import { signOut } from "./auth";
+import { signOut } from "../auth";
 import { deleteUser, User } from "firebase/auth";
-import { reauthenticateUser } from "./reauthenticateUser";
+import { reauthenticateUser } from "../reauthenticateUser";
 
 // note that after deleting a user, users data will still be shown in firestore
 // only after a new login, then data will be updated to a new blank state user

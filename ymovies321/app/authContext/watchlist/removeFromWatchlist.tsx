@@ -1,7 +1,7 @@
 import { doc, updateDoc } from "firebase/firestore";
 import { User } from "firebase/auth";
-import { findUser } from "./findUser";
-import { db } from "./reauthenticateUser";
+import { findUser } from "../users/findUser";
+import { db } from "../reauthenticateUser";
 
 
 export async function removeFromWatchlist(user: User, movieId: string) {

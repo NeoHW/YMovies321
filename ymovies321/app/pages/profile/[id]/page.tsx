@@ -7,7 +7,7 @@ import Profile from '../../../components/Profile';
 import { Box, Grid, Button } from '@mui/material';
 import Image from 'mui-image';
 import { Typography } from '@mui/material';
-import { deleteUserFromDB } from "../../../authContext/deleteUserFromDB";
+import { deleteUserFromDB } from "../../../authContext/users/deleteUserFromDB";
 import { signOut } from "../../../authContext/auth";
 
 export default function Page() {
