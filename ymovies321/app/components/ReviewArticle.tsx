@@ -22,9 +22,9 @@ export default function ReviewArticle({ user, movieId, reviewData} : {user: User
                                 className="mr-8 w-6 h-6 rounded-full"
                                 width={24}
                                 height={24}
-                                src={user ? user.photoURL : ""}
-                                alt={user ? user.displayName : ""}
-                            />{user ? user.displayName : ""}
+                                src={reviewData ? reviewData.photoURL : ""}
+                                alt={reviewData ? reviewData.name : ""}
+                            />{reviewData ? reviewData.name : ""}
                         </p>
                         <p className="text-sm text-gray-600 dark:text-gray-400"><time 
                                 title="date">{date}</time></p>
@@ -79,11 +79,11 @@ export default function ReviewArticle({ user, movieId, reviewData} : {user: User
                             <Image
                                 className="mr-8 w-6 h-6 rounded-full"
                                 width={24}
-                                src={user ? user.photoURL : ""}
-                                alt={user ? user.displayName : ""}
-                            /> {user ? user.displayName : ""}</p>
+                                src={reviewData ? reviewData.photoURL : ""}
+                                alt={reviewData ? reviewData.name : ""}
+                            /> {reviewData ? reviewData.name : ""}</p>
                         <p className="text-sm text-gray-600 dark:text-gray-400"><time 
-                                title="February 12th, 2022">Feb. 12, 2022</time></p>
+                                title="date">{date}</time></p>
                     </div>
                     <button id="dropdownComment2Button" data-dropdown-toggle="dropdownComment2"
                         className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -116,7 +116,7 @@ export default function ReviewArticle({ user, movieId, reviewData} : {user: User
                         </ul>
                     </div>
                 </footer>
-                <p className="text-gray-500 dark:text-gray-400">Much appreciated! Glad you liked it ☺️</p>
+                <p className="text-gray-500 dark:text-gray-400">{reviewData.review}</p>
                 <div className="flex items-center mt-4 space-x-4">
                     <button type="button"
                         className="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400">

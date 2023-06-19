@@ -16,6 +16,7 @@ export async function addReviewToMovieDB(user: User, movieId: string, review: st
                 {
                     uid: uid,
                     name: name,
+                    photoURL: user.photoURL,
                     review: review,
                     created: Timestamp.now(),
                 }
