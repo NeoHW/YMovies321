@@ -4,8 +4,8 @@ import { Typography, Rating } from '@mui/material';
 import { useAuthState } from "react-firebase-hooks/auth"
 import { MovieResult } from '../interfaces/TMDBapi';
 import { useState, useEffect } from 'react';
-import playerWriteNewMovieScore from '../authContext/playerWriteNewMovieScore';
-import movieWriteNewScore from '../authContext/movieWriteNewScore';
+import playerWriteNewMovieScore from '../authContext/scores/playerWriteNewMovieScore';
+import movieWriteNewScore from '../authContext/scores/movieWriteNewScore';
 
 
 export default function Score({ movie }: { movie: MovieResult }) {

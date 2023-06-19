@@ -10,7 +10,7 @@ import MovieCard from "./MovieCard";
 import Navbar from "./Navbar";
 import { auth, signIn, signOut } from "../authContext/auth";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import UserDatabase, { reauthenticateUser } from "../authContext/reauthenticateUser";
+import UserDatabase, { reauthenticateUser } from "../authContext/users/reauthenticateUser";
 
 
 // initialise cloud firestone and get ref to service

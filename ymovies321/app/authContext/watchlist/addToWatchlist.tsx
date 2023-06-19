@@ -1,7 +1,7 @@
 import { doc, updateDoc } from "firebase/firestore";
 import { User } from "firebase/auth";
 import { findUser } from "../users/findUser";
-import { db } from "../reauthenticateUser";
+import { db } from "../users/reauthenticateUser";
 
 
 export async function addToWatchlist(user: User, movieId: string) {

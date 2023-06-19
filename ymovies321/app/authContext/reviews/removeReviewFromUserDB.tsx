@@ -1,7 +1,7 @@
 import { doc, updateDoc, arrayUnion, Timestamp} from "firebase/firestore";
 import { User } from "firebase/auth";
 import { findUser } from "../users/findUser";
-import { db } from "../reauthenticateUser";
+import { db } from "../users/reauthenticateUser";
 import { signIn } from "../auth";
 import getDocFromMovieDB from "../getDocfromMovieDB";
 
