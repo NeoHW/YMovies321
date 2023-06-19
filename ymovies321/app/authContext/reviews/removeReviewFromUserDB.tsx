@@ -8,5 +8,8 @@ import getDocFromMovieDB from "../getDocfromMovieDB";
 export default async function removeReviewFromUserDB(movieId : string) {
     // getting data
     const data = getDocFromMovieDB(movieId);
-    
+    const reviewsArray = data.reviews;
+    console.log(reviewsArray);
+
+    return;
 }

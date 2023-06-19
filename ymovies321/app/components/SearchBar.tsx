@@ -1,7 +1,7 @@
 "use client";
 
 import firebase_app from "../firebase/config";
-import { collection, doc, getDoc, getDocs, setDoc, getFirestore, query, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, setDoc, getFirestore, query, where, orderBy, limit } from "firebase/firestore";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -24,11 +24,12 @@ async function fetchDataFromDB( searchVal: string | undefined, setIsFetching: (i
     const q = query(
       moviesRef,
       where("name", ">=", searchVal),
-      where("name", "<=", searchVal + "\uf8ff")
+      where("name", "<=", searchVal + "\uf8ff"),
+      orderBy("name"),
+      limit(5)
     );
 
     const querySnapshot = await getDocs(q);
-    // console.log(querySnapshot);
 
     const fetchedResults: any[] = [];
     querySnapshot.forEach((doc) => {
@@ -51,16 +52,7 @@ function SearchBar() {
 
   useEffect(() => {
     fetchDataFromDB(searchVal, setIsFetching, setResults);
-    // console.log(results);
   }, [searchVal]);
-
-  //console.log(results);
-
-  const displayedResults = results.length != 0 && results.length <= 5
-  ? results
-  : results.slice(0, 5); // Take the top 5 results
-
-  // console.log(displayedResults);
 
   return (
     <Search>
@@ -98,9 +90,9 @@ function SearchBar() {
         />
       )}
 
-      {displayedResults.length > 0 && (
+      {results.length > 0 && (
         <Dropdown>
-          {displayedResults.map((item: any) => (
+          {results.map((item: any) => (
             <DropDownItem item = {item} />
           ))}
         </Dropdown>
