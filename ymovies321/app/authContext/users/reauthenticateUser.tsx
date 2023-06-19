@@ -1,17 +1,17 @@
 import { getDoc, addDoc, getFirestore } from "firebase/firestore";
-import firebase_app from "../firebase/config";
-import { auth, signIn} from "./auth";
+import firebase_app from "../../firebase/config";
+import { auth, signIn} from "../auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { GoogleAuthProvider, reauthenticateWithCredential, User } from "firebase/auth";
 import { Button } from "@mui/material";
-import { getWatchlist } from "./watchlist/getWatchlist";
-import { addUserToDB } from "./users/addUserToDB";
-import { deleteUserFromDB } from "./users/deleteUserFromDB";
-import { findUser } from "./users/findUser";
-import { addToWatchlist } from "./watchlist/addToWatchlist";
-import { isMovieInWatchlist } from "./watchlist/isMovieInWatchlist";
-import { removeFromWatchlist } from "./watchlist/removeFromWatchlist";
-import playerWriteNewMovieScore from "./playerWriteNewMovieScore";
+import { getWatchlist } from "../watchlist/getWatchlist";
+import { addUserToDB } from "./addUserToDB";
+import { deleteUserFromDB } from "./deleteUserFromDB";
+import { findUser } from "./findUser";
+import { addToWatchlist } from "../watchlist/addToWatchlist";
+import { isMovieInWatchlist } from "../watchlist/isMovieInWatchlist";
+import { removeFromWatchlist } from "../watchlist/removeFromWatchlist";
+import playerWriteNewMovieScore from "../scores/playerWriteNewMovieScore";
 
 export const db = getFirestore(firebase_app);
 

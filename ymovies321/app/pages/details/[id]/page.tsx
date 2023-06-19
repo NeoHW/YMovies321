@@ -18,10 +18,10 @@ import MovieDetails from "../../../components/MovieDetails";
 import ReviewSection from "../../../components/ReviewSection";
 import AddIcon from '@mui/icons-material/Add';
 import DoneIcon from '@mui/icons-material/Done';
+import { MovieResult } from "../../../interfaces/TMDBapi";
+import getDocFromMovieDB from "../../../authContext/getDocfromMovieDB";
+import { addMovieToDB } from "../../../authContext/addMovieToDB";
 
-
-// initialise cloud firestone and get ref to service
-const db = getFirestore(firebase_app);
 
 function extractIdFromPath(pathName: string) {
   // extracting out the id from URL path
@@ -45,11 +45,24 @@ async function fetchMovieDataAPI(movieId: string | null) {
     }
   }
 
-  return fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`, options)
-    .then(response => response.json())
+  const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`, options)
+    .then(response => response.json());
+
+  // response is json data
+  console.log(response);
+
+  // adding data to firebase db if it does not exist
+  const docSnapData = await getDocFromMovieDB(movieId);
+  console.log(docSnapData);
+
+  if (docSnapData === undefined) {
+    addMovieToDB(movieId, response);
+  }
+
+  return response;
 }
 
-function Details({ user, APIdata }: { user: User | null | undefined; APIdata: any }) {
+function Details({ user, APIdata }: { user: User | null | undefined; APIdata: MovieResult }) {
   // getting URL path
   const pathName = usePathname();
 
