@@ -1,7 +1,6 @@
 // TODO !
 
 import { User, UserCredential } from "firebase/auth";
-import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase_app from "../firebase/config";
 import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
@@ -10,6 +9,7 @@ import Link from 'next/link';
 import { Fragment } from 'react'
 import { useRouter } from 'next/router';
 import { Box, Typography, TextField, Grid, Button } from "@mui/material";
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, signIn, signOut } from "../authContext/auth";
 import { findUser } from "../authContext/users/findUser";
 import { addReviewToMovieDB } from "../authContext/reviews/addReviewToMovieDB";
@@ -22,14 +22,41 @@ export default function Form({ user, movieId, handleFormSubmit } : { user: User 
     setComment(event.target.value);
   };
 
-  const handleSubmit = (event : any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
-    addReviewToUserDB(user, movieId, comment);
-    addReviewToMovieDB(user, movieId, comment);
-    // Reset the comment field after submission
-    setComment('');
-    // Call the handleFormSubmit function passed from the parent component
-    handleFormSubmit();
+    
+    if (user == null) {
+      try {
+        await signIn();
+
+        // Get the updated user object
+        const updatedUser = auth.currentUser;
+  
+        if (updatedUser) {
+          // Add the review after the user has signed in
+          addReviewToUserDB(updatedUser, movieId, comment);
+          addReviewToMovieDB(updatedUser, movieId, comment);
+  
+          // Reset the comment field after submission
+          setComment('');
+  
+          // Call the handleFormSubmit function passed from the parent component
+          handleFormSubmit();
+        }
+      } catch (error) {
+        console.log('Error signing in:', error);
+      }
+    } else {
+      // User is already signed in, add the review
+      addReviewToUserDB(user, movieId, comment);
+      addReviewToMovieDB(user, movieId, comment);
+  
+      // Reset the comment field after submission
+      setComment('');
+  
+      // Call the handleFormSubmit function passed from the parent component
+      handleFormSubmit();
+    }
   };
 
   return (

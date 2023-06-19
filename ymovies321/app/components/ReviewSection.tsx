@@ -17,12 +17,14 @@ export default function ReviewSection({ user, movieId, formSubmitted, handleForm
         <div>
             <section className="bg-white dark:bg-gray-900 py-8 lg:py-16">
                 <div className="max-w-2xl mx-auto px-4">
-                    <ReviewForm user={user} movieId={movieId} handleFormSubmit={handleFormSubmit}/>
-                    <ReviewsFromDB user={user} movieId={movieId} key={formSubmitted ? 'refresh' : 'default'} />
-
+                    
                     <Button variant="contained" onClick={() => removeReviewFromMovieDB(user, movieId)}>
                         remove review from DB (NOT DONE)
                     </Button>
+
+                    <ReviewForm user={user} movieId={movieId} handleFormSubmit={handleFormSubmit}/>
+
+                    <ReviewsFromDB user={user} movieId={movieId} key={formSubmitted ? 'refresh' : 'default'} />
                 </div>
             </section>
         </div>
