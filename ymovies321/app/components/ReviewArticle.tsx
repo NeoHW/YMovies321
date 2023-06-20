@@ -3,6 +3,7 @@ import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestor
 import React, { useState, useEffect } from "react";
 import { signIn } from "../authContext/auth"
 import { Box, Button, Typography, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Alert } from "@mui/material";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Image from 'mui-image';
 import removeReviewFromMovieDB from "../authContext/reviews/removeReviewFromMovieDB";
 import removeReviewFromUserDB from "../authContext/reviews/removeReviewFromUserDB";
@@ -146,22 +147,34 @@ export default function ReviewArticle({ user, movieId, handleRefresh, reviewData
             <Button variant="contained" onClick={() => handleDeleteReview()}>
                 remove review from both User DB and Movie DB
             </Button>
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">You can only remove your own reviews</DialogTitle>
-                <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                    You are not the original user who posted this comment. Only the original user can remove their own reviews.
-                </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                <Button onClick={handleClose}>OK</Button>
-                </DialogActions>
-            </Dialog>
+            <ThemeProvider theme={theme}>
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">You can only remove your own reviews</DialogTitle>
+                    <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        You are not the original user who posted this comment. Only the original user can remove their own reviews.
+                    </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                    <Button onClick={handleClose}>OK</Button>
+                    </DialogActions>
+                </Dialog>
+            </ThemeProvider>
         </div>
     );
 }
+
+
+const theme = createTheme({
+    palette: {
+        mode: 'dark',
+        background: {
+        paper: '#263238', // Adjust the color as per your preference
+        },
+    },
+});
