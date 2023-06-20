@@ -11,10 +11,8 @@ import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { blueGrey } from "@mui/material/colors";
 import DropDownItem from "./DropDownItem";
+import { db } from "../authContext/users/reauthenticateUser";
 
-// initialise cloud firestone and get ref to service
-const db = getFirestore(firebase_app);
-// const moviesRef = collection(db, "MoviesID_TMDB_database");
 const moviesRef = collection(db, "test_MoviesID_TMDB_database");
 
 async function fetchDataFromDB( searchVal: string | undefined, setIsFetching: (isFetching: boolean) => void, setResults: any) {

@@ -20,15 +20,6 @@ interface ButtonProps {
     nav: any;
 }
 
-// Nav for home
-// const nav = [
-//     { name: 'Home', href: '/', current: true },
-//     { name: 'Trending', href: '/pages/trending', current: false },
-// ]
-
-// to add in the pages for reviews and watchlist under href
-
-
 function classNames(...classes: unknown[]): string {
     return classes.filter(Boolean).join(' ');
 }
@@ -38,9 +29,6 @@ function Navbar({ isSignedIn, profile, nav }: ButtonProps) {
     const [token, setToken] = useState("");
 
     useEffect(() => {
-        //profile?.getIdTokenResult().then((t) => {
-        //    setToken(t.token);
-        //});
         setToken(profile?.uid);
     }, [])
 
@@ -123,11 +111,11 @@ function Navbar({ isSignedIn, profile, nav }: ButtonProps) {
                                 {isSignedIn ? (
                                     <span></span>
                                 )
-                                    : ( // Logout Button
+                                    : (
                                         <button
                                             type="button"
                                             className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                            onClick={signIn} // call signIn function on button click
+                                            onClick={signIn}
                                         >
                                             <span className="sr-only">Log In</span>
                                             Log In
@@ -182,7 +170,7 @@ function Navbar({ isSignedIn, profile, nav }: ButtonProps) {
                                                     <Menu.Item>
                                                         {({ active }) => (
                                                             <a
-                                                                href="#"
+                                                                href="#" // todo?
                                                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                             >
                                                                 Settings
