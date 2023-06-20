@@ -10,14 +10,14 @@ import getDocFromMovieDB from "../authContext/getDocfromMovieDB";
 import ReviewArticle from "./ReviewArticle";
 
 
-function Reviews({ user, movieId, reviewData} : {user: User | null | undefined; movieId : string | null; reviewData : any }) {
+function Reviews({ user, movieId, handleRefresh, reviewData} : {user: User | null | undefined; movieId : string | null; handleRefresh: () => void; reviewData : any }) {
 
     return (
         <div>
 
             {reviewData.reviews ?  
                 (reviewData.reviews.reverse().map((indivReview: any) => (
-                    <ReviewArticle user={user} movieId={movieId} reviewData={indivReview} />
+                    <ReviewArticle user={user} movieId={movieId} handleRefresh={handleRefresh} reviewData={indivReview} />
                 )))
                 : 
                 ( <span></span> )
@@ -27,7 +27,7 @@ function Reviews({ user, movieId, reviewData} : {user: User | null | undefined; 
     );
 }
 
-export default function ReturnReviews({ user, movieId } : { user: User | null | undefined; movieId : string | null }) {
+export default function ReturnReviews({ user, movieId, handleRefresh } : { user: User | null | undefined; movieId : string | null; handleRefresh: () => void }) {
 
     const [data, setData] = useState(null);
   
@@ -37,5 +37,5 @@ export default function ReturnReviews({ user, movieId } : { user: User | null | 
       });
     }, []);
 
-    return data != null ? <Reviews user ={user} movieId={movieId} reviewData={data} /> : <div></div>;
+    return data != null ? <Reviews user ={user} movieId={movieId} handleRefresh={handleRefresh} reviewData={data} /> : <div></div>;
 }

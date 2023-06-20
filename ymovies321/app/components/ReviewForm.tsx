@@ -1,13 +1,5 @@
-// TODO !
-
 import { User, UserCredential } from "firebase/auth";
-import firebase_app from "../firebase/config";
-import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
-import moment from "moment";
-import Link from 'next/link';
-import { Fragment } from 'react'
-import { useRouter } from 'next/router';
 import { Box, Typography, TextField, Grid, Button } from "@mui/material";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, signIn, signOut } from "../authContext/auth";
@@ -15,7 +7,7 @@ import { findUser } from "../authContext/users/findUser";
 import { addReviewToMovieDB } from "../authContext/reviews/addReviewToMovieDB";
 import { addReviewToUserDB } from "../authContext/reviews/addReviewToUserDB";
 
-export default function Form({ user, movieId, handleFormSubmit } : { user: User | null | undefined; movieId : string | null; handleFormSubmit: () => void }) {
+export default function Form({ user, movieId, handleRefresh } : { user: User | null | undefined; movieId : string | null; handleRefresh: () => void }) {
   const [comment, setComment] = useState('');
 
   const handleCommentChange = (event : any) => {
@@ -40,8 +32,8 @@ export default function Form({ user, movieId, handleFormSubmit } : { user: User 
           // Reset the comment field after submission
           setComment('');
   
-          // Call the handleFormSubmit function passed from the parent component
-          handleFormSubmit();
+          // Call the handleRefresh function passed from the parent component
+          handleRefresh();
         }
       } catch (error) {
         console.log('Error signing in:', error);
@@ -54,8 +46,8 @@ export default function Form({ user, movieId, handleFormSubmit } : { user: User 
       // Reset the comment field after submission
       setComment('');
   
-      // Call the handleFormSubmit function passed from the parent component
-      handleFormSubmit();
+      // Call the handleRefresh function passed from the parent component
+      handleRefresh();
     }
   };
 
@@ -85,17 +77,5 @@ export default function Form({ user, movieId, handleFormSubmit } : { user: User 
         </button>
       </form>
     </div>
-    );
+  );
 }
-
-/*
-<Button
-  variant="contained"
-  onClick={() => {
-    addReviewToUserDB(user, movieId, "test review 1");
-    addReviewToMovieDB(user, movieId, "test review with name and timestamp");
-  }}
->
-  add review
-</Button>
-*/

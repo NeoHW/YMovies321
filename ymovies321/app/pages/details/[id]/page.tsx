@@ -71,10 +71,10 @@ function Details({ user, APIdata }: { user: User | null | undefined; APIdata: Mo
   const [inWatchlist, setInWatchlist] = useState(false);
   isMovieInWatchlist(user, movieId).then(res => setInWatchlist(res));
 
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [refresh, setRefresh] = useState(false);
   
-  const handleFormSubmit = () => {
-    setFormSubmitted(!formSubmitted);
+  const handleRefresh = () => {
+    setRefresh(!refresh);
   };
 
   return (
@@ -123,7 +123,7 @@ function Details({ user, APIdata }: { user: User | null | undefined; APIdata: Mo
       
       </Grid>
       
-      <ReviewSection user={user} movieId={movieId} formSubmitted={formSubmitted} handleFormSubmit={handleFormSubmit}/>
+      <ReviewSection user={user} movieId={movieId} refresh={refresh} handleRefresh={handleRefresh}/>
       
     </div>
   );
