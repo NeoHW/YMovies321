@@ -4,9 +4,11 @@ import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestor
 import React, { useState, useEffect } from "react";
 import Link from 'next/link';
 import { signIn } from "../authContext/auth"
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import Image from 'mui-image';
 import getDocFromMovieDB from "../authContext/getDocfromMovieDB";
+import removeReviewFromMovieDB from "../authContext/reviews/removeReviewFromMovieDB";
+import removeReviewFromUserDB from "../authContext/reviews/removeReviewFromUserDB";
 
 export default function ReviewArticle({ user, movieId, reviewData} : {user: User | null | undefined; movieId : string | null; reviewData : any }) {
     
@@ -126,6 +128,12 @@ export default function ReviewArticle({ user, movieId, reviewData} : {user: User
                 </div>
             </article>
             */}
+            <Button variant="contained" onClick={() => removeReviewFromMovieDB(user, movieId, reviewData)}>
+                remove review from Movie DB
+            </Button>
+            <Button variant="contained" onClick={() => removeReviewFromUserDB(user, movieId, reviewData)}>
+                remove review from User DB
+            </Button>
         </div>
     );
 }
