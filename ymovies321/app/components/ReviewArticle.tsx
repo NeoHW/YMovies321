@@ -2,8 +2,7 @@ import { User, UserCredential } from "firebase/auth";
 import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
 import { signIn } from "../authContext/auth"
-import { Box, Button, Typography } from "@mui/material";
-import Alert from '@mui/material/Alert';
+import { Box, Button, Typography, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Alert } from "@mui/material";
 import Image from 'mui-image';
 import removeReviewFromMovieDB from "../authContext/reviews/removeReviewFromMovieDB";
 import removeReviewFromUserDB from "../authContext/reviews/removeReviewFromUserDB";
@@ -11,7 +10,7 @@ import removeReviewFromUserDB from "../authContext/reviews/removeReviewFromUserD
 export default function ReviewArticle({ user, movieId, handleRefresh, reviewData} : {user: User | null | undefined; movieId : string | null; handleRefresh: () => void; reviewData : any }) {
     
     const date = reviewData.created.toDate().toDateString();
-    const [showAlert, setShowAlert] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleDeleteReview = async () => {
         if (user?.uid == reviewData.uid) {
@@ -22,8 +21,12 @@ export default function ReviewArticle({ user, movieId, handleRefresh, reviewData
             // Call the handleRefresh function passed from the parent component
             handleRefresh();
         } else {
-            setShowAlert(true);
+            setOpen(true);
         }
+    };
+
+    const handleClose = () => {
+        setOpen(false);
     };
 
     return (
@@ -140,12 +143,25 @@ export default function ReviewArticle({ user, movieId, handleRefresh, reviewData
                 </div>
             </article>
             */}
-            {showAlert && (
-                <Alert severity="error" onClose={() => setShowAlert(false)}>You can only remove your own reviews</Alert>
-            )}
             <Button variant="contained" onClick={() => handleDeleteReview()}>
                 remove review from both User DB and Movie DB
             </Button>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">You can only remove your own reviews</DialogTitle>
+                <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                    You are not the original user who posted this comment. Only the original user can remove their own reviews.
+                </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={handleClose}>OK</Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }
