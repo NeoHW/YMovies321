@@ -10,7 +10,7 @@ import getDocFromMovieDB from "../authContext/getDocfromMovieDB";
 import removeReviewFromMovieDB from "../authContext/reviews/removeReviewFromMovieDB";
 import removeReviewFromUserDB from "../authContext/reviews/removeReviewFromUserDB";
 
-export default function ReviewArticle({ user, movieId, reviewData} : {user: User | null | undefined; movieId : string | null; reviewData : any }) {
+export default function ReviewArticle({ user, movieId, reviewData} : {user: User | null | undefined; movieId : string | null; handleRefresh: () => void; reviewData : any }) {
     
     const date = reviewData.created.toDate().toDateString()
 

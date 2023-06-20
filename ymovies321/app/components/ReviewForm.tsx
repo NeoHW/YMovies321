@@ -1,13 +1,5 @@
-// TODO !
-
 import { User, UserCredential } from "firebase/auth";
-import firebase_app from "../firebase/config";
-import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
-import moment from "moment";
-import Link from 'next/link';
-import { Fragment } from 'react'
-import { useRouter } from 'next/router';
 import { Box, Typography, TextField, Grid, Button } from "@mui/material";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, signIn, signOut } from "../authContext/auth";
@@ -85,17 +77,5 @@ export default function Form({ user, movieId, handleRefresh } : { user: User | n
         </button>
       </form>
     </div>
-    );
+  );
 }
-
-/*
-<Button
-  variant="contained"
-  onClick={() => {
-    addReviewToUserDB(user, movieId, "test review 1");
-    addReviewToMovieDB(user, movieId, "test review with name and timestamp");
-  }}
->
-  add review
-</Button>
-*/
