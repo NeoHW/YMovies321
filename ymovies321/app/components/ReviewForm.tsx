@@ -15,7 +15,7 @@ import { findUser } from "../authContext/users/findUser";
 import { addReviewToMovieDB } from "../authContext/reviews/addReviewToMovieDB";
 import { addReviewToUserDB } from "../authContext/reviews/addReviewToUserDB";
 
-export default function Form({ user, movieId, handleFormSubmit } : { user: User | null | undefined; movieId : string | null; handleFormSubmit: () => void }) {
+export default function Form({ user, movieId, handleRefresh } : { user: User | null | undefined; movieId : string | null; handleRefresh: () => void }) {
   const [comment, setComment] = useState('');
 
   const handleCommentChange = (event : any) => {
@@ -40,8 +40,8 @@ export default function Form({ user, movieId, handleFormSubmit } : { user: User 
           // Reset the comment field after submission
           setComment('');
   
-          // Call the handleFormSubmit function passed from the parent component
-          handleFormSubmit();
+          // Call the handleRefresh function passed from the parent component
+          handleRefresh();
         }
       } catch (error) {
         console.log('Error signing in:', error);
@@ -54,8 +54,8 @@ export default function Form({ user, movieId, handleFormSubmit } : { user: User 
       // Reset the comment field after submission
       setComment('');
   
-      // Call the handleFormSubmit function passed from the parent component
-      handleFormSubmit();
+      // Call the handleRefresh function passed from the parent component
+      handleRefresh();
     }
   };
 
