@@ -3,8 +3,8 @@ import { User } from "firebase/auth";
 import { db } from "./reauthenticateUser";
 
 
-export async function findUser(user: User) {
-    if (user != null) {
+export async function findUser(user: User | undefined | null) {
+    if (user != null && user != undefined) {
 
         // console.log("finding user " + user.displayName + " id " + user.uid);
         const usersRef = collection(db, "users");

@@ -10,11 +10,9 @@ import getDocFromMovieDB from "../authContext/getDocfromMovieDB";
 import ReviewForm from "./ReviewForm";
 import ReviewsFromDB from "./ReviewsFromDB";
 import removeReviewFromMovieDB from "../authContext/reviews/removeReviewFromMovieDB";
+import removeReviewFromUserDB from "../authContext/reviews/removeReviewFromUserDB";
 
-export default function ReviewSection({ user, movieId, formSubmitted, handleFormSubmit } : { user: User | null | undefined; movieId : string | null; formSubmitted : boolean; handleFormSubmit: () => void }) {
-
-    const [placeholder, setPlaceholder] = useState(null);
-
+export default function ReviewSection({ user, movieId, formSubmitted, handleFormSubmit } : { user: User | null | undefined; movieId : string; formSubmitted : boolean; handleFormSubmit: () => void }) {
     return (
         <div>
             <section className="bg-white dark:bg-gray-900 py-8 lg:py-16">
@@ -22,7 +20,7 @@ export default function ReviewSection({ user, movieId, formSubmitted, handleForm
                     
                     <Button variant="contained" onClick={() => {
                         removeReviewFromMovieDB(user, movieId);
-                        setPlaceholder(null);
+                        removeReviewFromUserDB(user, movieId);
                         }}>
                         remove review from DB (NOT DONE)
                     </Button>

@@ -6,13 +6,25 @@ import { signIn } from "../auth";
 import getDocFromMovieDB from "../getDocfromMovieDB";
 import { Box, Button, Typography } from "@mui/material";
 
-export default async function removeReviewFromMovieDB( user: User | null | undefined, movieId : string) {
+// removes the most recent review for a particular movie
+export default async function removeReviewFromMovieDB( user: User, movieId : string) {
     // getting data
     const data = await getDocFromMovieDB(movieId);
-    const reviewsArray = data?.reviews;
-    // console.log(reviewsArray);
+    const reviewsArray: any[] = data?.reviews;
+    let newArray: any[] = reviewsArray;
 
-    const newArray = reviewsArray.slice(0, reviewsArray.length - 1);
+    // console.log(reviewsArray);
+    for (let i = reviewsArray.length - 1; i >= 0; i--) {
+        const item = reviewsArray[i];
+        console.log("item", item.uid);
+        if (item.uid == user.uid) {
+            reviewsArray.splice(i, 1);
+            break;
+        }
+    }
+
+
+    // const newArray = reviewsArray.slice(0, reviewsArray.length - 1);
     // console.log("newArray", newArray);
 
     const moviesRef = collection(db, "test_MoviesID_TMDB_database");
@@ -22,7 +34,7 @@ export default async function removeReviewFromMovieDB( user: User | null | undef
     if (!querySnapshot.empty) {
         const movieRef = doc(db, "test_MoviesID_TMDB_database", movieId.toString());
 
-        await updateDoc(movieRef, {reviews: newArray});
+        await updateDoc(movieRef, {reviews: reviewsArray});
     }
 
     return;
