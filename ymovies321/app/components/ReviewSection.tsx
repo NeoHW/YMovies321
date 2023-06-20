@@ -22,7 +22,7 @@ export default function ReviewSection({ user, movieId, formSubmitted, handleForm
                         removeReviewFromMovieDB(user, movieId);
                         removeReviewFromUserDB(user, movieId);
                         }}>
-                        remove review from DB (NOT DONE)
+                        remove review from DB (need to shift to review form's dropdown)
                     </Button>
 
                     <ReviewForm user={user} movieId={movieId} handleFormSubmit={handleFormSubmit}/>
