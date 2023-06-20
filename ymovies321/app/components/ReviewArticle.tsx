@@ -17,7 +17,7 @@ export default function ReviewArticle({ user, movieId, reviewData} : {user: User
             <article className="p-6 mb-6 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900">
                 <footer className="flex justify-between items-center mb-2">
                     <div className="flex items-center">
-                        <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                        <div className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                             <Image
                                 className="mr-8 w-6 h-6 rounded-full"
                                 width={24}
@@ -25,7 +25,7 @@ export default function ReviewArticle({ user, movieId, reviewData} : {user: User
                                 src={reviewData ? reviewData.photoURL : ""}
                                 alt={reviewData ? reviewData.name : ""}
                             />{reviewData ? reviewData.name : ""}
-                        </p>
+                        </div>
                         <p className="text-sm text-gray-600 dark:text-gray-400"><time 
                                 title="date">{date}</time></p>
                     </div>
