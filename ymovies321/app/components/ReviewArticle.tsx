@@ -3,13 +3,15 @@ import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestor
 import React, { useState, useEffect } from "react";
 import { signIn } from "../authContext/auth"
 import { Box, Button, Typography } from "@mui/material";
+import Alert from '@mui/material/Alert';
 import Image from 'mui-image';
 import removeReviewFromMovieDB from "../authContext/reviews/removeReviewFromMovieDB";
 import removeReviewFromUserDB from "../authContext/reviews/removeReviewFromUserDB";
 
 export default function ReviewArticle({ user, movieId, handleRefresh, reviewData} : {user: User | null | undefined; movieId : string | null; handleRefresh: () => void; reviewData : any }) {
     
-    const date = reviewData.created.toDate().toDateString()
+    const date = reviewData.created.toDate().toDateString();
+    const [showAlert, setShowAlert] = useState(false);
 
     const handleDeleteReview = async () => {
         if (user?.uid == reviewData.uid) {
@@ -20,7 +22,7 @@ export default function ReviewArticle({ user, movieId, handleRefresh, reviewData
             // Call the handleRefresh function passed from the parent component
             handleRefresh();
         } else {
-            window.alert("You can only remove your own review.");
+            setShowAlert(true);
         }
     };
 
@@ -138,6 +140,9 @@ export default function ReviewArticle({ user, movieId, handleRefresh, reviewData
                 </div>
             </article>
             */}
+            {showAlert && (
+                <Alert severity="error" onClose={() => setShowAlert(false)}>You can only remove your own reviews</Alert>
+            )}
             <Button variant="contained" onClick={() => handleDeleteReview()}>
                 remove review from both User DB and Movie DB
             </Button>
