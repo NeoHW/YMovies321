@@ -10,9 +10,22 @@ import getDocFromMovieDB from "../authContext/getDocfromMovieDB";
 import removeReviewFromMovieDB from "../authContext/reviews/removeReviewFromMovieDB";
 import removeReviewFromUserDB from "../authContext/reviews/removeReviewFromUserDB";
 
-export default function ReviewArticle({ user, movieId, reviewData} : {user: User | null | undefined; movieId : string | null; handleRefresh: () => void; reviewData : any }) {
+export default function ReviewArticle({ user, movieId, handleRefresh, reviewData} : {user: User | null | undefined; movieId : string | null; handleRefresh: () => void; reviewData : any }) {
     
     const date = reviewData.created.toDate().toDateString()
+
+    const handleDeleteReview = async () => {
+        if (user?.uid == reviewData.uid) {
+            // User is already signed in, add the review
+            removeReviewFromMovieDB(user, movieId, reviewData);
+            removeReviewFromUserDB(user, movieId, reviewData)
+      
+            // Call the handleRefresh function passed from the parent component
+            handleRefresh();
+        } else {
+            window.alert("You can only remove your own review.");
+        }
+    };
 
     return (
         <div>
@@ -128,11 +141,8 @@ export default function ReviewArticle({ user, movieId, reviewData} : {user: User
                 </div>
             </article>
             */}
-            <Button variant="contained" onClick={() => removeReviewFromMovieDB(user, movieId, reviewData)}>
-                remove review from Movie DB
-            </Button>
-            <Button variant="contained" onClick={() => removeReviewFromUserDB(user, movieId, reviewData)}>
-                remove review from User DB
+            <Button variant="contained" onClick={() => handleDeleteReview()}>
+                remove review from both User DB and Movie DB
             </Button>
         </div>
     );
