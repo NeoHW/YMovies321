@@ -1,6 +1,6 @@
 import { User, UserCredential } from "firebase/auth";
 import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { signIn } from "../authContext/auth"
 import { Box, Button, Typography, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Alert } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -11,13 +11,28 @@ import removeReviewFromUserDB from "../authContext/reviews/removeReviewFromUserD
 export default function ReviewArticle({ user, movieId, handleRefresh, reviewData} : {user: User | null | undefined; movieId : string | null; handleRefresh: () => void; reviewData : any }) {
     
     const date = reviewData.created.toDate().toDateString();
+    const dropdownRef = useRef(null);
+
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [open, setOpen] = useState(false); // for alert
 
 
     const handleDropdownToggle = () => {
         setIsDropdownOpen(!isDropdownOpen);
-      };
+    };
+
+    const handleClickOutside = (event) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setIsDropdownOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside);
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
 
 
     const handleDeleteReview = async () => {
@@ -52,7 +67,7 @@ export default function ReviewArticle({ user, movieId, handleRefresh, reviewData
                         <p className="text-sm text-gray-600 dark:text-gray-400"><time 
                                 title="date">{date}</time></p>
                     </div>
-                    <Box className="relative">
+                    <Box className="relative" ref={dropdownRef}>
                         <button id="dropdownCommentButton"
                             data-dropdown-toggle="dropdownComment"
                             className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
