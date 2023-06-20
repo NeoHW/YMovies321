@@ -24,10 +24,3 @@ export default async function removeReviewFromMovieDB(user: User, movieId: strin
         });
     }
 }
-
-
-/*
-<Button variant="contained" onClick={() => removeReviewFromMovieDB(movieId)}>
-    remove review from DB
-</Button>
-*/

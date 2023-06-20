@@ -1,12 +1,9 @@
 import { User, UserCredential } from "firebase/auth";
-import firebase_app from "../firebase/config";
 import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
-import Link from 'next/link';
 import { signIn } from "../authContext/auth"
 import { Box, Button, Typography } from "@mui/material";
 import Image from 'mui-image';
-import getDocFromMovieDB from "../authContext/getDocfromMovieDB";
 import removeReviewFromMovieDB from "../authContext/reviews/removeReviewFromMovieDB";
 import removeReviewFromUserDB from "../authContext/reviews/removeReviewFromUserDB";
 
