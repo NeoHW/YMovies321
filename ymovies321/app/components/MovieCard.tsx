@@ -5,7 +5,7 @@ import { MovieResult } from "../interfaces/TMDBapi";
 
 
 
-export default function MovieCard({ item } : {item: MovieResult}) {
+export default function MovieCard({ item, image_or_path: image_or_path } : {item: MovieResult, image_or_path: boolean}) {
     return (
         <Link href={"/pages/details/" + item.id} key={item.id}>
             <div className="ml-3 w-40 h-128 max-w-xs overflow-hidden cursor-pointer">
@@ -15,7 +15,7 @@ export default function MovieCard({ item } : {item: MovieResult}) {
                         target.onerror = null;
                         target.src = "../images/no-image-available.png";
                     }}
-                    src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
+                    src={image_or_path ? `https://image.tmdb.org/t/p/w185${item.poster_image}` : `https://image.tmdb.org/t/p/w185${item.poster_path}`}
                     alt={item.title ? item.title : item.original_title}
                 />
                 <div className="pl-1">

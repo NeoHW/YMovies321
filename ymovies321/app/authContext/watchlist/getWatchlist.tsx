@@ -10,7 +10,7 @@ export async function getWatchlist(user: User) {
         userRes.forEach(doc => {
             array = doc.data()["watchlist"];
         });
-        console.log(array);
+        // console.log(array);
         return array;
     } else {
         return null;
