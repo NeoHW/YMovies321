@@ -4,7 +4,7 @@ import firebase_app from "../firebase/config";
 import { collection, doc, getDoc, getDocs, setDoc, getFirestore, query, where, orderBy, limit } from "firebase/firestore";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Box, Button, InputBase, LinearProgress, Typography } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
@@ -42,15 +42,38 @@ async function fetchDataFromDB( searchVal: string | undefined, setIsFetching: (i
 
 function SearchBar() {
 
+  const dropdownRef = useRef(null);
+
   // states
   const [searchVal, setSearchVal] = useState<string>();
   const [results, setResults] = useState<any[]>([]);
-  const [isResultsVisible, setIsResultsVisible] = useState<boolean>(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
     fetchDataFromDB(searchVal, setIsFetching, setResults);
   }, [searchVal]);
+
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+};
+
+  const handleClickOutside = (event) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target) &&
+      !event.target.classList.contains("search-input")
+    ) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+      document.addEventListener('click', handleClickOutside);
+      return () => {
+          document.removeEventListener('click', handleClickOutside);
+      };
+  }, []);
 
   return (
     <Search>
@@ -62,8 +85,8 @@ function SearchBar() {
         inputProps={{ "aria-label": "search" }}
         value={searchVal || ""}
         onChange={(e) => setSearchVal(e.target.value)}
-        onFocus={() => setIsResultsVisible(true)}
-        onBlur={() => setIsResultsVisible(false)}
+        onFocus={() => setIsDropdownOpen(true)}
+        onBlur={() => setIsDropdownOpen(false)}
         /*
         onKeyUp={(e) => {
             if (e.key == "Enter") {
@@ -88,8 +111,8 @@ function SearchBar() {
         />
       )}
 
-      {results.length > 0 && (
-        <Dropdown>
+      {results.length > 0 && isDropdownOpen && (
+        <Dropdown ref={dropdownRef}>
           {results.map((item: any) => (
             <DropDownItem item = {item} />
           ))}
