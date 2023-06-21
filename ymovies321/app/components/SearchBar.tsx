@@ -4,7 +4,7 @@ import firebase_app from "../firebase/config";
 import { collection, doc, getDoc, getDocs, setDoc, getFirestore, query, where, orderBy, limit } from "firebase/firestore";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Box, Button, InputBase, LinearProgress, Typography } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
@@ -42,15 +42,49 @@ async function fetchDataFromDB( searchVal: string | undefined, setIsFetching: (i
 
 function SearchBar() {
 
+  const dropdownRef = useRef(null);
+
   // states
   const [searchVal, setSearchVal] = useState<string>();
   const [results, setResults] = useState<any[]>([]);
-  const [isResultsVisible, setIsResultsVisible] = useState<boolean>(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
     fetchDataFromDB(searchVal, setIsFetching, setResults);
   }, [searchVal]);
+
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+    console.log("handleDropdownToggle : changing dropdown state")
+  };
+
+
+
+ const handleClick = () => {
+    if (!isDropdownOpen) {
+      setIsDropdownOpen(true);
+      console.log('handleClick: opening dropdown');
+    }
+  };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsDropdownOpen(false);
+      console.log('handleClickOutside: closing dropdown');
+    }
+  };
+
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <Search>
@@ -58,12 +92,12 @@ function SearchBar() {
         <SearchIcon />
       </SearchIconWrapper>
       <StyledInputBase
+        className="search-input"
         placeholder="Search…"
         inputProps={{ "aria-label": "search" }}
         value={searchVal || ""}
         onChange={(e) => setSearchVal(e.target.value)}
-        onFocus={() => setIsResultsVisible(true)}
-        onBlur={() => setIsResultsVisible(false)}
+        onClick={handleClick}
         /*
         onKeyUp={(e) => {
             if (e.key == "Enter") {
@@ -88,8 +122,8 @@ function SearchBar() {
         />
       )}
 
-      {results.length > 0 && (
-        <Dropdown>
+      {results.length > 0 && isDropdownOpen && (
+        <Dropdown ref={dropdownRef}>
           {results.map((item: any) => (
             <DropDownItem item = {item} />
           ))}
