@@ -1,17 +1,13 @@
 "use client";
 
-import firebase_app from "../firebase/config";
+import { db } from "../authContext/users/reauthenticateUser";
 import { collection, doc, getDoc, getDocs, setDoc, getFirestore, query, where, orderBy, limit } from "firebase/firestore";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
 import { Box, Button, InputBase, LinearProgress, Typography } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { blueGrey } from "@mui/material/colors";
 import DropDownItem from "./DropDownItem";
-import { db } from "../authContext/users/reauthenticateUser";
 
 const moviesRef = collection(db, "test_MoviesID_TMDB_database");
 
@@ -54,14 +50,8 @@ function SearchBar() {
     fetchDataFromDB(searchVal, setIsFetching, setResults);
   }, [searchVal]);
 
-  const handleDropdownToggle = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-    console.log("handleDropdownToggle : changing dropdown state")
-  };
 
-
-
- const handleClick = () => {
+  const handleClick = () => {
     if (!isDropdownOpen) {
       setIsDropdownOpen(true);
       console.log('handleClick: opening dropdown');
