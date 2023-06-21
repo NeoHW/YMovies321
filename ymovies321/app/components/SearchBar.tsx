@@ -15,6 +15,7 @@ async function fetchDataFromDB( searchVal: string | undefined, setIsFetching: (i
   setIsFetching(true); // Set isFetching to true before fetching data
 
   if (searchVal) {
+    searchVal.toLowerCase();
     const q = query(
       moviesRef,
       where("name", ">=", searchVal),

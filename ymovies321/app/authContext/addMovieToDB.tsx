@@ -10,7 +10,7 @@ export async function addMovieToDB(movieId : string, movieData : MovieResult) {
         const movieRef = doc(db, "test_MoviesID_TMDB_database", movieId);
         await setDoc(movieRef, {
             id: movieId,
-            name: movieData.title,
+            name: movieData.title.toLowerCase(),
             original_name: movieData.original_title,
             original_language: movieData.original_language || "",
             genres: movieData.genres || [],
