@@ -56,23 +56,34 @@ function SearchBar() {
 
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
-};
+    console.log("handleDropdownToggle : changing dropdown state")
+  };
 
-  const handleClickOutside = (event) => {
-    if (
-      dropdownRef.current &&
-      !dropdownRef.current.contains(event.target) &&
-      !event.target.classList.contains("search-input")
-    ) {
-      setIsDropdownOpen(false);
+
+
+ const handleClick = () => {
+    if (!isDropdownOpen) {
+      setIsDropdownOpen(true);
+      console.log('handleClick: opening dropdown');
     }
   };
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsDropdownOpen(false);
+      console.log('handleClickOutside: closing dropdown');
+    }
+  };
+
+
   useEffect(() => {
-      document.addEventListener('click', handleClickOutside);
-      return () => {
-          document.removeEventListener('click', handleClickOutside);
-      };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   return (
@@ -81,12 +92,12 @@ function SearchBar() {
         <SearchIcon />
       </SearchIconWrapper>
       <StyledInputBase
+        className="search-input"
         placeholder="Search…"
         inputProps={{ "aria-label": "search" }}
         value={searchVal || ""}
         onChange={(e) => setSearchVal(e.target.value)}
-        onFocus={() => setIsDropdownOpen(true)}
-        onBlur={() => setIsDropdownOpen(false)}
+        onClick={handleClick}
         /*
         onKeyUp={(e) => {
             if (e.key == "Enter") {
