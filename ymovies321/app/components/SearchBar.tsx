@@ -55,7 +55,7 @@ function SearchBar() {
   const handleClick = () => {
     if (!isDropdownOpen) {
       setIsDropdownOpen(true);
-      console.log('handleClick: opening dropdown');
+      // console.log('handleClick: opening dropdown');
     }
   };
 
@@ -65,7 +65,7 @@ function SearchBar() {
       !dropdownRef.current.contains(event.target as Node)
     ) {
       setIsDropdownOpen(false);
-      console.log('handleClickOutside: closing dropdown');
+      // console.log('handleClickOutside: closing dropdown');
     }
   };
 

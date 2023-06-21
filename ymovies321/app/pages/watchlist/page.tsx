@@ -18,19 +18,6 @@ import getDocFromMovieDB from "../../authContext/getDocfromMovieDB";
 // initialise cloud firestone and get ref to service
 const db = getFirestore(firebase_app);
 
-// https://firebase.google.com/docs/firestore/query-data/get-data
-async function fetchDataFromDB() {
-    // getting data
-    const docRef = doc(db, "cities", "SF");
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
-    } else {
-        // docSnap.data() will be undefined in this case
-        console.log("No such document!");
-    }
-}
 
 function Details({ user, data }: { user: User | null | undefined; data: any }) {
 
@@ -44,7 +31,9 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
             {/* <MovieCard item={data[0]}></MovieCard> */}
             <Grid container spacing={3} padding={3}>
                 {data && data.map(item => (
-                    <Grid item key={item.id}><MovieCard image_or_path={true} item={item}></MovieCard></Grid>
+                    <Grid item key={item.id}>
+                        <MovieCard image_or_path={true} item={item} />
+                    </Grid>
                 ))}
             </Grid>
         </div>
