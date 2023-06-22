@@ -92,7 +92,7 @@ const imageCSS = {
   overflow: "hidden",
   flex: "none",
   borderRadius: "20px",
-  objectFit: "cover",
+  objectFit: "contain",
 };
 
 const iconContainer = {
