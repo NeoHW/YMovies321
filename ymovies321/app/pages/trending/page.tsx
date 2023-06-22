@@ -11,24 +11,6 @@ import { auth, signIn, signOut } from "../../authContext/auth";
 import MovieCard from "../../components/MovieCard";
 import Navbar from "../../components/Navbar";
 
-// initialise cloud firestone and get ref to service
-const db = getFirestore(firebase_app);
-
-
-// https://firebase.google.com/docs/firestore/query-data/get-data
-async function fetchDataFromDB() {
-    // getting data
-    const docRef = doc(db, "cities", "SF");
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
-    } else {
-        // docSnap.data() will be undefined in this case
-        console.log("No such document!");
-    }
-}
-
 function fetchMovieDataAPI() {
     const options = {
         method: 'GET',

@@ -21,6 +21,7 @@ import DoneIcon from '@mui/icons-material/Done';
 import { MovieResult } from "../../../interfaces/TMDBapi";
 import getDocFromMovieDB from "../../../authContext/getDocfromMovieDB";
 import { addMovieToDB } from "../../../authContext/addMovieToDB";
+import PicturesScrollBar from "../../../components/PicturesScrollBar";
 
 
 function extractIdFromPath(pathName: string) {
@@ -122,6 +123,8 @@ function Details({ user, APIdata }: { user: User | null | undefined; APIdata: Mo
         </Grid>
       
       </Grid>
+
+      <PicturesScrollBar movieId={movieId}/>
       
       <ReviewSection user={user} movieId={movieId} refresh={refresh} handleRefresh={handleRefresh}/>
       

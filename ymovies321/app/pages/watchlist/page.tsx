@@ -1,4 +1,3 @@
-// this will be the page for specific user watchlist movies
 "use client";
 
 import { User, UserCredential } from "firebase/auth";
@@ -12,11 +11,6 @@ import { auth, signIn, signOut } from "../../authContext/auth";
 import { getWatchlist } from "../../authContext/watchlist/getWatchlist";
 import MovieCard from "../../components/MovieCard";
 import getDocFromMovieDB from "../../authContext/getDocfromMovieDB";
-
-
-
-// initialise cloud firestone and get ref to service
-const db = getFirestore(firebase_app);
 
 
 function Details({ user, data }: { user: User | null | undefined; data: any }) {
