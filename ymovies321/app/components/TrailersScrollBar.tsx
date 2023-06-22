@@ -41,7 +41,7 @@ export default function TrailersScrollBar({ movieId } : { movieId : string | nul
 
   return (
     <div>
-      <Typography variant="h5" sx={{ marginTop: "15px", marginLeft:"15px" }}>
+      <Typography variant="h5" sx={{ marginTop: "15px", marginLeft:"15px", marginBottom:"-5px" }}>
         Clips & Trailers
       </Typography>
       <Box className="container mx-auto flex overflow-x-scroll pb-5 scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-gray-300 scrollbar-track-sky-800">
@@ -77,11 +77,10 @@ export default function TrailersScrollBar({ movieId } : { movieId : string | nul
 const anchorCSS = {
   position: "relative",
   width: "320px",
-  height: "180px",
+  height: "210px",
   overflow: "hidden",
   flex: "none",
   marginRight: "18px",
-  borderRadius: "10px",
   "@media (max-width: 900px)": {
     width: "256px",
     height: "144px",
@@ -90,12 +89,10 @@ const anchorCSS = {
 
 const imageCSS = {
   position: "relative",
-  width: "100%",
-  height: "100%",
   overflow: "hidden",
   flex: "none",
-  marginRight: "18px",
-  borderRadius: "10px",
+  borderRadius: "20px",
+  objectFit: "cover",
 };
 
 const iconContainer = {
