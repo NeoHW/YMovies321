@@ -1,0 +1,95 @@
+Test Case,Sign-in Status,Section,Description,Preconditions,Test Steps,Expected Results,Postconditions,Test Data,Test Environment,Notes,Passed?
+Home Page,Logged Out,Home Page,Verifies the functionality of the home page,1. The web app is accessible and running. ,"1. Start the web app.
+2. Enter the web app through browser.",User should see the home page with movie rows fully loaded and displayed.,1. User is on the home page.,-,"1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Scrollbar,Logged Out,Home Page,Verifies the functionality of the home page,1. User is at the home page.,"1. Scroll the scrollbar of the ""Showing In Cinemas"" page.
+2. Scroll the scrollbar of the ""Top Rated"" page.",Both scrollbars should function as normal.,-,-,"1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Navbar,Logged Out,Navbar,Verifies the correct display of navbar,1. The home page is loaded.,-,"Navbar displays:
+1. Home page
+2. Trending page
+3. ""Log in"" button
+4. Searchbar",-,-,"1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Trending,Logged Out,Trending,Verifies the correct display of the trending page.,"1. The web app is accessible and running. 
+2. The user is on the home page.","1. Click on the ""Trending"" tab under the navbar.","1. User will be redirected to the Trending page.
+2. A total of 20 trending movies are displayed in a 5x4 grid.",1. User is on the trending page.,-,"1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Searchbar,Both,Navbar,Verifies the correct functionality of the searchbar.,1. The user is on a page where the navbar can be seen. (Home/Trending/Watchlist),"1. Click on the searchbar.
+2. Type in the following letters: ""t"", ""i"", ""t"", ""a"".","1. At every letter input, there are 5 predicted search results.
+2. All search results begin with the input letters.",1. Search bar displays result predictions.,"1. Input data: ""tita""","1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Movie Detail Page,Signed Out,Movie Detail Page,Verifies the user is correctly routed to the appropriate movie detail page.,1. The user is on the movie detail page.,-,"User correctly sees details loaded:
+1. Movie title, poster, year released, vote score and count, genres, description, images, clips and trailers
+2. Movie review section
+3. Add to watchlist button
+4. Voting section",-,"1. Details page of ""Fast X""","1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Movie Detail Page,Signed Out,Movie Detail Page,Verifies the movie detail page correctly displays data.,1. The user is on the movie detail page.,"1. Click on a video under ""Clips & Trailers"".",1. A new tab is created at the youtube link for the trailer.,"1. A new tab with the address at the trailer link is opened.
+2. User is redirected to that tab.","1. Details page of ""Fast X""
+2. First trailer is clicked on.","1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Movie Detail Page,Signed Out,Movie Detail Page,Verifies the functionality of the scrollbars.,1. The user is on the movie detail page.,"1. Scroll the scrollbar of the ""Images"" section.
+2. Scroll the scrollbar of the ""Clips & Trailers"" section.",Both scrollbars should function as normal.,-,"1. Details page of ""Fast X""","1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Scoring Section,Signed Out,Movie Detail Page,Verifies the correct behaviour of the movie scoring section when user is signed out.,1. The user is on the movie detail page.,1. Click on the stars to vote for the movie. (7 stars),1. A new prompt sign-in window is opened ,User is redirected to the new sign-in window.,"1. Details page of ""Fast X""
+2. Attempt to vote 7 stars.","1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Add to Watchlist Button,Signed Out,Movie Detail Page,Verifies the correct behaviour of the add to watchlist button when user is signed out.,1. The user is on the movie detail page.,"1. Click on ""Add to Watchlist"" button.",1. A new prompt sign-in window is opened ,User is redirected to the new sign-in window.,"1. Details page of ""Fast X""","1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Review Form,Signed Out,Movie Detail Page,Verifies the correct behaviour of the review section when user is signed out.,1. The user is on the movie detail page.,"1. Enter a review ""REVIEW"".
+2. Click on ""Review"" button.",1. A new prompt sign-in window is opened ,User is redirected to the new sign-in window.,"1. Details page of ""Fast X""
+2. Attempt review ""REVIEW"".","1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Sign In,Signed Out,Home Page,Verifies the correctness of the sign-in process.,,,,,,"1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Watchlist,Signed In,Watchlist,Verifies the correct routing to watchlist page.,"1. The app is running.
+2. The user is on the home page.","1. Navigate the navbar and click ""Watchlist"".","1. The navbar should correctly display the current page.
+2. The user should be redirected to their unique watchlist page.",1. User is redirected to watchlist page.,1. User logged in: Leng Khai,"1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Watchlist items,Signed In,Watchlist,Verifies the correct display of items in the watchlist.,1. The user is on the home page.,"1. Enter the movie detail page of ""Fast X"".
+2. Click ""Add to watchlist"".
+3. Repeat steps 1-2 a total of 5 times for another 5 movies.
+4. Navigate to the Watchlist page.",1. A total of 6 movies should be displayed on the watchlist.,1. 6 movies are added to the user's watchlist.,"1. Movies used are:
+- Transformers Rise of the Beasts
+- Fast X
+- The Perfect Find
+- Extraction 2
+- Through My Window Across the Sea
+- iNumber Number: Jozi Gold","1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Add Review,Signed In,Review Section,Verifies the correct addition of a review to the review section.,1. User is at the movie detail page.,"1. Enter ""TEST"" in the review form.
+2. Submit the review.","1. A new review is added at the top of the review section with the content of ""TEST"".",1. A new review is added to the review section.,1. Movie detail page used: Fast X,"1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Delete Review,Signed In,Review Section,Verifies the correct deletion of a user's review.,1. User has an existing review on the review section of a particular movie.,"1. Click on the 3 dots of the user's review.
+2. Click ""remove"".",1. User's review is removed accordingly.,1. User's review is removed.,1. Movie detail page used: Fast X,"1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Navbar,Signed In,Home Page,Verifies the correct display of the navbar when a user is signed in.,1. The app is running. ,1. Click on the user's display image.,"1. The navbar should correctly display in order: Home, Trending, Watchlist, Searchbar, and the user's display image.
+2. Upon clicking display image, user should see 3 buttons: Your Profile, Settings, and Sign Out.",-,,"1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Profile Page,Signed In,Profile Page,Verifies the correct display of the Profile page.,1. User is logged in.,"1. Click on user's avatar at the top right of the screen.
+2. Click on ""Your Profile"".",1. User is redirected to their unique profile page.,1. User is redirected to profile page.,,"1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Sign Out,Signed In,Navbar,Verifies the correct behaviour of signing out a user.,1. User is logged in.,"1. Click on user's avatar at the top right of the screen.
+2. Click on ""Sign Out"".",1. User is signed out.,1. User is signed out.,,"1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Navbar,Logged In,Navbar,Verifies the correct indication of current section the user is at.,1. User is logged in. (All sections are displayed),,,,,"1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Searchbar,Both,Navbar,Verifies the correct routing when following a prediction result.,1. The searchbar is displaying some predicted results.,1. Click on a search result. (Titanic),1. User is routed to the movie details page on the movie Titanic.,1. User is at the movie detail page.,"1. Input data: ""tita""
+2. Selected search result: Titanic","1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Movie Detail Page,Both,Movie Detail Page,Verifies the correct routing when clicking on a movie card.,1. The user is on a page where a movie card is displayed. (Home/Trending/Watchlist),1. Click on a movie card. (Fast X),1. User is routed to the movie details page on the movie Fast X.,1. User is at the movie detail page.,1. Movie Card clicked on: Fast X,"1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Review Form,Both,Movie Detail Page,Verifies the correct behaviour of the review section when review form is empty.,"1. The user is on the movie detail page.
+2. Review form is empty.","
+1. Click on ""Review"" button.",1. User is prompted to fill in review form.,-,"1. Details page of ""Fast X""","1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Movie Detail Page,Both,Review Form,Verifies the correct behaviour of the review section when attempting to modify a review of another user.,"1. The user is on the movie detail page.
+2. There is an existing review by another user.
+3. User is either not logged in, or is logged in with a different user than the author of existing review.","
+1. Click on details of the review.
+2. Click on ""remove"" button.",1. A pop-up informs the user that only the user's own reviews can be removed.,1. New pop-up is shown.,"1. Details page of ""Fast X""","1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
+Movie Detail Page,Both,Review Form,Verifies the correct behaviour when resizing the review form.,1. The user is on the movie detail page.,"
+1. Click and drag the bottom-right triangle of the review form.",1. Review form is resized accordingly.,1. Review form is resized to new sizing.,"1. Details page of ""Fast X""","1. Browser: Chrome
+2. Operating System: Windows 11",-,Y
