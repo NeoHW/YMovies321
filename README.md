@@ -116,8 +116,8 @@ Finalize documentation and user guides
 1. Component-Based Architecture: React follows a component-based architecture, which allows us to break down the user interface into smaller, reusable components. This modular approach promotes code reusability, maintainability, and scalability. We can create components for different sections of our application, such as movie lists, search bars, movie details, reviews, and user authentication. This modular structure will make it easier to develop and update different parts of the application independently.
 2. Virtual DOM: React utilizes a virtual DOM that efficiently updates and renders only the necessary components when changes occur. This approach minimizes the number of actual DOM manipulations, resulting in improved performance and faster rendering. In YMovies321, where users can interact with various components and update data dynamically, React's virtual DOM will enhance the overall user experience by providing smooth and responsive interactions.
 
-### Database UML diagram
-![UML diagram](/Ymovies321%20DB%20planning.png)
+### Database ER diagram
+![ER diagram](/Ymovies321%20DB%20planning.png)
 
 ### Design principles and patterns
 
