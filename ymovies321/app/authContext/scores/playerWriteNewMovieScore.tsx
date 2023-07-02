@@ -3,10 +3,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../auth";
 import { findUser } from "../users/findUser";
 import { db } from "../users/reauthenticateUser";
+import { User } from "firebase/auth";
 
 
 
-export default async function playerWriteNewMovieScore(user, movieId: number, newScore: number) {
+export default async function playerWriteNewMovieScore(user: User, movieId: number, newScore: number) {
     // const [user] = useAuthState(auth);
 
     if (user) {
@@ -14,7 +15,7 @@ export default async function playerWriteNewMovieScore(user, movieId: number, ne
 
         if (userRes != null && userRes.size > 0) {
             const id = user?.uid;
-            let allRatings = {};
+            let allRatings;
             userRes.forEach(doc => {
                 allRatings = doc.data()["movieScores"];
 
