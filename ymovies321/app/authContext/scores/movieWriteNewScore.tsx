@@ -1,10 +1,11 @@
 import { doc, getDocs, setDoc, updateDoc, collection, query, where } from "firebase/firestore";
 import { findUser } from "../users/findUser";
 import { db } from "../users/reauthenticateUser";
+import { User } from "firebase/auth";
 
 
 
-export default async function movieWriteNewScore(user, movieId: number, newScore: number) {
+export default async function movieWriteNewScore(user: User, movieId: number, newScore: number) {
     const newRating: any = {};
     newRating[user.uid] = newScore;
 

@@ -38,6 +38,7 @@ function Navbar({ isSignedIn, profile, nav }: ButtonProps) {
     ]
     const navLoggedInExtra = [
         { name: 'Watchlist', href: '/pages/watchlist', current: nav == "Watchlist" },
+        { name: 'Recommendations', href: '/pages/recommendations', current: nav == "Recommendations"}
     ]
 
     return (

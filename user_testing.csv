@@ -93,3 +93,15 @@ Movie Detail Page,Both,Review Form,Verifies the correct behaviour of the review 
 Movie Detail Page,Both,Review Form,Verifies the correct behaviour when resizing the review form.,1. The user is on the movie detail page.,"
 1. Click and drag the bottom-right triangle of the review form.",1. Review form is resized accordingly.,1. Review form is resized to new sizing.,"1. Details page of ""Fast X""","1. Browser: Chrome
 2. Operating System: Windows 11",-,Y
+Recommendations,Signed In,Recommendations,Verifies the correct loading of the recommendations page.,1. The user is logged in. 2. User has an existing favourite movie (Highest rated),1. Navigate to the Recommendations page using the Navbar.,1. User sees two sections with: 1. similar movies to their favourite movie; 2. similar movies to their favourite genre.,-,"1. Highest rated of ""Fast X""","1. Browser: Chrome
+2. Operating System: Windows 12",-,Y
+Change of favourite movie,Signed In,Recommendations,Verifies that the recommendations correctly change when a user has changed their preferences.,1. The user is logged in. 2. User has an existing favourite movie (Highest rated),"1. Navigate to the movie detail page of the user's current favourite movie.
+2. Change the rating to 1 star.
+3. Navigate to a different movie.
+4. Rate the new movie 10 stars.
+5. Navigate to the recommendations page.",1. User should observe that the recommendations are different.,"1. New recommendations
+2. Modified rating for previous favourite movie.
+3. New /modified rating for new favourite movie.","1. Previous favourite movie: ""Fast X""
+2. New favourite movie: ""Extraction 2""
+","1. Browser: Chrome
+2. Operating System: Windows 13",-,Y

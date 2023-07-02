@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Typography } from "@mui/material";
 import moment from "moment";
 import { MovieResult } from "../interfaces/TMDBapi";
+import no_img_avail from "../images/no-image-available.png"
 
 
 
@@ -13,7 +14,7 @@ export default function MovieCard({ item, image_or_path: image_or_path } : {item
                     onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.onerror = null;
-                        target.src = "../images/no-image-available.png";
+                        target.src = no_img_avail.src;
                     }}
                     src={image_or_path ? `https://image.tmdb.org/t/p/w185${item.poster_image}` : `https://image.tmdb.org/t/p/w185${item.poster_path}`}
                     alt={item.title ? item.title : item.original_title}
