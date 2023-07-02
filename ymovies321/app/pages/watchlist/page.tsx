@@ -11,6 +11,7 @@ import { auth, signIn, signOut } from "../../authContext/auth";
 import { getWatchlist } from "../../authContext/watchlist/getWatchlist";
 import MovieCard from "../../components/MovieCard";
 import getDocFromMovieDB from "../../authContext/getDocfromMovieDB";
+import { MovieResult } from "../../interfaces/TMDBapi";
 
 
 function Details({ user, data }: { user: User | null | undefined; data: any }) {
@@ -24,9 +25,9 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
             />
             {/* <MovieCard item={data[0]}></MovieCard> */}
             <Grid container spacing={3} padding={3}>
-                {data && data.map(item => (
-                    <Grid item key={item.id}>
-                        <MovieCard image_or_path={true} item={item} />
+                {data && data.map((i: MovieResult) => (
+                    <Grid item key={i.id}>
+                        <MovieCard image_or_path={true} item={i} />
                     </Grid>
                 ))}
             </Grid>

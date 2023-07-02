@@ -61,7 +61,7 @@ export default function Form({ user, movieId, handleRefresh } : { user: User | n
           <label htmlFor="comment" className="sr-only">Your comment</label>
           <textarea
             id="comment"
-            rows="6"
+            rows={6}
             className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
             placeholder="Leave a review..."
             value={comment}

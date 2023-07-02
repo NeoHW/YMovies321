@@ -95,7 +95,7 @@ function MoviesComponent() {
       <Box className="container mx-auto flex overflow-x-scroll pb-5 scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-gray-300 scrollbar-track-sky-800" >
         <div className="flex flex-nowrap">
           {showingInCinemas.results && showingInCinemas.results.map((item: any) => (
-            <MovieCard key={item.id} item={item} />
+            <MovieCard image_or_path={false} key={item.id} item={item} />
           ))}
         </div>
       </Box>
@@ -115,7 +115,7 @@ function MoviesComponent() {
       <Box className="container mx-auto flex overflow-x-scroll pb-5 scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-gray-300 scrollbar-track-sky-800" >
         <div className="flex flex-nowrap">
           {topRated.results && topRated.results.map((item: any) => (
-            <MovieCard key={item.id} item={item} />
+            <MovieCard image_or_path={false} key={item.id} item={item} />
           ))}
         </div>
       </Box>

@@ -26,7 +26,7 @@ function classNames(...classes: unknown[]): string {
 
 function Navbar({ isSignedIn, profile, nav }: ButtonProps) {
 
-    const [token, setToken] = useState("");
+    const [token, setToken] = useState<any>("");
 
     useEffect(() => {
         setToken(profile?.uid);
@@ -135,7 +135,7 @@ function Navbar({ isSignedIn, profile, nav }: ButtonProps) {
                                                     <span className="sr-only">Open user menu</span>
                                                     <img
                                                         className="h-8 w-8 rounded-full"
-                                                        src={profile ? profile.photoURL : ""}
+                                                        src={profile && profile.photoURL ? profile.photoURL : ""}
                                                         alt=""
                                                     />
                                                 </Menu.Button>

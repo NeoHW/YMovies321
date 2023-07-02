@@ -7,6 +7,7 @@ export interface MovieResult {
     original_title: string;
     overview: string;
     poster_path: string;
+    poster_image: string;
     media_type: MediaType.Movie;
     genre_ids: number[];
     popularity: number;
