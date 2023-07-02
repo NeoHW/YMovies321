@@ -152,8 +152,7 @@ Finalize documentation and user guides
 Test Case|Sign-in Status|Section|Description|Preconditions|Test Steps|Expected Results|Postconditions|Test Data|Test Environment|Notes|Passed?
 ---------|--------------|-------|-----------|-------------|----------|----------------|--------------|---------|----------------|-----|-------
 Home Page|Logged Out|Home Page|Verifies the functionality of the home page|1. The web app is accessible and running. |"1. Start the web app.
-2. Enter the web app through browser."|User should see the home page with movie rows fully loaded and displayed.|1. User is on the home page.|-|"1. Browser: Chrome
-2. Operating System: Windows 11"|-"|Y
+2. Enter the web app through browser."|User should see the home page with movie rows fully loaded and displayed.|1. User is on the home page.|-|"1. Browser: Chrome \n 2. Operating System: Windows 11"|-"|Y
 
 Scrollbar|Logged Out|Home Page|Verifies the functionality of the home page|1. User is at the home page.|"1. Scroll the scrollbar of the ""Showing In Cinemas"" page.
 2. Scroll the scrollbar of the ""Top Rated"" page."|Both scrollbars should function as normal.|-|-|"1. Browser: Chrome
