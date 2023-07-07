@@ -41,7 +41,7 @@ export default function MovieDetails({ apiData, firebaseData}: { apiData: MovieR
                     className="pl-1"
                 >
 
-                    <Score firebaseData={firebaseData}></Score>
+                    <Score firebaseMovieData={firebaseData}></Score>
                 </Grid>
                 
                     <Typography sx={{ color: "#ffffff" }} variant="subtitle1">
