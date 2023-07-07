@@ -7,7 +7,8 @@ import playerWriteNewMovieScore from '../authContext/scores/playerWriteNewMovieS
 import movieWriteNewScore from '../authContext/scores/movieWriteNewScore';
 import { User } from "firebase/auth";
 import getUserFromMovieDB from '../authContext/getUserFromUserDB';
-
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 interface ScoreProps {
     firebaseMovieData: any;
@@ -33,6 +34,8 @@ function Score({ firebaseMovieData, value, setValue, user }: ScoreProps) {
                     playerWriteNewMovieScore(user, firebaseMovieData.id, newValue)
                     movieWriteNewScore(user, firebaseMovieData.id, newValue);
                 }}
+                emptyIcon={<StarBorderIcon style={{ color: "#fff" }} />}
+                icon={<StarIcon style={{ color: "#ff0" }} />}
             />
         </div>
     )
