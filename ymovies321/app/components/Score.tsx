@@ -1,6 +1,6 @@
 // Provide template for scoring of movie
 import { auth } from '../authContext/auth';
-import { Typography, Rating } from '@mui/material';
+import { Typography, Rating, Box, Button } from '@mui/material';
 import { useAuthState } from "react-firebase-hooks/auth"
 import { useState, useEffect, memo } from 'react';
 import playerWriteNewMovieScore from '../authContext/scores/playerWriteNewMovieScore';
@@ -25,18 +25,21 @@ function Score({ firebaseMovieData, value, setValue, user }: ScoreProps) {
             <Typography align="center" sx={{ color: "#d8dbda" }} variant="subtitle1" >
                 <p>{firebaseMovieData.vote_average.toFixed(1)} / 10, {firebaseMovieData.vote_count} votes</p>
             </Typography>
-            <Rating
-                defaultValue={value}
-                max={10}
-                precision={0.5}
-                onChange={(event, newValue) => {
-                    setValue(newValue);
-                    playerWriteNewMovieScore(user, firebaseMovieData.id, newValue)
-                    movieWriteNewScore(user, firebaseMovieData.id, newValue);
-                }}
-                emptyIcon={<StarBorderIcon style={{ color: "#fff" }} />}
-                icon={<StarIcon style={{ color: "#ff0" }} />}
-            />
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Rating
+                    defaultValue={value}
+                    max={10}
+                    precision={0.5}
+                    onChange={(event, newValue) => {
+                        setValue(newValue);
+                        playerWriteNewMovieScore(user, firebaseMovieData.id, newValue)
+                        movieWriteNewScore(user, firebaseMovieData.id, newValue);
+                    }}
+                    emptyIcon={<StarBorderIcon style={{ color: "#fff" }} />}
+                    icon={<StarIcon style={{ color: "#ff0" }} />}
+                />
+                <Button variant="outlined" sx={{ marginLeft: "20px" }}>Reset Score</Button>
+            </Box>
         </div>
     )
 }

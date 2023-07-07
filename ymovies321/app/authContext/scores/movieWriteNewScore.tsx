@@ -1,4 +1,4 @@
-import { doc, getDocs, setDoc, updateDoc, collection, query, where } from "firebase/firestore";
+import { doc, getDocs, setDoc, updateDoc, collection, query, where, increment } from "firebase/firestore";
 import { findUser } from "../users/findUser";
 import { db } from "../users/reauthenticateUser";
 import { User } from "firebase/auth";
@@ -23,27 +23,8 @@ export default async function movieWriteNewScore(user: User, movieId: number, ne
             allRatings[user.uid] = newScore;
             await updateDoc(movieRef, {userScores: allRatings});
         }
+        await updateDoc(movieRef, { vote_count: increment(1)});
+        const updatedScore = (movieDocument["vote_average"] * movieDocument["vote_count"] + newScore) / (movieDocument["vote_count"] + 1)
+        await updateDoc(movieRef, { vote_average: updatedScore});
     }
-
-    // if (user) {
-    //     const userRes = await findUser(user);
-
-    //     if (userRes != null && userRes.size > 0) {
-    //         const id = user?.uid;
-    //         let allRatings = {};
-    //         userRes.forEach(doc => {
-    //             allRatings = doc.data()["movieScores"];
-
-    //             console.log(allRatings);
-    //             allRatings[movieId] = newScore;
-    //         })
-
-    //         const userRef = doc(db, "users", id);
-    //         await updateDoc(userRef, {
-    //             movieScores: allRatings
-    //         });
-
-    //     }
-    // }
-
 }
