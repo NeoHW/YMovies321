@@ -18,8 +18,6 @@ interface ScoreProps {
 }
 
 function Score({ firebaseMovieData, value, setValue, user }: ScoreProps) {
-    console.log(value);
-
     return (
         <div>
             <Typography align="center" sx={{ color: "#d8dbda" }} variant="subtitle1" >
@@ -38,7 +36,6 @@ function Score({ firebaseMovieData, value, setValue, user }: ScoreProps) {
                     emptyIcon={<StarBorderIcon style={{ color: "#fff" }} />}
                     icon={<StarIcon style={{ color: "#ff0" }} />}
                 />
-                <Button variant="outlined" sx={{ marginLeft: "20px" }}>Reset Score</Button>
             </Box>
         </div>
     )
@@ -47,8 +44,6 @@ function Score({ firebaseMovieData, value, setValue, user }: ScoreProps) {
 export default function ReturnScore({ firebaseMovieData }: { firebaseMovieData: any }) {
     
     const [user] = useAuthState(auth);
-
-    // Annoyance: after voting, score does not stay at selected score after refreshing
     const [value, setValue] = useState(-1);
     const movieID = firebaseMovieData.id;
 
