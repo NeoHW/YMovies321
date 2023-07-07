@@ -17,9 +17,9 @@ export async function addMovieToDB(movieId : string, movieData : MovieResult) {
             overview: movieData.overview || "",
             poster_image: movieData.poster_path || "",
             release_date: movieData.release_date || "",
-            runtime: movieData.runtime || 0,
-            vote_average: movieData.vote_average || 0,
-            vote_count: 10 || 0
+            runtime: movieData.runtime,
+            vote_average: movieData.vote_average,
+            vote_count: 10
         });
         console.log("added movie: " + movieData.title);
     } catch (e) {

@@ -28,7 +28,11 @@ function MovieCard({ item, image_or_path, movieDataFromDB } : {item: MovieResult
                         {moment(item.release_date).format("YYYY")}
                     </Typography>
                     <Typography sx={{ color: "#00adb5" }} variant="subtitle2" >
-                        <p>{item.vote_average.toFixed(1)} / 10</p>
+                    {(movieDataFromDB && movieDataFromDB.vote_average != 0) ? (
+                            <p>{movieDataFromDB.vote_average.toFixed(1)} / 10</p>
+                        ) : (
+                            <p>{item.vote_average.toFixed(1)} / 10</p>
+                    )}
                     </Typography>
                 </div>
             </div>
