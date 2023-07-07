@@ -64,7 +64,7 @@ async function fetchMovieDataAPI(movieId: string | null) {
   return response;
 }
 
-function Details({ user, APIdata }: { user: User | null | undefined; APIdata: MovieResult }) {
+function Details({ user, APIdata, firebaseData }: { user: User | null | undefined; APIdata: MovieResult; firebaseData: any }) {
   // getting URL path
   const pathName = usePathname();
 
@@ -96,7 +96,7 @@ function Details({ user, APIdata }: { user: User | null | undefined; APIdata: Mo
         spacing={3}
       >
         <Grid item> 
-          <MovieDetails item={APIdata} />
+          <MovieDetails apiData={APIdata} firebaseData={firebaseData} />
         </Grid>
         <Grid item>
         {inWatchlist ? (<Button
@@ -137,6 +137,7 @@ function Details({ user, APIdata }: { user: User | null | undefined; APIdata: Mo
 export default function ReturnMovieDetails() {
   const [user] = useAuthState(auth);
   const [data, setData] = useState(null);
+  const [firebaseData, setFireBaseData] = useState(null);
 
   // getting URL path
   const pathName = usePathname();
@@ -146,7 +147,9 @@ export default function ReturnMovieDetails() {
     fetchMovieDataAPI(movieId).then((movieData) => {
       setData(movieData);
     });
+    getDocFromMovieDB(movieId).then((data) => {
+      setFireBaseData(data);
+    });
   }, []);
-
-  return data != null ? <Details user={user} APIdata={data} /> : <div></div>;
+  return data != null ? <Details user={user} APIdata={data} firebaseData={firebaseData} /> : <div></div>;
 }

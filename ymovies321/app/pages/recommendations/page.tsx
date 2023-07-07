@@ -8,7 +8,6 @@ import { Box, Typography, Grid } from "@mui/material";
 import Navbar from "../../components/Navbar";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, signIn, signOut } from "../../authContext/auth";
-import { getWatchlist } from "../../authContext/watchlist/getWatchlist";
 import MovieCard from "../../components/MovieCard";
 import getDocFromMovieDB from "../../authContext/getDocfromMovieDB";
 import { MovieResult } from "../../interfaces/TMDBapi";

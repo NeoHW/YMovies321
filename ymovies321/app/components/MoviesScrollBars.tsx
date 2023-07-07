@@ -1,35 +1,11 @@
-// shows trending movies + searchbar(?)
-import firebase_app from "../firebase/config";
-import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
-import type { InferGetStaticPropsType, GetStaticProps } from 'next';
 import { Box, CircularProgress, Typography } from "@mui/material";
-import moment from "moment";
-import Link from 'next/link';
 import MovieCard from "./MovieCard";
-import Navbar from "./Navbar";
 import { auth, signIn, signOut } from "../authContext/auth";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import UserDatabase, { reauthenticateUser } from "../authContext/users/reauthenticateUser";
 import getFavMovie from "../authContext/scores/getFavMovie";
 
-
-// initialise cloud firestone and get ref to service
-const db = getFirestore(firebase_app);
-
-// https://firebase.google.com/docs/firestore/query-data/get-data
-async function fetchDataFromDB() {
-  // getting data
-  const docRef = doc(db, "cities", "SF");
-  const docSnap = await getDoc(docRef);
-
-  if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-  } else {
-    // docSnap.data() will be undefined in this case
-    console.log("No such document!");
-  }
-}
 
 interface MovieData {
   showingInCinemas: any;

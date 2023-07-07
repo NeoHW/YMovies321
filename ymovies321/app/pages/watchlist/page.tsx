@@ -23,7 +23,7 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
                 profile={user}
                 nav={"Watchlist"}
             />
-            {/* <MovieCard item={data[0]}></MovieCard> */}
+
             <Grid container spacing={3} padding={3}>
                 {data && data.map((i: MovieResult) => (
                     <Grid item key={i.id}>
@@ -32,7 +32,9 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
                 ))}
             </Grid>
         </div>
-    ) : <div></div>;
+    ) : <div>
+            <Typography fontSize={20} m={2} sx={{ color: "#00adb5" }}>You've not added anything to your watchlist!</Typography>
+        </div>;
 }
 
 export default function Watchlist() {
