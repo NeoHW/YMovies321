@@ -9,15 +9,23 @@ import { User } from "firebase/auth";
 import getUserFromMovieDB from '../authContext/getUserFromUserDB';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import getDocFromMovieDB from '../authContext/getDocfromMovieDB';
 
 interface ScoreProps {
     firebaseMovieData: any;
     value: number;
     setValue: (value: number) => void;
     user: User | null;
+    setFireBaseData: (x: any) => void;
 }
 
-function Score({ firebaseMovieData, value, setValue, user }: ScoreProps) {
+async function updateScoreFromDatabase(movieId: string, setFireBaseData: (x: any) => void) {
+    const data = await getDocFromMovieDB(movieId);
+    setFireBaseData(data);
+}
+
+
+function Score({ firebaseMovieData, value, setValue, user, setFireBaseData }: ScoreProps) {
     return (
         <div>
             <Typography align="center" sx={{ color: "#d8dbda" }} variant="subtitle1" >
@@ -30,8 +38,10 @@ function Score({ firebaseMovieData, value, setValue, user }: ScoreProps) {
                     precision={0.5}
                     onChange={(event, newValue) => {
                         setValue(newValue);
-                        playerWriteNewMovieScore(user, firebaseMovieData.id, newValue)
-                        movieWriteNewScore(user, firebaseMovieData.id, newValue);
+                        playerWriteNewMovieScore(user, firebaseMovieData.id, newValue);
+                        movieWriteNewScore(user, firebaseMovieData.id, newValue)
+                            .then(() => updateScoreFromDatabase(firebaseMovieData.id, setFireBaseData));
+
                     }}
                     emptyIcon={<StarBorderIcon style={{ color: "#fff" }} />}
                     icon={<StarIcon style={{ color: "#ff0" }} />}
@@ -41,7 +51,7 @@ function Score({ firebaseMovieData, value, setValue, user }: ScoreProps) {
     )
 }
 
-export default function ReturnScore({ firebaseMovieData }: { firebaseMovieData: any }) {
+export default function ReturnScore({ firebaseMovieData, setFireBaseData }: { firebaseMovieData: any; setFireBaseData: (x: any) => void }) {
     
     const [user] = useAuthState(auth);
     const [value, setValue] = useState(-1);
@@ -65,5 +75,5 @@ export default function ReturnScore({ firebaseMovieData }: { firebaseMovieData: 
         return <div>Loading...</div>;
     }
     
-    return  <Score firebaseMovieData={firebaseMovieData} value={value} setValue={setValue} user={user} /> ;
+    return  <Score firebaseMovieData={firebaseMovieData} value={value} setValue={setValue} user={user} setFireBaseData={setFireBaseData} /> ;
 }

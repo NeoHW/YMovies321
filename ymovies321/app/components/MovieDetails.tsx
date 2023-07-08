@@ -3,7 +3,7 @@ import moment from "moment";
 import { MovieResult } from "../interfaces/TMDBapi";
 import Score from "./Score";
 
-export default function MovieDetails({ apiData, firebaseData}: { apiData: MovieResult; firebaseData : any }) {
+export default function MovieDetails({ apiData, firebaseData, setFireBaseData}: { apiData: MovieResult; firebaseData : any; setFireBaseData: (x: any) => void }) {
     return (
         <div>
             <Grid container direction="column" alignItems="center">
@@ -41,7 +41,7 @@ export default function MovieDetails({ apiData, firebaseData}: { apiData: MovieR
                     className="pl-1"
                 >
 
-                    <Score firebaseMovieData={firebaseData}></Score>
+                    <Score firebaseMovieData={firebaseData} setFireBaseData={setFireBaseData}></Score>
                 </Grid>
                 
                     <Typography sx={{ color: "#ffffff" }} variant="subtitle1">

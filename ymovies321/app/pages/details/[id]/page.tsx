@@ -2,12 +2,9 @@
 "use client";
 
 import { User, UserCredential } from "firebase/auth";
-import firebase_app from "../../../firebase/config";
-import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, signIn, signOut } from "../../../authContext/auth";
 import React, { useState, useEffect } from "react";
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Box, Typography, Grid, Button } from "@mui/material";
 import Navbar from "../../../components/Navbar";
@@ -64,7 +61,7 @@ async function fetchMovieDataAPI(movieId: string | null) {
   return response;
 }
 
-function Details({ user, APIdata, firebaseData }: { user: User | null | undefined; APIdata: MovieResult; firebaseData: any }) {
+function Details({ user, APIdata, firebaseData, setFireBaseData }: { user: User | null | undefined; APIdata: MovieResult; firebaseData: any; setFireBaseData: (x: any) => void}) {
   // getting URL path
   const pathName = usePathname();
 
@@ -96,7 +93,7 @@ function Details({ user, APIdata, firebaseData }: { user: User | null | undefine
         spacing={3}
       >
         <Grid item> 
-          <MovieDetails apiData={APIdata} firebaseData={firebaseData} />
+          <MovieDetails apiData={APIdata} firebaseData={firebaseData} setFireBaseData={setFireBaseData} />
         </Grid>
         <Grid item>
         {inWatchlist ? (<Button
@@ -151,5 +148,5 @@ export default function ReturnMovieDetails() {
       setFireBaseData(data);
     });
   }, []);
-  return data != null ? <Details user={user} APIdata={data} firebaseData={firebaseData} /> : <div></div>;
+  return data != null ? <Details user={user} APIdata={data} firebaseData={firebaseData} setFireBaseData={setFireBaseData} /> : <div></div>;
 }
