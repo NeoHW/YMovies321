@@ -143,8 +143,11 @@ Finalize documentation and user guides
 ### SWE Practices
 - Agile methodology: As a student-led project, we are taking into consideration that the product we are developing is in an environment susceptible to change. Therefore, we are using the Scrum methodology, in which we are breaking our tasks into delivery cycles called sprints, which generally last from a week to two. This way, work would be incremental and focused on previous work.
 
-- Version Control: We would be utilising a version control system (Git) to manage source code changes. We took the time to ensure that both team members are familiar with version control best practices. We would be creating branches for feature developments and also performing regular code reviews.
+- Version Control: We would be utilizing a version control system (Git) to manage source code changes. We took the time to ensure that both team members are familiar with version control best practices. We would be creating branches for feature developments and also performing regular code reviews.
 
 - Code Reviews: We have implemented a code review process to maintain code quality and catch potential issues early. We will be conducting regular code reviews among team members to provide feedback, identify bugs, improve code readability, and enforce coding standards.
 
-- User Testing: We have wrote more than 25 testcases, testing various states (signed in vs signed out) to clearly document and easily replicate testing for expected behaviour and account for edge cases:
+- User Testing: We have wrote more than 25 test cases, testing various states (signed in vs signed out) to clearly document and easily replicate testing for expected behaviour and account for edge cases:
+
+- Kanban Board: we are utilizing a Kanban board to track tickets and issues. The Kanban board helps us visualize our workflow, manage tasks, and improve overall productivity. Here's an example of how we are using the Kanban board in our project:
+![Kanban Board](/Kanban%20Board.jpg)
