@@ -89,6 +89,10 @@ Finalize documentation and user guides
 8. User Profile:
     - Feature: Allow users to customize their profiles, including adding a profile picture and bio.
     - Use Case: As a user, I want to personalize my profile and share information about myself with the community.
+    - 
+
+### YMovies321 Web Application UML Sequence Diagram
+![UML diagram](/uml_sequence.png)
 
 ### Flow and Architecture
 
