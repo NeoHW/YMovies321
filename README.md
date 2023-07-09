@@ -147,7 +147,8 @@ Finalize documentation and user guides
 
 - Code Reviews: We have implemented a code review process to maintain code quality and catch potential issues early. We will be conducting regular code reviews among team members to provide feedback, identify bugs, improve code readability, and enforce coding standards.
 
-- User Testing: We have wrote more than 25 test cases, testing various states (signed in vs signed out) to clearly document and easily replicate testing for expected behaviour and account for edge cases:
+- User Testing: We have wrote more than 25 test cases, testing various states (signed in vs signed out) to clearly document and easily replicate testing for expected behaviour and account for edge cases. The following is a preview of the test cases. For more information visit https://docs.google.com/spreadsheets/d/197hQW5dUfE0MA_zky5LneL3luUpS-dGtfEx2cKa6Rd4/edit?usp=sharing
+![User Testing Preview](/user_testing.png)
 
 - Kanban Board: we are utilizing a Kanban board to track tickets and issues. The Kanban board helps us visualize our workflow, manage tasks, and improve overall productivity. Here's an example of how we are using the Kanban board in our project:
 ![Kanban Board](/Kanban%20Board.jpg)
