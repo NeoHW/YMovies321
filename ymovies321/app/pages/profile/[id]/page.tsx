@@ -5,6 +5,7 @@ import { auth } from "../../../authContext/auth"
 import Navbar from '../../../components/Navbar';
 import { Box, Grid, Button, Typography, Avatar } from '@mui/material';
 import { deleteUserFromDB } from "../../../authContext/users/deleteUserFromDB";
+import UserProfileInfo from '../../../components/UserProfileInfo';
 
 export default function ProfilePage() {
     const [user] = useAuthState(auth);
@@ -30,6 +31,9 @@ export default function ProfilePage() {
                     </Grid>
                 </Grid>
             </Box>
+
+            <UserProfileInfo user={user} />
+
             <Box sx={{ p: 3 }}>
                 <Button variant="contained" onClick={handleDeleteAccount}>
                     Delete Account
