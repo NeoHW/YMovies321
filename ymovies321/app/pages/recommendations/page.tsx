@@ -1,8 +1,6 @@
 "use client";
 
-import { User, UserCredential } from "firebase/auth";
-import firebase_app from "../../firebase/config";
-import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
+import { User } from "firebase/auth";
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Grid } from "@mui/material";
 import Navbar from "../../components/Navbar";
@@ -17,10 +15,6 @@ import getFavMovie from "../../authContext/scores/getFavMovie";
 function Details({ user, data, favMovie, similar }: { user: User | null | undefined; data: any; favMovie: { movie: MovieResult }; similar: any }) {
     return (
         <div>
-            <button onClick={() => getFavMovie(user).then(e => console.log(e.valueOf()))}>getFavMovie</button>
-            <button onClick={() => fetchMovieDataAPI(381283).then(e => console.log(e.recommendations.results))}>get recos</button>
-            <button onClick={() => console.log(favMovie)}>favMovie</button>
-            <button onClick={() => console.log(similar)}>similar</button>
             <Navbar
                 isSignedIn={user ? true : false}
                 profile={user}
@@ -36,7 +30,7 @@ function Details({ user, data, favMovie, similar }: { user: User | null | undefi
                     backgroundColor: "#000519"
                 }}
             >
-                <Typography fontSize={15} m={2} sx={{ color: "#00adb5" }}>You've rated {favMovie.movie.title} highly. Here are similar movies:</Typography>
+                <Typography fontSize={15} m={2} sx={{ color: "#00adb5" }}>You've rated <strong style={{ color: "#CCCCCC" }}> {favMovie.movie.title} </strong> highly. Here are similar movies:</Typography>
             </Grid>
             <Grid container justifyContent={"space-evenly"} spacing={3} padding={3}>
                 {data && data.map((i: MovieResult) => (
@@ -54,7 +48,7 @@ function Details({ user, data, favMovie, similar }: { user: User | null | undefi
                     backgroundColor: "#000519"
                 }}
             >
-                <Typography fontSize={15} m={2} sx={{ color: "#00adb5" }}>Here are some other{" " + favMovie.movie.genres[0].name} movies you may like:</Typography>
+                <Typography fontSize={15} m={2} sx={{ color: "#00adb5" }}>Here are some other <strong style={{ color: "#CCCCCC" }}> {" " + favMovie.movie.genres[0].name} </strong> movies you may like:</Typography>
             </Grid>
             <Grid container spacing={3} justifyContent={"space-evenly"} padding={3}>
                 {similar && similar.map((i: MovieResult) => (
