@@ -20,6 +20,7 @@ import getDocFromMovieDB from "../../../authContext/getDocfromMovieDB";
 import { addMovieToDB } from "../../../authContext/addMovieToDB";
 import PicturesScrollBar from "../../../components/PicturesScrollBar";
 import TrailersScrollBar from "../../../components/TrailersScrollBar";
+import RecommendationScrollBar from "../../../components/RecommendationScrollBar";
 
 
 function extractIdFromPath(pathName: string) {
@@ -127,6 +128,7 @@ function Details({ user, APIdata, firebaseData, setFireBaseData }: { user: User 
       
       <ReviewSection user={user} movieId={movieId} refresh={refresh} handleRefresh={handleRefresh}/>
       
+      <RecommendationScrollBar movieId={movieId}/>
     </div>
   );
 }
