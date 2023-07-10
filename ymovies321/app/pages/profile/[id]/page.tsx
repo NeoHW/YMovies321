@@ -3,46 +3,38 @@
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from "../../../authContext/auth"
 import Navbar from '../../../components/Navbar';
-import Profile from '../../../components/Profile';
-import { Box, Grid, Button } from '@mui/material';
-import Image from 'mui-image';
-import { Typography } from '@mui/material';
+import { Box, Grid, Button, Typography, Avatar } from '@mui/material';
 import { deleteUserFromDB } from "../../../authContext/users/deleteUserFromDB";
-import { signOut } from "../../../authContext/auth";
 
-export default function Page() {
+export default function ProfilePage() {
     const [user] = useAuthState(auth);
-    return user != null ? (
+    
+    const handleDeleteAccount = async () => {
+        if (user) {
+            await deleteUserFromDB(user); // delete the user
+        }
+        window.location.href = "/";
+    };
+
+    return user ? (
         <div>
             <Navbar isSignedIn={true} profile={user} nav={null}></Navbar>
-            <Grid
-                container
-                alignItems="center"
-                direction="column"
-                spacing={8}
-            >
-                <Grid item>
-                    <Typography variant="subtitle2" sx={{ fontSize: "32px", fontWeight: "400" }}>
-                        {user.displayName}
-                    </Typography>
+            <Box sx={{ p: 3 }}>
+                <Grid container spacing={2} alignItems="center">
+                    <Grid item>
+                        <Avatar src={user.photoURL} alt="Profile Image" sx={{ width: 100, height: 100 }} />
+                    </Grid>
+                    <Grid item>
+                        <Typography variant="h5">{user.displayName}</Typography>
+                        <Typography variant="subtitle1" color="text.secondary">{user.email}</Typography>
+                    </Grid>
                 </Grid>
-                <Grid item>
-                    <Image
-                        width={250}
-                        src={user ? user.photoURL : ""}
-                    />
-                </Grid>
-                <Grid item>Email: {user.email}</Grid>
-            </Grid>
-            <Button variant="contained">
-                <a onClick={async () => {
-                    if (user) {
-                        await deleteUserFromDB(user); // delete the user
-                    }
-                    window.location.href = "/"; // Redirect to "/"
-                }}>Delete Account</a>
+            </Box>
+            <Box sx={{ p: 3 }}>
+                <Button variant="contained" onClick={handleDeleteAccount}>
+                    Delete Account
                 </Button>
-            <Profile user={user} />
+            </Box>
         </div>
     ) : <div></div>;
 }
