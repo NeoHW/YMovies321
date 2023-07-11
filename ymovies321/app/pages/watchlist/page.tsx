@@ -34,7 +34,8 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
         </div>
     ) : <div>
             <Typography fontSize={20} m={2} sx={{ color: "#00adb5" }}>You've not added anything to your watchlist!</Typography>
-        </div>;
+        </div>
+    ;
 }
 
 export default function Watchlist() {
