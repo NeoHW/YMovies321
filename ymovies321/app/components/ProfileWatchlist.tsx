@@ -1,33 +1,32 @@
-"use client";
-
-import { User, UserCredential } from "firebase/auth";
+import { User } from "firebase/auth";
 import { MovieResult } from "../interfaces/TMDBapi";
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Grid } from "@mui/material";
 import { getWatchlist } from "../authContext/watchlist/getWatchlist";
 import getDocFromMovieDB from "../authContext/getDocfromMovieDB";
-import ProfileWatchlist from "./ProfileWatchlist";
 import MovieCard from "./MovieCard";
 
-function ProfileDetails ({ user } : { user: User }) {
+function Watchlist({ watchlistData } : { watchlistData: any }) {
     
     return (
         <div>
-            <ProfileWatchlist user={user}/>
+            <Typography variant="body1" sx={{ color: "#FFFFFF", fontFamily: "Arial, sans-serif", padding: "10px" }}>
+                Your most recent watchlisted movies! Check them out!
+            </Typography>
 
-            <Box sx={{ padding: "10px" }}>
-                Your top rated movies! (3)
-            </Box>
-            
-            <Box sx={{ padding: "10px" }}>
-                Your top genres! (3)
-            </Box>
+            <Grid container justifyContent={"space-evenly"} sx={{ padding: "10px" }}>
+                {watchlistData && watchlistData.map((i: MovieResult) => (
+                    <Grid item key={i.id}>
+                        <MovieCard image_or_path={true} item={i} />
+                    </Grid>
+                ))}
+            </Grid>
         </div>
     );
 }
 
 
-export default function Profile ({ user } : { user: User }) {
+export default function ProfileWatchlist({ user } : { user: User }) {
     const [watchlistData, setWatchlistData]: any[] = useState(null);
 
     useEffect(() => {
@@ -51,5 +50,5 @@ export default function Profile ({ user } : { user: User }) {
         </div>;
     }
 
-    return <ProfileDetails user={user} />;
+    return <Watchlist user={user} watchlistData={watchlistData} />;
 }
