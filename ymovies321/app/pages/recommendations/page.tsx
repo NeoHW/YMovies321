@@ -20,7 +20,6 @@ function Details({ user, data, favMovie, similar }: { user: User | null | undefi
                 profile={user}
                 nav={"Recommendations"}
             />
-            {/* <MovieCard item={data[0]}></MovieCard> */}
             <Grid
                 container
                 justifyContent={"center"}

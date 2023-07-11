@@ -26,7 +26,7 @@ function Watchlist({ watchlistData } : { watchlistData: any }) {
 }
 
 
-export default function ProfileWatchlist({ user } : { user: User }) {
+export default function UserProfileWatchlist({ user } : { user: User }) {
     const [watchlistData, setWatchlistData]: any[] = useState(null);
 
     useEffect(() => {
