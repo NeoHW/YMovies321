@@ -50,5 +50,5 @@ export default function UserProfileWatchlist({ user } : { user: User }) {
         </div>;
     }
 
-    return <Watchlist user={user} watchlistData={watchlistData} />;
+    return <Watchlist watchlistData={watchlistData} />;
 }

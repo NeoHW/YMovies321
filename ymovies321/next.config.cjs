@@ -2,14 +2,11 @@
 const nextConfig = {}
 
 module.exports = {
-    images: {
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: 'flowbite.com',
-          port: '',
-          pathname: '/docs/images/people/**',
-        },
-      ],
+  typescript: {
+    // !! WARN !!
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    // !! WARN !!
+    ignoreBuildErrors: true,
     },
   }

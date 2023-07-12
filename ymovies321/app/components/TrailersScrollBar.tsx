@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, CSSProperties } from "react";
 import { Box, Typography } from "@mui/material";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 
@@ -53,6 +53,7 @@ export default function TrailersScrollBar({ movieId } : { movieId : string | nul
           {trailers &&
             trailers.map((item: any) => (
               <a
+                key={item.key}
                 href={`https://www.youtube.com/watch?v=${item.key}`}
                 target="_blank"
                 rel="noreferrer"
@@ -78,7 +79,9 @@ export default function TrailersScrollBar({ movieId } : { movieId : string | nul
   );
 }
 
-const anchorCSS = {
+const anchorCSS: CSSProperties & {
+  "@media (max-width: 900px)": CSSProperties;
+} = {
   position: "relative",
   width: "320px",
   height: "210px",
@@ -91,7 +94,7 @@ const anchorCSS = {
   },
 };
 
-const imageCSS = {
+const imageCSS: CSSProperties = {
   position: "relative",
   overflow: "hidden",
   flex: "none",
@@ -99,7 +102,7 @@ const imageCSS = {
   objectFit: "contain",
 };
 
-const iconContainer = {
+const iconContainer: CSSProperties = {
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -107,7 +110,7 @@ const iconContainer = {
   zIndex: 10,
 };
 
-const youtubeIcon = {
+const youtubeIcon: CSSProperties = {
   fontSize: "55px",
   color: "red",
 };

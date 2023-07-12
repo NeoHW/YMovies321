@@ -52,5 +52,5 @@ export default function ReturnMovieCard( { item, image_or_path } : {item: MovieR
       });
     }, []);
 
-    return data != null ? <MovieCard item = {item} image_or_path = {image_or_path} movieDataFromDB={data} /> : <MovieCard key={item.id} item={item} />;
+    return data != null ? <MovieCard item = {item} image_or_path = {image_or_path} movieDataFromDB={data} /> : <MovieCard key={item.id} item={item} image_or_path = {image_or_path} movieDataFromDB={data}/>;
 }

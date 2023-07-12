@@ -61,5 +61,5 @@ export default function UserProfileTopRated({ user } : { user: User }) {
             </div>;
         }
 
-    return <TopRated user={user} topRatedData={topRatedData} />;
+    return <TopRated topRatedData={topRatedData} />;
 }

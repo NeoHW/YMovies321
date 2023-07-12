@@ -20,7 +20,6 @@ function fetchMovieDataAPI() {
 
     return fetch(`https://api.themoviedb.org/3/trending/movie/day?language=en-US`, options)
         .then(response => {
-            // console.log(response);
             return Promise.all([response.json()]);
         }).then(([trending]) => {
             return { trending };
@@ -54,7 +53,7 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
                     justifyContent="space-around"
                 >
                     {row1.map((item: any) => (
-                        <MovieCard key={item.id} item={item} />
+                        <MovieCard image_or_path={false} key={item.id} item={item} />
                     ))}
                 </Grid>
                 <Grid
@@ -62,7 +61,7 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
                     justifyContent="space-around"
                 >
                     {row2.map((item: any) => (
-                        <MovieCard key={item.id} item={item} />
+                        <MovieCard image_or_path={false} key={item.id} item={item} />
                     ))}
                 </Grid>
                 <Grid
@@ -70,7 +69,7 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
                     justifyContent="space-around"
                 >
                     {row3.map((item: any) => (
-                        <MovieCard key={item.id} item={item} />
+                        <MovieCard image_or_path={false} key={item.id} item={item} />
                     ))}
                 </Grid>
                 <Grid
@@ -78,7 +77,7 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
                     justifyContent="space-around"
                 >
                     {row4.map((item: any) => (
-                        <MovieCard key={item.id} item={item} />
+                        <MovieCard image_or_path={false} key={item.id} item={item} />
                     ))}
                 </Grid>
             </Grid>

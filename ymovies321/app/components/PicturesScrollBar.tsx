@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, CSSProperties } from "react";
 import { Box, Typography } from "@mui/material";
 
 function fetchImages(movieId: string) {
@@ -52,6 +52,7 @@ export default function PicturesScrollBar({ movieId } : { movieId : string | nul
           {images &&
             images.map((item: any) => (
               <img
+                key={item.file_path}
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   target.onerror = null;
@@ -67,7 +68,9 @@ export default function PicturesScrollBar({ movieId } : { movieId : string | nul
   );
 }
 
-const imageCSS = {
+const imageCSS: CSSProperties & {
+  "@media (max-width: 900px)": CSSProperties;
+} = {
   position: "relative",
   width: "320px",
   height: "180px",
