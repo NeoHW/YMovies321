@@ -33,7 +33,7 @@ export default function UserProfileWatchlist({ user } : { user: User }) {
         if (user) {
             getWatchlist(user).then((data) => {
                 let allList: any[] = [];
-                data?.slice(0,5)?.map(d => {getDocFromMovieDB(d).then(r => allList.push(r)).then(() => setWatchlistData(allList))})
+                data?.reverse().slice(0,5)?.map(d => {getDocFromMovieDB(d).then(r => allList.push(r)).then(() => setWatchlistData(allList))})
             }).catch((error) => {
                 console.error('Error fetching watchlist movie data:', error);
             });
