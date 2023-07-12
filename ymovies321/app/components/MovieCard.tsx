@@ -5,6 +5,7 @@ import { MovieResult } from "../interfaces/TMDBapi";
 import no_img_avail from "../images/no-image-available.png"
 import React, { useState, useEffect } from "react";
 import getDocFromMovieDB from "../authContext/getDocfromMovieDB";
+import { DocumentData } from 'firebase/firestore';
 
 
 function MovieCard({ item, image_or_path, movieDataFromDB } : {item: MovieResult, image_or_path: boolean, movieDataFromDB: any}) {
@@ -43,7 +44,7 @@ function MovieCard({ item, image_or_path, movieDataFromDB } : {item: MovieResult
 export default function ReturnMovieCard( { item, image_or_path } : {item: MovieResult, image_or_path: boolean} ) {
     
     const movieId = item.id.toString();
-    const [data, setData] = useState(null);
+    const [data, setData] = useState<null | DocumentData>(null);
   
     useEffect(() => {
         getDocFromMovieDB(movieId).then((movieData) => {
