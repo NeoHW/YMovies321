@@ -1,13 +1,11 @@
 "use client";
 
-import { User, UserCredential } from "firebase/auth";
-import firebase_app from "../../firebase/config";
-import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
+import { User } from "firebase/auth";
 import React, { useState, useEffect } from "react";
-import { Box, Typography, Grid } from "@mui/material";
+import { Typography, Grid } from "@mui/material";
 import Navbar from "../../components/Navbar";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, signIn, signOut } from "../../authContext/auth";
+import { auth } from "../../authContext/auth";
 import { getWatchlist } from "../../authContext/watchlist/getWatchlist";
 import MovieCard from "../../components/MovieCard";
 import getDocFromMovieDB from "../../authContext/getDocfromMovieDB";
@@ -45,9 +43,7 @@ export default function Watchlist() {
     useEffect(() => {
         if (user != null) {
             getWatchlist(user).then((data) => {
-                // console.log("from useeffect " + data);
                 let allList: any[] = [];
-
                 data?.map(d => {getDocFromMovieDB(d).then(r => allList.push(r)).then(() => setMovieData(allList))})
             }).catch((error) => {
                 console.error('Error fetching movie data:', error);

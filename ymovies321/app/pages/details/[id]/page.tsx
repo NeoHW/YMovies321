@@ -1,12 +1,11 @@
-// this will be a page containing all the details for the specified movieId
 "use client";
 
-import { User, UserCredential } from "firebase/auth";
+import { User } from "firebase/auth";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, signIn, signOut } from "../../../authContext/auth";
+import { auth } from "../../../authContext/auth";
 import React, { useState, useEffect } from "react";
 import { usePathname } from 'next/navigation';
-import { Box, Typography, Grid, Button } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 import Navbar from "../../../components/Navbar";
 import { removeFromWatchlist } from "../../../authContext/watchlist/removeFromWatchlist";
 import { isMovieInWatchlist } from "../../../authContext/watchlist/isMovieInWatchlist";
@@ -48,10 +47,6 @@ async function fetchMovieDataAPI(movieId: string | null) {
   const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`, options)
     .then(response => response.json());
 
-  // response is json data
-  console.log(response);
-
-  // adding data to firebase db if it does not exist
   const docSnapData = await getDocFromMovieDB(movieId);
   console.log(docSnapData);
 
@@ -84,8 +79,6 @@ function Details({ user, APIdata, firebaseData, setFireBaseData }: { user: User 
         profile={user}
         nav={"Home"}
       />
-
-      
 
       <Grid
         container

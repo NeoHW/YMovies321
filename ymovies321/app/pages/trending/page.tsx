@@ -1,13 +1,10 @@
-// this will be the page for all trending movies
 "use client";
 
 import { User } from "firebase/auth";
-import firebase_app from "../../firebase/config";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, signIn, signOut } from "../../authContext/auth";
+import { auth } from "../../authContext/auth";
 import MovieCard from "../../components/MovieCard";
 import Navbar from "../../components/Navbar";
 
@@ -31,17 +28,12 @@ function fetchMovieDataAPI() {
 }
 
 function Details({ user, data }: { user: User | null | undefined; data: any }) {
-    // console.log(data);
 
     const row1 = data.slice(0, 5);
     const row2 = data.slice(5, 10);
     const row3 = data.slice(10, 15);
     const row4 = data.slice(15, 20);
 
-    // console.log(row1.map(i => i.original_title));
-    // console.log(row2.map(i => i.original_title));
-    // console.log(row3.map(i => i.original_title));
-    // console.log(row4.map(i => i.original_title));
     return (
         <div>
             <Navbar

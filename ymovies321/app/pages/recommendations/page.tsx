@@ -2,12 +2,11 @@
 
 import { User } from "firebase/auth";
 import React, { useState, useEffect } from "react";
-import { Box, Typography, Grid } from "@mui/material";
+import { Typography, Grid } from "@mui/material";
 import Navbar from "../../components/Navbar";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, signIn, signOut } from "../../authContext/auth";
+import { auth } from "../../authContext/auth";
 import MovieCard from "../../components/MovieCard";
-import getDocFromMovieDB from "../../authContext/getDocfromMovieDB";
 import { MovieResult } from "../../interfaces/TMDBapi";
 import getFavMovie from "../../authContext/scores/getFavMovie";
 
@@ -91,7 +90,6 @@ function fetchMovieDetail(movieId: number) {
 
     return fetch(`https://api.themoviedb.org/3/movie/${movieId}`, options)
         .then(response => {
-            // console.log(response);
             return Promise.all([response.json()]);
         }).then(([movie]) => {
             return { movie };
@@ -110,7 +108,6 @@ function fetchSimilarMovieDataAPI(movieId: number) {
 
     return fetch(`https://api.themoviedb.org/3/movie/${movieId}/similar`, options)
         .then(response => {
-            // console.log(response);
             return Promise.all([response.json()]);
         }).then(([similar]) => {
             return { similar };
