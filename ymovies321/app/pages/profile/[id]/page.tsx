@@ -3,7 +3,7 @@
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from "../../../authContext/auth"
 import Navbar from '../../../components/Navbar';
-import { Box, Grid, Button, Typography, Avatar } from '@mui/material';
+import { Box, Avatar } from '@mui/material';
 import { deleteUserFromDB } from "../../../authContext/users/deleteUserFromDB";
 import UserProfileInfo from '../../../components/UserProfileInfo';
 

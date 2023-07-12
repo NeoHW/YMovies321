@@ -1,26 +1,19 @@
 "use client";
 
 import { User, UserCredential } from "firebase/auth";
-import { MovieResult } from "../interfaces/TMDBapi";
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Grid } from "@mui/material";
-import { getWatchlist } from "../authContext/watchlist/getWatchlist";
-import getDocFromMovieDB from "../authContext/getDocfromMovieDB";
 import UserProfileWatchlist from "./UserProfileWatchlist";
 import UserProfileTopRated from "./UserProfileTopRated";
-import MovieCard from "./MovieCard";
+import UserProfileTopGenres from "./UserProfileTopGenres";
 
 function ProfileDetails ({ user } : { user: User }) {
     
     return (
         <div>
+            <UserProfileTopGenres user={user}/>
             <UserProfileWatchlist user={user}/>
-            
             <UserProfileTopRated user={user}/>
-            
-            <Box sx={{ padding: "10px" }}>
-                Your top genres! (5)
-            </Box>
         </div>
     );
 }
