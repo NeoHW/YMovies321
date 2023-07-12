@@ -1,6 +1,5 @@
-import { User, UserCredential } from "firebase/auth";
-import React, { useState, useEffect } from "react";
-import { Box, Typography, Button } from "@mui/material";
+import { User } from "firebase/auth";
+import React from "react";
 import ReviewForm from "./ReviewForm";
 import ReviewsFromDB from "./ReviewsFromDB";
 

@@ -1,8 +1,6 @@
-import { User, UserCredential } from "firebase/auth";
-import { collection, doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
+import { User } from "firebase/auth";
 import React, { useState, useEffect, useRef } from "react";
-import { signIn } from "../authContext/auth"
-import { Box, Button, Typography, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Alert } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Image from 'mui-image';
 import removeReviewFromMovieDB from "../authContext/reviews/removeReviewFromMovieDB";
@@ -129,7 +127,7 @@ const theme = createTheme({
     palette: {
         mode: 'dark',
         background: {
-        paper: '#263238', // Adjust the color as per your preference
+        paper: '#263238',
         },
     },
 });

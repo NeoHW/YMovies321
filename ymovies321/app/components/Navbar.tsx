@@ -2,16 +2,13 @@
 
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image';
 import companyLogo from "../navigation/YMoviesLogo.jpg";
-import avatar from "../navigation/avatar.png";
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { signIn, signOut } from "../authContext/auth"
-import { User, UserCredential, getIdToken } from 'firebase/auth';
-import { Box, Typography } from "@mui/material";
+import { User } from 'firebase/auth';
 import SearchBar from "./SearchBar";
 
 interface ButtonProps {

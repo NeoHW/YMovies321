@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import MovieCard from "./MovieCard";
-import { auth, signIn, signOut } from "../authContext/auth";
+import { auth } from "../authContext/auth";
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 interface MovieData {

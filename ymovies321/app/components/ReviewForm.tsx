@@ -1,9 +1,6 @@
-import { User, UserCredential } from "firebase/auth";
-import React, { useState, useEffect } from "react";
-import { Box, Typography, TextField, Grid, Button } from "@mui/material";
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, signIn, signOut } from "../authContext/auth";
-import { findUser } from "../authContext/users/findUser";
+import { User } from "firebase/auth";
+import React, { useState } from "react";
+import { auth, signIn } from "../authContext/auth";
 import { addReviewToMovieDB } from "../authContext/reviews/addReviewToMovieDB";
 import { addReviewToUserDB } from "../authContext/reviews/addReviewToUserDB";
 

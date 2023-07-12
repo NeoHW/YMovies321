@@ -1,8 +1,7 @@
 "use client";
 
-import { User, UserCredential } from "firebase/auth";
-import React, { useState, useEffect } from "react";
-import { Box, Typography, Grid } from "@mui/material";
+import { User } from "firebase/auth";
+import React from "react";
 import UserProfileWatchlist from "./UserProfileWatchlist";
 import UserProfileTopRated from "./UserProfileTopRated";
 import UserProfileTopGenres from "./UserProfileTopGenres";

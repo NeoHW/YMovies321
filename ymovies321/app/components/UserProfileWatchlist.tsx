@@ -1,7 +1,7 @@
 import { User } from "firebase/auth";
 import { MovieResult } from "../interfaces/TMDBapi";
 import React, { useState, useEffect } from "react";
-import { Box, Typography, Grid } from "@mui/material";
+import { Typography, Grid } from "@mui/material";
 import { getWatchlist } from "../authContext/watchlist/getWatchlist";
 import getDocFromMovieDB from "../authContext/getDocfromMovieDB";
 import MovieCard from "./MovieCard";

@@ -1,4 +1,4 @@
-import { User, UserCredential } from "firebase/auth";
+import { User } from "firebase/auth";
 import React, { useState, useEffect } from "react";
 import getDocFromMovieDB from "../authContext/getDocfromMovieDB";
 import ReviewArticle from "./ReviewArticle";

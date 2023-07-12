@@ -1,8 +1,7 @@
-// Provide template for scoring of movie
 import { auth } from '../authContext/auth';
-import { Typography, Rating, Box, Button } from '@mui/material';
+import { Typography, Rating, Box } from '@mui/material';
 import { useAuthState } from "react-firebase-hooks/auth"
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect } from 'react';
 import playerWriteNewMovieScore from '../authContext/scores/playerWriteNewMovieScore';
 import movieWriteNewScore from '../authContext/scores/movieWriteNewScore';
 import { User } from "firebase/auth";
