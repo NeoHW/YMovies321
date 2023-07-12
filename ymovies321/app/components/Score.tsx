@@ -67,6 +67,8 @@ export default function ReturnScore({ firebaseMovieData, setFireBaseData }: { fi
                     setValue(0);
                 }
               });
+        } else {
+            setValue(0);
         };
     }, []);
 
