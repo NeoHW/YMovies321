@@ -4,7 +4,7 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image';
-import companyLogo from "../navigation/YMoviesLogo.jpg";
+import companyLogo from "../Navigation/YMoviesLogo.jpg";
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { signIn, signOut } from "../authContext/auth"
