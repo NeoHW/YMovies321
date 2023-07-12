@@ -1,9 +1,9 @@
 "use client";
 
 import { db } from "../authContext/users/reauthenticateUser";
-import { collection, doc, getDoc, getDocs, setDoc, getFirestore, query, where, orderBy, limit } from "firebase/firestore";
+import { collection, getDocs, query, where, orderBy, limit } from "firebase/firestore";
 import { useState, useEffect, useRef } from "react";
-import { Box, Button, InputBase, LinearProgress, Typography } from "@mui/material";
+import { InputBase, LinearProgress} from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { blueGrey } from "@mui/material/colors";
@@ -12,7 +12,7 @@ import DropDownItem from "./DropDownItem";
 const moviesRef = collection(db, "test_MoviesID_TMDB_database");
 
 async function fetchDataFromDB( searchVal: string | undefined, setIsFetching: (isFetching: boolean) => void, setResults: any) {
-  setIsFetching(true); // Set isFetching to true before fetching data
+  setIsFetching(true);
 
   if (searchVal) {
     searchVal.toLowerCase();
@@ -34,7 +34,7 @@ async function fetchDataFromDB( searchVal: string | undefined, setIsFetching: (i
     setResults(fetchedResults);
   }
 
-  setIsFetching(false); // Set isFetching to false after fetching data
+  setIsFetching(false);
 }
 
 function SearchBar() {
@@ -55,17 +55,12 @@ function SearchBar() {
   const handleClick = () => {
     if (!isDropdownOpen) {
       setIsDropdownOpen(true);
-      // console.log('handleClick: opening dropdown');
     }
   };
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (
-      dropdownRef.current &&
-      !dropdownRef.current.contains(event.target as Node)
-    ) {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
       setIsDropdownOpen(false);
-      // console.log('handleClickOutside: closing dropdown');
     }
   };
 
@@ -89,14 +84,6 @@ function SearchBar() {
         value={searchVal || ""}
         onChange={(e) => setSearchVal(e.target.value)}
         onClick={handleClick}
-        /*
-        onKeyUp={(e) => {
-            if (e.key == "Enter") {
-            e.currentTarget.blur();
-            customRedirect("/search?q=" + (searchVal ?? ""));
-            }
-        }}
-        */
       />
 
       {isFetching && (
