@@ -114,7 +114,7 @@ Finalize documentation and user guides
 
 - Database: Google Firebase
 
-- Deployment: Vercel
+- Deployment: Netlify
 
 ### Reasons for choosing React
 1. Component-Based Architecture: React follows a component-based architecture, which allows us to break down the user interface into smaller, reusable components. This modular approach promotes code reusability, maintainability, and scalability. We can create components for different sections of our application, such as movie lists, search bars, movie details, reviews, and user authentication. This modular structure will make it easier to develop and update different parts of the application independently.
@@ -150,6 +150,12 @@ Finalize documentation and user guides
 - Version Control: We would be utilizing a version control system (Git) to manage source code changes. We took the time to ensure that both team members are familiar with version control best practices. We would be creating branches for feature developments and also performing regular code reviews.
 
 - Code Reviews: We have implemented a code review process to maintain code quality and catch potential issues early. We will be conducting regular code reviews among team members to provide feedback, identify bugs, improve code readability, and enforce coding standards.
+
+- Branching: By creating branches, we can isolate their changes from the main codebase until they are ready to be merged. This isolation provides a safe space for experimenting with new features or making significant changes without affecting the stability of the main codebase. It also allows for easier rollback if any issues arise. 
+
+- Pull Requests: Pull requests are created to propose merging of changes into the main branch. Pull requests facilitate code reviews, where we can provide feedback, suggest improvements, and catch potential bugs or issues before merging the code. This collaborative process helps maintain code quality and ensures that changes align our project goals.  
+An example:
+![Branching and PR Preview](/branching_example.jpg)
 
 - User Testing: We have wrote more than 25 test cases, testing various states (signed in vs signed out) to clearly document and easily replicate testing for expected behaviour and account for edge cases. The following is a preview of the test cases. For more information visit https://docs.google.com/spreadsheets/d/197hQW5dUfE0MA_zky5LneL3luUpS-dGtfEx2cKa6Rd4/edit?usp=sharing
 ![User Testing Preview](/user_testing.png)
