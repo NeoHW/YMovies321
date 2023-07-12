@@ -43,8 +43,6 @@ export default function TrailersScrollBar({ movieId } : { movieId : string | nul
     </div>;
   }
 
-  console.log(trailers);
-
   return (
     <div>
       <Typography variant="h5" sx={{ marginTop: "15px", marginLeft:"15px", marginBottom:"-5px" }}>

@@ -48,7 +48,6 @@ async function fetchMovieDataAPI(movieId: string | null) {
     .then(response => response.json());
 
   const docSnapData = await getDocFromMovieDB(movieId);
-  console.log(docSnapData);
 
   if (docSnapData === undefined) {
     addMovieToDB(movieId, response);

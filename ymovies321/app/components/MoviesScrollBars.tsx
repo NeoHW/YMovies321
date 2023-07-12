@@ -24,8 +24,6 @@ function fetchMovieDataAPI() {
     fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options),
     fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options),
   ]).then(([showingInCinemasAPIResponse, topRatedAPIResponse]) => {
-    console.log(showingInCinemasAPIResponse);
-    console.log(topRatedAPIResponse);
     return Promise.all([
       showingInCinemasAPIResponse.json(),
       topRatedAPIResponse.json(),
