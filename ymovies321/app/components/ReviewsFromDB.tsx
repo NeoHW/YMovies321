@@ -11,7 +11,7 @@ function Reviews({ user, movieId, handleRefresh, reviewData} : {user: User | nul
 
             {reviewData.reviews ?  
                 (reviewData.reviews.reverse().map((indivReview: any) => (
-                    <ReviewArticle user={user} movieId={movieId} handleRefresh={handleRefresh} reviewData={indivReview} />
+                    <ReviewArticle user={user} movieId={movieId} handleRefresh={handleRefresh} reviewData={indivReview} key={indivReview} />
                 )))
                 : 
                 ( <span></span> )

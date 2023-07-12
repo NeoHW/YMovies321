@@ -103,7 +103,7 @@ function SearchBar() {
       {results.length > 0 && isDropdownOpen && (
         <Dropdown ref={dropdownRef}>
           {results.map((item: any) => (
-            <DropDownItem item = {item} />
+            <DropDownItem item = {item} key={item} />
           ))}
         </Dropdown>
       )}

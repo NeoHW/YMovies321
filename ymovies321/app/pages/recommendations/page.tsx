@@ -44,7 +44,7 @@ function Details({ user, data, favMovie, similar }: { user: User | null | undefi
                     backgroundColor: "#000519"
                 }}
             >
-                <Typography fontSize={15} m={2} sx={{ color: "#00adb5" }}>You've rated <strong style={{ color: "#CCCCCC" }}> {favMovie.movie.title} </strong> highly. Here are similar movies:</Typography>
+                <Typography fontSize={15} m={2} sx={{ color: "#00adb5" }}>You have rated <strong style={{ color: "#CCCCCC" }}> {favMovie.movie.title} </strong> highly. Here are similar movies:</Typography>
             </Grid>
             <Grid container justifyContent={"space-evenly"} spacing={3} padding={3}>
                 {data && data.map((i: MovieResult) => (
