@@ -8,7 +8,6 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "type": "module",
   "google-gax": "1.6.2",
   "dependencies": {
     "@emotion/react": "^11.11.0",
