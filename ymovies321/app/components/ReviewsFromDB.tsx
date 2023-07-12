@@ -29,7 +29,7 @@ export default function ReturnReviews({ user, movieId, handleRefresh } : { user:
         getDocFromMovieDB(movieId).then((movieData) => {
         setData(movieData);
       });
-    }, []);
+    }, [movieId]);
 
     return data != null ? <Reviews user ={user} movieId={movieId} handleRefresh={handleRefresh} reviewData={data} /> : <div></div>;
 }
