@@ -3,8 +3,6 @@ import { User } from "firebase/auth";
 import { db } from "./reauthenticateUser";
 import { findUser } from "./findUser";
 
-
-
 export async function addUserToDB(user: User) {
     const userRes = await findUser(user);
     if (userRes != null && userRes.size == 0) {

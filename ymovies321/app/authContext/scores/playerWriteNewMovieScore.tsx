@@ -1,14 +1,9 @@
-import { doc, setDoc, updateDoc } from "firebase/firestore";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../auth";
+import { doc, updateDoc } from "firebase/firestore";
 import { findUser } from "../users/findUser";
 import { db } from "../users/reauthenticateUser";
 import { User } from "firebase/auth";
 
-
-
 export default async function playerWriteNewMovieScore(user: User, movieId: number, newScore: number) {
-    // const [user] = useAuthState(auth);
 
     if (user) {
         const userRes = await findUser(user);
@@ -26,8 +21,6 @@ export default async function playerWriteNewMovieScore(user: User, movieId: numb
             await updateDoc(userRef, {
                 movieScores: allRatings
             });
-
         }
     }
-
 }

@@ -2,7 +2,6 @@ import { doc, updateDoc, arrayUnion, arrayRemove, Timestamp} from "firebase/fire
 import { User } from "firebase/auth";
 import { findUser } from "../users/findUser";
 import { db } from "../users/reauthenticateUser";
-import { signIn } from "../auth";
 
 export default async function removeReviewFromMovieDB(user: User, movieId: string, reviewData: any) {
     const userRes = await findUser(user);

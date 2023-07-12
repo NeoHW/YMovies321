@@ -12,7 +12,6 @@ export async function addToWatchlist(user: User, movieId: string) {
         let array: string[] = [];
         userRes.forEach(doc => {
             array = doc.data()["watchlist"];
-            // console.log("JSON IS " + (doc.data()["email"]));
         });
         const userRef = doc(db, "users", id);
         if (!array.includes(movieId)) {

@@ -1,7 +1,5 @@
 import { User } from "firebase/auth";
 import { findUser } from "../users/findUser";
-import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../users/reauthenticateUser";
 import { MovieScores } from "../../interfaces/MovieScores";
 
 export default async function getFavMovie(user: User) {
