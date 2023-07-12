@@ -49,7 +49,7 @@ export default function Watchlist() {
                 console.error('Error fetching movie data:', error);
             });
         }
-    }, []);
+    }, [user]);
 
     if (movieData == null) {
         return <div role="status">

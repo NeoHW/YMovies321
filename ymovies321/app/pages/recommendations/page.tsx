@@ -154,7 +154,7 @@ export default function Watchlist() {
                 console.error('Error fetching movie data:', error);
             });
         }
-    }, []);
+    }, [user]);
 
     if (user == null || favMovie == null) {
         return <div role="status">

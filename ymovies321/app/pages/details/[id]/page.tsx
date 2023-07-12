@@ -141,6 +141,6 @@ export default function ReturnMovieDetails() {
     getDocFromMovieDB(movieId).then((data) => {
       setFireBaseData(data);
     });
-  }, []);
+  }, [pathName]);
   return data != null ? <Details user={user} APIdata={data} firebaseData={firebaseData} setFireBaseData={setFireBaseData} /> : <div></div>;
 }

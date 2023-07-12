@@ -73,7 +73,7 @@ export default function ReturnScore({ firebaseMovieData, setFireBaseData }: { fi
         } else {
             setValue(0);
         };
-    }, []);
+    }, [movieID, user]);
 
     if (value === -1) {
         return <div role="status">

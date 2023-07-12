@@ -31,7 +31,7 @@ export default function TrailersScrollBar({ movieId } : { movieId : string | nul
       .catch((error) => {
         console.error("Error fetching movie trailers:", error);
       });
-  }, []);
+  }, [movieId]);
 
   if (trailers == null) {
     return <div role="status">
@@ -65,6 +65,7 @@ export default function TrailersScrollBar({ movieId } : { movieId : string | nul
                     target.onerror = null;
                     target.src = "../trailers/no-image-available.png";
                   }}
+                  alt="Trailer videos"
                   style={imageCSS}
                   src={`https://img.youtube.com/vi/${item.key}/hqdefault.jpg`}
                 />

@@ -30,7 +30,7 @@ export default function RecommendationScrollBar({ movieId } : { movieId : string
     }).catch((error) => {
         console.error('Error fetching movie data recommendations:', error);
     });
-  }, []);
+  }, [movieId]);
 
   if (movieData === null) {
     return <div role="status">

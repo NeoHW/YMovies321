@@ -38,7 +38,7 @@ export default function UserProfileWatchlist({ user } : { user: User }) {
                 console.error('Error fetching watchlist movie data:', error);
             });
         }
-    }, []);
+    }, [user]);
 
     if (watchlistData == null) {
         return <div role="status">

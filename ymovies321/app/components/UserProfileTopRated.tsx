@@ -49,7 +49,7 @@ export default function UserProfileTopRated({ user } : { user: User }) {
                 });
             }
             
-        }, []);
+        }, [user]);
 
         if (topRatedData == null) {
             return <div role="status">

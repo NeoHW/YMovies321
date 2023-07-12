@@ -30,7 +30,7 @@ export default function PicturesScrollBar({ movieId } : { movieId : string | nul
       .catch((error) => {
         console.error("Error fetching movie images:", error);
       });
-  }, []);
+  }, [movieId]);
 
   if (images == null) {
     return <div role="status">
@@ -60,6 +60,7 @@ export default function PicturesScrollBar({ movieId } : { movieId : string | nul
                 }}
                 style={imageCSS}
                 src={`https://image.tmdb.org/t/p/w500${item.file_path}`}
+                alt="No Image Available"
               />
             ))}
         </div>

@@ -27,7 +27,7 @@ function Navbar({ isSignedIn, profile, nav }: ButtonProps) {
 
     useEffect(() => {
         setToken(profile?.uid);
-    }, [])
+    }, [profile?.uid])
 
     const navigation = [
         { name: 'Home', href: '/', current: nav == "Home" },

@@ -65,7 +65,7 @@ export default function UserProfileTopGenres({ user } : { user: User }) {
                 });
             }
             
-        }, []);
+        }, [user]);
 
         if (topGenresData == null) {
             return <div role="status">
