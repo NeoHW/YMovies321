@@ -30,7 +30,7 @@ export default function UserProfileWatchlist({ user } : { user: User }) {
     const [watchlistData, setWatchlistData]: any[] = useState(null);
 
     useEffect(() => {
-        if (user != null) {
+        if (user) {
             getWatchlist(user).then((data) => {
                 let allList: any[] = [];
                 data?.slice(0,5)?.map(d => {getDocFromMovieDB(d).then(r => allList.push(r)).then(() => setWatchlistData(allList))})

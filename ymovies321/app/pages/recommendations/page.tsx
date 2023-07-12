@@ -124,7 +124,7 @@ export default function Watchlist() {
     const [similarMovies, setSimilarMovies]: any[] = useState(null);
 
     useEffect(() => {
-        if (user != null) {
+        if (user) {
             getFavMovie(user).then((mId) => {
                 fetchMovieDataAPI(Number.parseInt(mId)).then(id => {
                     setMovieData(id.recommendations.results.slice(0, 6));

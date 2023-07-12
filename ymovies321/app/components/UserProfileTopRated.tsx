@@ -2,8 +2,9 @@ import { User } from "firebase/auth";
 import { MovieResult } from "../interfaces/TMDBapi";
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Grid } from "@mui/material";
-import getDocFromMovieDB from "../authContext/getDocfromMovieDB";
+import getUserFromMovieDB from "../authContext/getUserFromUserDB";
 import MovieCard from "./MovieCard";
+import getDocFromMovieDB from "../authContext/getDocfromMovieDB";
 
 function TopRated({ topRatedData } : { topRatedData: any }) {
     
@@ -28,9 +29,26 @@ export default function UserProfileTopRated({ user } : { user: User }) {
     const [topRatedData, setTopRatedData]: any[] = useState(null);
 
         useEffect(() => {
-            if (user != null) {
+            if (user) {
                 // get the top 5 rated shows from user db in firebase
+                getUserFromMovieDB(user.uid).then((data) => {
+                    let movieScores = data.movieScores;
+                    let allList: any[] = [];
+                    let sortable = [];
+                    for (var movie in movieScores) {
+                        sortable.push([movie, movieScores[movie]]);
+                    }
+                    sortable.sort(function(a, b) {
+                        return b[1] - a[1];
+                    });
+                    const results = sortable.slice(0,5);
+                    console.log(results);
+                    results.map(d => {getDocFromMovieDB(d[0]).then(r => allList.push(r)).then(() => setTopRatedData(allList))})
+                }).catch((error) => {
+                    console.error('Error fetching watchlist movie data:', error);
+                });
             }
+            
         }, []);
 
         if (topRatedData == null) {
