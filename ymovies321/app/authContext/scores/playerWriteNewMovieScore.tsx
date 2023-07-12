@@ -9,11 +9,10 @@ export default async function playerWriteNewMovieScore(user: User, movieId: numb
         const userRes = await findUser(user);
 
         if (userRes != null && userRes.size > 0) {
-            const id = user?.uid;
+            const id = user.uid;
             let allRatings;
             userRes.forEach(doc => {
                 allRatings = doc.data()["movieScores"];
-
                 allRatings[movieId] = newScore;
             })
 

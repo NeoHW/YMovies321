@@ -12,9 +12,9 @@ export default async function getFavMovie(user: User) {
             userRes.forEach(doc => {
                 allRatings = doc.data()["movieScores"];
             })
-            
-            if(allRatings != undefined) {
-                let currentFavId: string = "0";
+
+            if (allRatings != undefined) {
+                let currentFavId: string = "-1";
                 let currentMax: number = 0;
 
                 for (const [currentId, score] of Object.entries(allRatings)) {
@@ -24,7 +24,6 @@ export default async function getFavMovie(user: User) {
                         currentMax = score
                     }
                 }
-                
                 return currentFavId;
             }
         }

@@ -1,4 +1,4 @@
-import { auth } from '../authContext/auth';
+import { auth, signIn } from '../authContext/auth';
 import { Typography, Rating, Box } from '@mui/material';
 import { useAuthState } from "react-firebase-hooks/auth"
 import { useState, useEffect } from 'react';
@@ -36,11 +36,14 @@ function Score({ firebaseMovieData, value, setValue, user, setFireBaseData }: Sc
                     max={10}
                     precision={0.5}
                     onChange={(event, newValue) => {
-                        setValue(newValue);
-                        playerWriteNewMovieScore(user, firebaseMovieData.id, newValue);
-                        movieWriteNewScore(user, firebaseMovieData.id, newValue)
-                            .then(() => updateScoreFromDatabase(firebaseMovieData.id, setFireBaseData));
-
+                        if (user == null) {
+                            signIn();
+                        } else {
+                            setValue(newValue);
+                            playerWriteNewMovieScore(user, firebaseMovieData.id, newValue);
+                            movieWriteNewScore(user, firebaseMovieData.id, newValue)
+                                .then(() => updateScoreFromDatabase(firebaseMovieData.id, setFireBaseData));
+                        }
                     }}
                     emptyIcon={<StarBorderIcon style={{ color: "#fff" }} />}
                     icon={<StarIcon style={{ color: "#ff0" }} />}

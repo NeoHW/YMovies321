@@ -22,15 +22,15 @@ export default async function movieWriteNewScore(user: User, movieId: number, ne
             await updateDoc(movieRef, {vote_average: updatedScore});
         } else {
             const allRatings = movieDocument["userScores"];
-            console.log(user);
+            console.log(user.uid);
             console.log(allRatings);
             const oldScore = allRatings[user.uid];
 
-            console.log(allRatings[user.uid]);
             if (allRatings[user.uid] === undefined) {
                 // if it is a new review for the movie
                 console.log("doing new review");
                 allRatings[user.uid] = newScore;
+                await updateDoc(movieRef, {userScores: newRating});
                 await updateDoc(movieRef, {vote_count: increment(1)});
                 const updatedScore = (movieDocument["vote_average"] * movieDocument["vote_count"] + newScore) / (movieDocument["vote_count"] + 1)
                 await updateDoc(movieRef, {vote_average: updatedScore});
