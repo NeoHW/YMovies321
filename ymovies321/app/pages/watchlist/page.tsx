@@ -32,24 +32,24 @@ function Details({ user, data }: { user: User | null | undefined; data: any }) {
         </div>
     ) : <div>
         <Navbar
-                isSignedIn={user ? true : false}
-                profile={user}
-                nav={"Watchlist"}
-            />
+            isSignedIn={user ? true : false}
+            profile={user}
+            nav={"Watchlist"}
+        />
         <Grid
-                    container
-                    justifyContent={"center"}
-                    alignItems={"center"}
-                    sx={{
-                        justifyContent: "center",
-                        backgroundColor: "#000519"
-                    }}
-                >
+            container
+            justifyContent={"center"}
+            alignItems={"center"}
+            sx={{
+                justifyContent: "center",
+                backgroundColor: "#000519"
+            }}
+        >
 
             <Typography fontSize={20} m={2} sx={{ color: "#00adb5" }}>You have not added anything to your watchlist!</Typography>
-                </Grid>
-        </div>
-    ;
+        </Grid>
+    </div>
+        ;
 }
 
 export default function Watchlist() {
@@ -60,7 +60,7 @@ export default function Watchlist() {
         if (user != null) {
             getWatchlist(user).then((data) => {
                 let allList: any[] = [];
-                data?.map(d => {getDocFromMovieDB(d).then(r => allList.push(r)).then(() => setMovieData(allList))})
+                data?.map(d => { getDocFromMovieDB(d).then(r => allList.push(r)).then(() => setMovieData(allList)) })
             }).catch((error) => {
                 console.error('Error fetching movie data:', error);
             });
